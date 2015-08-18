@@ -1,0 +1,3196 @@
+From nobody at sheep.berlios.de  Wed Mar  9 11:29:58 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:29:58 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/EBuLaTools/Graphics - New directory
+Message-ID: <200503091029.j29ATwN27822@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Graphics
+In directory sheep:/tmp/cvs-serv9837/Graphics
+
+Log Message:
+Directory /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Graphics added to the repository
+
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:30:15 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:30:15 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/EBuLaTools/Network - New directory
+Message-ID: <200503091030.j29AUFN27868@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Network
+In directory sheep:/tmp/cvs-serv9892/Network
+
+Log Message:
+Directory /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Network added to the repository
+
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:24 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:24 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/ET42X_ AssemblyInfo.cs,1.1.1.1,1.2 ET42XControl.cs,1.1.1.1,1.2 ET42XControl.resx,1.1.1.1,1.2 State.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqON28869@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/ET42X_
+In directory sheep:/tmp/cvs-serv11087/ET42X_
+
+Modified Files:
+	AssemblyInfo.cs ET42XControl.cs ET42XControl.resx State.cs 
+	Switcher.resx UserControler.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.00.*")]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.2.*")]
+  
+  //
+
+Index: ET42XControl.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/ET42XControl.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** ET42XControl.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- ET42XControl.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 29,33 ****
+--- 29,36 ----
+  		private DateTime vtime;
+  
++ 		public bool GLOBAL_SOUND = true;
+  		private bool CONNECTED = false;
++ 		int stoerung_counter = 0;
++ 		SoundInterface Sound;
+  
+  		Color ST?RUNG_BG = Color.Gold, ST?RUNG_FG = Color.Black;
+***************
+[...1880 lines suppressed...]
+! 				case CURRENT_DISPLAY.B:
+! 					return "                        Bremsenzustand";
+  			}
+  			
+***************
+*** 2076,2080 ****
+  				case 2:
+                      if (localstate.ET42Xtype1 == ET42XTYPE.ET426 && localstate.ET42Xtype2 != ET42XTYPE.ET426)
+! 						return zugkraft * 2f;
+  					else if (localstate.ET42Xtype1 != ET42XTYPE.ET426 && localstate.ET42Xtype2 == ET42XTYPE.ET426)
+  						return zugkraft / 2f; 
+--- 3200,3207 ----
+  				case 2:
+                      if (localstate.ET42Xtype1 == ET42XTYPE.ET426 && localstate.ET42Xtype2 != ET42XTYPE.ET426)
+! 						if (zugkraft < 0)
+! 							return zugkraft * 2f * (65f/90f);
+! 						else
+! 							return zugkraft * 2f;
+  					else if (localstate.ET42Xtype1 != ET42XTYPE.ET426 && localstate.ET42Xtype2 == ET42XTYPE.ET426)
+  						return zugkraft / 2f; 
+
+Index: ET42XControl.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/ET42XControl.resx,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** ET42XControl.resx	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- ET42XControl.resx	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 143,152 ****
+      <value>Private</value>
+    </data>
+-   <data name="p_Light8.SnapToGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+-     <value>True</value>
+-   </data>
+    <data name="p_Light8.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+    </data>
+    <data name="p_Light8.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+--- 143,152 ----
+      <value>Private</value>
+    </data>
+    <data name="p_Light8.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+    </data>
++   <data name="p_Light8.SnapToGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>True</value>
++   </data>
+    <data name="p_Light8.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+***************
+*** 356,362 ****
+      <value>True</value>
+    </data>
+-   <data name="p_Button7.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+-     <value>Private</value>
+-   </data>
+    <data name="p_Button7.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <value>8, 8</value>
+--- 356,359 ----
+***************
+*** 368,371 ****
+--- 365,371 ----
+      <value>Private</value>
+    </data>
++   <data name="p_Button7.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>Private</value>
++   </data>
+    <data name="p_Light5.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+***************
+*** 458,464 ****
+      <value>Private</value>
+    </data>
+-   <data name="p_Dark8.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+-     <value>8, 8</value>
+-   </data>
+    <data name="p_Dark8.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+--- 458,461 ----
+***************
+*** 470,473 ****
+--- 467,473 ----
+      <value>Private</value>
+    </data>
++   <data name="p_Dark8.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
++     <value>8, 8</value>
++   </data>
+    <data name="p_Dark8.DrawGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>True</value>
+***************
+*** 602,608 ****
+      <value>Private</value>
+    </data>
+-   <data name="p_Button3.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+-     <value>8, 8</value>
+-   </data>
+    <data name="p_Button3.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+--- 602,605 ----
+***************
+*** 614,617 ****
+--- 611,617 ----
+      <value>Private</value>
+    </data>
++   <data name="p_Button3.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
++     <value>8, 8</value>
++   </data>
+    <data name="p_Button3.DrawGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>True</value>
+***************
+*** 620,623 ****
+--- 620,641 ----
+      <value>Private</value>
+    </data>
++   <data name="p_Light1.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>False</value>
++   </data>
++   <data name="p_Light1.SnapToGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>True</value>
++   </data>
++   <data name="p_Light1.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>Private</value>
++   </data>
++   <data name="p_Light1.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
++     <value>8, 8</value>
++   </data>
++   <data name="p_Light1.DrawGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>True</value>
++   </data>
++   <data name="p_Light1.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>Private</value>
++   </data>
+    <data name="l_Button3.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+***************
+*** 759,784 ****
+    </data>
+    <data name="timer_st.Location" type="System.Drawing.Point, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+!     <value>102, 17</value>
+    </data>
+    <data name="timer_st.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="p_Light1.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+!     <value>False</value>
+!   </data>
+!   <data name="p_Light1.SnapToGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+!     <value>True</value>
+!   </data>
+!   <data name="p_Light1.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+!     <value>Private</value>
+!   </data>
+!   <data name="p_Light1.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+!     <value>8, 8</value>
+!   </data>
+!   <data name="p_Light1.DrawGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+!     <value>True</value>
+!   </data>
+!   <data name="p_Light1.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+!     <value>Private</value>
+    </data>
+    <data name="$this.TrayLargeIcon" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+--- 777,787 ----
+    </data>
+    <data name="timer_st.Location" type="System.Drawing.Point, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+!     <value>100, 17</value>
+    </data>
+    <data name="timer_st.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="$this.Name">
+!     <value>ET42XControl</value>
+    </data>
+    <data name="$this.TrayLargeIcon" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+***************
+*** 793,799 ****
+    <data name="$this.DrawGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>True</value>
+-   </data>
+-   <data name="$this.Name">
+-     <value>ET42XControl</value>
+    </data>
+    <data name="$this.TrayHeight" type="System.Int32, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+--- 796,799 ----
+
+Index: State.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/State.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** State.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- State.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 6,10 ****
+  	public enum CURRENT_DISPLAY
+  	{
+! 		G=1, M?ngel, ZUG, Zugbesy, B, VA, Spg, FIS, S, V_GREATER_0, V_EQUAL_0, ST, NONE
+  	}
+  
+--- 6,10 ----
+  	public enum CURRENT_DISPLAY
+  	{
+! 		G=1, M?ngel, ZUG, Zugbesy, B, VA, Spg, FIS, FIS_HK, FIS_ROUTE, S, V_GREATER_0, V_EQUAL_0, ST, NONE, OBERSTROM, Info, Besetz, Vist, DSK, Zug_Tf_Nr
+  	}
+  
+***************
+*** 12,16 ****
+  	{
+  		ET423=1, ET424, ET425, ET426, NONE
+! 	}
+  
+  	public enum T?REN
+--- 12,16 ----
+  	{
+  		ET423=1, ET424, ET425, ET426, NONE
+! 	}       	
+  
+  	public enum T?REN
+***************
+*** 23,41 ****
+  		public CURRENT_DISPLAY DISPLAY = CURRENT_DISPLAY.G;
+  		public CURRENT_DISPLAY OLD_DISPLAY = CURRENT_DISPLAY.NONE;
+! 		public ET42XTYPE ET42Xtype1 = ET42XTYPE.ET423;
+! 		public ET42XTYPE ET42Xtype2 = ET42XTYPE.NONE;
+! 		public ET42XTYPE ET42Xtype3 = ET42XTYPE.NONE;
+  
+  		public float Zusatzbremse = 0f;
+  
+! 		public float OberstromGrenze = 900f;
+  		public float OberstromToRender = 0f;
+  		public float Drehzahl = 0f;
+  
+  		public new float Fahrstufe = 0f;
+  		public float E_Bremse = 0f;
+  
+  		public T?REN T?ren = T?REN.ZU;
+  
+  
+  		public St?rungsManager st?rungmgr = new St?rungsManager();
+--- 23,49 ----
+  		public CURRENT_DISPLAY DISPLAY = CURRENT_DISPLAY.G;
+  		public CURRENT_DISPLAY OLD_DISPLAY = CURRENT_DISPLAY.NONE;
+! 		public ET42XTYPE ET42Xtype1 = ET42XTYPE.ET425;
+! 		public ET42XTYPE ET42Xtype2 = ET42XTYPE.ET425;
+! 		public ET42XTYPE ET42Xtype3 = ET42XTYPE.ET425;
+! 
+! 		public FIS_TYPE FISType = FIS_TYPE.GPS_FIS;
+  
+  		public float Zusatzbremse = 0f;
+  
+! 		public float OberstromGrenze = 1000f;
+  		public float OberstromToRender = 0f;
+  		public float Drehzahl = 0f;
+  
+  		public new float Fahrstufe = 0f;
++ 		public int FahrstufenSchalter = 10;
+  		public float E_Bremse = 0f;
+  
+  		public T?REN T?ren = T?REN.ZU;
+  
++ 		public bool DSK_Gesperrt = false;
++ 		public string DSK_BUFFER = "    ";
++ 
++ 		public bool Kuehlung = true;
++ 
+  
+  		public St?rungsManager st?rungmgr = new St?rungsManager();
+***************
+*** 47,52 ****
+  			st?rungmgr.Add(new St?rung(ENUMSt?rung.S01_ZUSIKomm));			
+  		}
+  		
+! 		public string Zugnummer = "12345";
+  	}
+  
+--- 55,69 ----
+  			st?rungmgr.Add(new St?rung(ENUMSt?rung.S01_ZUSIKomm));			
+  		}
++ 
++ 		public FIS fis = new FIS();
+  		
+! 		public string Zugnummer = "<INIT>";
+! 		public string ZugnummerTemp = "";
+! 		public string Tfnummer = "<INIT>";
+! 		public string TfnummerTemp = "";
+! 
+! 		public int marker = 0;
+! 		public bool marker_changed = false;
+! 		public bool marker_changed2 = false;
+  	}
+  
+
+Index: Switcher.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/Switcher.resx,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Switcher.resx	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- Switcher.resx	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 230,233 ****
+--- 230,236 ----
+      <value>8, 8</value>
+    </data>
++   <data name="groupBox1.SnapToGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>True</value>
++   </data>
+    <data name="groupBox1.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+***************
+*** 236,242 ****
+      <value>True</value>
+    </data>
+-   <data name="groupBox1.SnapToGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+-     <value>True</value>
+-   </data>
+    <data name="groupBox1.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+--- 239,242 ----
+***************
+*** 272,279 ****
+      <value>False</value>
+    </data>
+!   <data name="rb_425_3.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="rb_425_3.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+--- 272,279 ----
+      <value>False</value>
+    </data>
+!   <data name="rb_425_3.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="rb_425_3.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+***************
+*** 308,311 ****
+--- 308,314 ----
+      <value>False</value>
+    </data>
++   <data name="$this.Name">
++     <value>Switcher</value>
++   </data>
+    <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>(Default)</value>
+***************
+*** 319,325 ****
+    <data name="$this.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <value>8, 8</value>
+-   </data>
+-   <data name="$this.Name">
+-     <value>Switcher</value>
+    </data>
+    <data name="$this.DrawGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+--- 322,325 ----
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/UserControler.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** UserControler.cs	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- UserControler.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 36,40 ****
+              {
+                  //m_parent = gotParent;
+!                 m_widget = new ET42XControl(XMLConf);
+                  P_Display.Controls.Add(m_widget);
+                  if (m_XMLConf.Inverse) 
+--- 36,40 ----
+              {
+                  //m_parent = gotParent;
+!                 m_widget = new ET42XControl(XMLConf, ref net);
+                  P_Display.Controls.Add(m_widget);
+                  if (m_XMLConf.Inverse) 
+***************
+*** 72,75 ****
+--- 72,77 ----
+  				Thread.Sleep(1);
+  			}
++ 
++ 			m_widget.m_net = net;
+  		}
+  
+***************
+*** 182,185 ****
+--- 184,188 ----
+          private void B_Off_Click(object sender, System.EventArgs e)
+          {
++ 			m_widget.GLOBAL_SOUND = false;
+              this.Dispose();
+          }
+***************
+*** 366,378 ****
+  				if (e.X > 88 && e.X < 138) // aus
+  				{
+  					this.Dispose();
+  				}
+  				else if (e.X > 150 && e.X < 205) // nix
+  				{
+  				}
+  				else if (e.X > 216 && e.X < 270) // i
+  				{
+  					if (m_widget.Visible)
+! 						m_widget.Button_SW_Pressed(sender, e);
+  				}
+  				else if (e.X > 282 && e.X < 402) // St
+--- 369,384 ----
+  				if (e.X > 88 && e.X < 138) // aus
+  				{
++ 					m_widget.GLOBAL_SOUND = false;
+  					this.Dispose();
+  				}
+  				else if (e.X > 150 && e.X < 205) // nix
+  				{
++ 					if (m_widget.Visible)
++ 						m_widget.Button_SW_Pressed(sender, e);
+  				}
+  				else if (e.X > 216 && e.X < 270) // i
+  				{
+  					if (m_widget.Visible)
+! 						m_widget.Button_I_Pressed(sender, e);
+  				}
+  				else if (e.X > 282 && e.X < 402) // St
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:24 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:24 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/SystemTools AssemblyInfo.vb,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqON28877@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/SystemTools
+In directory sheep:/tmp/cvs-serv11087/SystemTools
+
+Modified Files:
+	AssemblyInfo.vb 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.vb
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/SystemTools/AssemblyInfo.vb,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.vb	31 Jan 2005 10:54:27 -0000	1.1.1.1
+--- AssemblyInfo.vb	9 Mar 2005 10:52:22 -0000	1.2
+***************
+*** 30,32 ****
+  ' zur?ckgreifen, indem Sie '*' wie unten angezeigt verwenden:
+  
+! <Assembly: AssemblyVersion("1.5.*")> 
+--- 30,32 ----
+  ' zur?ckgreifen, indem Sie '*' wie unten angezeigt verwenden:
+  
+! <Assembly: AssemblyVersion("1.5.2.*")> 
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:25 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:25 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/br185mmi/Network Network.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqPN28888@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/br185mmi/Network
+In directory sheep:/tmp/cvs-serv11087/br185mmi/Network
+
+Modified Files:
+	Network.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: Network.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/br185mmi/Network/Network.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Network.cs	31 Jan 2005 10:54:21 -0000	1.1.1.1
+--- Network.cs	9 Mar 2005 10:52:23 -0000	1.2
+***************
+*** 84,87 ****
+--- 84,89 ----
+  		}  */
+  
++ 		public void ChangeFISState(int type, byte[] buffer) {}
++ 
+  		public void ChangeState(int type, byte[] buffer)
+  		{
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:25 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:25 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/ice3 AssemblyInfo.cs,1.1.1.1,1.2 ICE3Control.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqPN28891@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/ice3
+In directory sheep:/tmp/cvs-serv11087/ice3
+
+Modified Files:
+	AssemblyInfo.cs ICE3Control.cs UserControler.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ice3/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:23 -0000	1.2
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.0.*")]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.2.*")]
+  
+  //
+
+Index: ICE3Control.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ice3/ICE3Control.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** ICE3Control.cs	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- ICE3Control.cs	9 Mar 2005 10:52:23 -0000	1.2
+***************
+*** 47,50 ****
+--- 47,52 ----
+  		Thread ThreadT?ren;
+  
++ 		SoundInterface sound;
++ 
+  		bool DO_T?REN = false;
+  
+***************
+*** 113,116 ****
+--- 115,131 ----
+  			//olddisplay = CURRENT_DISPLAY.D1_Grundb;
+  
++ 			switch (m_conf.Sound)
++ 			{
++ 				case 1:
++ 					sound = new APISound();
++ 					break;
++ 				case 2:
++ 					sound = new DxSound();
++ 					break;
++ 				default:
++ 					sound = new NullSound();
++ 					break;
++ 			}
++ 
+  			//SetButtons();
+  			vtime = DateTime.Now;
+***************
+*** 252,255 ****
+--- 267,271 ----
+  							localstate.wbBremse = WBBremse.AUS;
+  							something_changed = true;
++ 							sound.PlayWBGesperrt();
+  						}
+  						break;
+***************
+*** 274,277 ****
+--- 290,294 ----
+  						localstate.wbBremse = WBBremse.SB;
+  						something_changed = true;
++ 						sound.PlayWBFreigabe();
+  					}
+  					break;
+***************
+*** 301,304 ****
+--- 318,322 ----
+  							localstate.wbBremse = WBBremse.BB_SB;
+  							something_changed = true;
++ 							sound.PlayWBFreigabe();
+  						}
+  						break;
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ice3/UserControler.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** UserControler.cs	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- UserControler.cs	9 Mar 2005 10:52:23 -0000	1.2
+***************
+*** 503,512 ****
+  				else if (e.X > 273 && e.X < 318) // S
+  				{
+! 					
+  				}
+  				else if (e.X > 332 && e.X < 375) // i
+  				{ 
+- 					// Umschaltung ICE Typ
+- 					m_widget.Button_SW_Pressed(sender, e);					
+  				}
+  				else if (e.X > 391 && e.X < 494) // st?rung
+--- 503,511 ----
+  				else if (e.X > 273 && e.X < 318) // S
+  				{
+! 					// Umschaltung ICE Typ
+! 					m_widget.Button_SW_Pressed(sender, e);					
+  				}
+  				else if (e.X > 332 && e.X < 375) // i
+  				{ 
+  				}
+  				else if (e.X > 391 && e.X < 494) // st?rung
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:24 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:24 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/VT612 AssemblyInfo.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2 VT612Control.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqON28881@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/VT612
+In directory sheep:/tmp/cvs-serv11087/VT612
+
+Modified Files:
+	AssemblyInfo.cs UserControler.cs VT612Control.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/VT612/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:27 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:22 -0000	1.2
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.0.*")]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.2.*")]
+  
+  //
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/VT612/UserControler.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** UserControler.cs	31 Jan 2005 10:54:27 -0000	1.1.1.1
+--- UserControler.cs	9 Mar 2005 10:52:22 -0000	1.2
+***************
+*** 369,377 ****
+  				else if (e.X > 150 && e.X < 205) // nix
+  				{
+  				}
+  				else if (e.X > 216 && e.X < 270) // i
+  				{
+- 					if (m_widget.Visible)
+- 						m_widget.Button_SW_Pressed(sender, e);
+  				}
+  				else if (e.X > 282 && e.X < 402) // St
+--- 369,377 ----
+  				else if (e.X > 150 && e.X < 205) // nix
+  				{
++ 					if (m_widget.Visible)
++ 						m_widget.Button_SW_Pressed(sender, e);
+  				}
+  				else if (e.X > 216 && e.X < 270) // i
+  				{
+  				}
+  				else if (e.X > 282 && e.X < 402) // St
+
+Index: VT612Control.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/VT612/VT612Control.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** VT612Control.cs	31 Jan 2005 10:54:27 -0000	1.1.1.1
+--- VT612Control.cs	9 Mar 2005 10:52:22 -0000	1.2
+***************
+*** 1470,1485 ****
+  				DrawFrame(ref pg, 468, 1, 160, 38);
+  
+! 				string s = "";
+! 
+! 				s = DayOfWeekGerman(vtime.DayOfWeek).Substring(0, 2) + ", ";	
+! 				if (vtime.DayOfYear < 10)
+! 					s += "0"+vtime.DayOfYear.ToString() + ".";
+! 				else
+! 					s += vtime.DayOfYear.ToString() + ".";
+! 				if (vtime.Month < 10)
+! 					s += "0"+vtime.Month.ToString() + ".";
+! 				else
+! 					s += vtime.Month.ToString() + ".";
+! 				s += vtime.Year.ToString();
+  
+  				Font f = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+--- 1470,1474 ----
+  				DrawFrame(ref pg, 468, 1, 160, 38);
+  
+! 				string s = MMI.EBuLa.Tools.Misc.getDateString(vtime);
+  
+  				Font f = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+***************
+*** 1492,1507 ****
+  				DrawFrame(ref pg, 1, 1, 120, 38);
+  
+! 				string s = "";
+! 
+! 				s = DayOfWeekGerman(vtime.DayOfWeek).Substring(0, 2) + ", ";	
+! 				if (vtime.DayOfYear < 10)
+! 					s += "0"+vtime.DayOfYear.ToString() + ".";
+! 				else
+! 					s += vtime.DayOfYear.ToString() + ".";
+! 				if (vtime.Month < 10)
+! 					s += "0"+vtime.Month.ToString() + ".";
+! 				else
+! 					s += vtime.Month.ToString() + ".";
+! 				s += vtime.Year.ToString();
+  
+  				Font f = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+--- 1481,1485 ----
+  				DrawFrame(ref pg, 1, 1, 120, 38);
+  
+! 				string s = MMI.EBuLa.Tools.Misc.getDateString(vtime);
+  
+  				Font f = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+***************
+*** 1971,1996 ****
+  			//graph_main.Render(this.CreateGraphics());
+  		}
+! 		private string DayOfWeekGerman(DayOfWeek dayofweek)
+! 		{
+! 			switch (dayofweek)
+! 			{
+! 				case DayOfWeek.Monday:
+! 					return "Montag";
+! 				case DayOfWeek.Tuesday:
+! 					return "Dienstag";
+! 				case DayOfWeek.Wednesday:
+! 					return "Mittwoch";
+! 				case DayOfWeek.Thursday:
+! 					return "Donnerstag";
+! 				case DayOfWeek.Friday:
+! 					return "Freitag";
+! 				case DayOfWeek.Saturday:
+! 					return "Samstag";
+! 				case DayOfWeek.Sunday:
+! 					return "Sonntag";
+! 			}
+! 			return "";
+! 
+! 		}
+  		private void MoveZugkraft()
+  		{
+--- 1949,1953 ----
+  			//graph_main.Render(this.CreateGraphics());
+  		}
+! 		
+  		private void MoveZugkraft()
+  		{
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:24 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:24 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/ET42X_/Network Network.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqON28871@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/ET42X_/Network
+In directory sheep:/tmp/cvs-serv11087/ET42X_/Network
+
+Modified Files:
+	Network.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: Network.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/Network/Network.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Network.cs	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- Network.cs	9 Mar 2005 10:52:22 -0000	1.2
+***************
+*** 6,13 ****
+  using System.Windows.Forms;
+  using System.Collections;
+  
+  namespace MMI.ET42X
+  {
+! 	public class Network : MMI.EBuLa.Tools.INetwork
+  	{
+  		Socket s;
+--- 6,14 ----
+  using System.Windows.Forms;
+  using System.Collections;
++ using MMI.EBuLa.Tools;
+  
+  namespace MMI.ET42X
+  {
+! 	public class Network : MMI.EBuLa.Tools.INetwork, MMI.EBuLa.Tools.IFISNetwork
+  	{
+  		Socket s;
+***************
+*** 16,19 ****
+--- 17,21 ----
+  		ET42XControl c;
+  		ArrayList sockets_list = new ArrayList();
++ 		MMI.EBuLa.Tools.SuperNetwork sn;
+  		
+  		public Network(ref ET42XControl control)
+***************
+*** 33,37 ****
+  		public void Connect()
+  		{
+! 			MMI.EBuLa.Tools.SuperNetwork sn = new MMI.EBuLa.Tools.SuperNetwork(this);
+  			c.IsCONNECTED = true;
+  
+--- 35,39 ----
+  		public void Connect()
+  		{
+! 			sn = new MMI.EBuLa.Tools.SuperNetwork(this);
+  			c.IsCONNECTED = true;
+  
+***************
+*** 81,84 ****
+--- 83,219 ----
+  		}  */
+  
++ 		public void SendData(FIS_DATA type, string data)
++ 		{
++ 			switch(type)
++ 			{
++ 				case FIS_DATA.FIS_Aus:
++ 					// TODO
++ 					break;
++ 				case FIS_DATA.FIS_Ausloesen:
++ 					sn.SendToFISServer(s, 25, "");
++ 					break;
++ 				case FIS_DATA.FIS_Start:
++ 					sn.SendToFISServer(s, 26, "");
++ 					break;
++ 				case FIS_DATA.GPS_Status:
++ 					sn.SendToFISServer(s, 17, "");
++ 					break;
++ 				case FIS_DATA.Naechster_Halt:
++ 					sn.SendToFISServer(s, 18, "");
++ 					break;
++ 				case FIS_DATA.Next_Entry:
++ 					sn.SendToFISServer(s, 23, "");
++ 					break;
++ 				case FIS_DATA.Prev_Entry:
++ 					sn.SendToFISServer(s, 24, "");
++ 					break;
++ 				case FIS_DATA.Route_Data:
++ 					sn.SendToFISServer(s, 29, "");
++ 					break;
++ 				case FIS_DATA.Status:
++ 					sn.SendToFISServer(s, 16, "");
++ 					break;
++ 				case FIS_DATA.Set_FISTYPE:
++ 					if (data == "true")
++ 						sn.SendToFISServer(s, 40, true);
++ 					else if (data == "false")
++ 						sn.SendToFISServer(s, 40, false);
++ 					break;
++ 				case FIS_DATA.Set_NaechsterHalt:
++ 					// TODO
++ 					break;
++ 				case FIS_DATA.Set_Route_Netz:
++ 					sn.SendToFISServer(s, 34, data);
++ 					break;
++ 				case FIS_DATA.Set_Route_Linie:
++ 					sn.SendToFISServer(s, 35, data);
++ 					break;
++ 				case FIS_DATA.Set_Route_Start:
++ 					sn.SendToFISServer(s, 36, data);
++ 					break;
++ 				case FIS_DATA.Set_Route_Ziel:
++ 					sn.SendToFISServer(s, 37, data);
++ 					break;
++ 				case FIS_DATA.Set_Status:
++ 					if (data == "true")
++ 						sn.SendToFISServer(s, 32, true);
++ 					else if (data == "false")
++ 						sn.SendToFISServer(s, 32, false);
++ 					break;
++ 			}
++ 		}
++ 		public void ChangeFISState(int type, byte[] buffer) 
++ 		{
++ 			string data = "";
++ 			float valu = 0f;
++ 			bool state = false;
++ 			BinaryReader reader = new BinaryReader(new MemoryStream(buffer));
++ 
++ 			switch (type)
++ 			{
++ 				case  1: 
++ 					valu = reader.ReadSingle();
++ 					if (valu == 1f) state = true;
++ 					c.SetFIS_Status(state);
++ 					break;
++ 				case  2: 
++ 					valu = reader.ReadSingle();
++ 					if (valu == 1f) state = true;
++ 					c.SetFIS_GPSStatus(state);
++ 					break;
++ 				case  3:
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_NaechsterHalt(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  4: 
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_Netz(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  5: 
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_Linie(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  6: 
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_Start(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  7: 
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_Ziel(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  8: 
++ 					c.SetFIS_NoMoreData();
++ 					break;
++ 				case  9: 
++ 					c.SetFIS_NoMoreZiel();
++ 					break;
++ 				case  10: 
++ 					c.SetFIS_NoMoreStart();
++ 					break;
++ 				default: // nix
++ 					break;
++ 			}
++ 		}
++ 
+  		public void ChangeState(int type, byte[] buffer)
+  		{
+***************
+*** 168,171 ****
+--- 303,309 ----
+  				case 47: // T?ren offen
+  					c.SetLM_T?r(state);
++ 					break;
++ 				case 51: // Schalter Fahrstufen
++ 					c.SetFahrstufenSchalter(valu);
+  					break;
+  				case 56: // AFB
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:25 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:25 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/br185mmi AssemblyInfo.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqPN28886@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/br185mmi
+In directory sheep:/tmp/cvs-serv11087/br185mmi
+
+Modified Files:
+	AssemblyInfo.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/br185mmi/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:19 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:22 -0000	1.2
+***************
+*** 26,30 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.0.*")]
+  
+  //
+--- 26,30 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.2.*")]
+  
+  //
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:25 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:25 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/ice3/Network Network.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqPN28894@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/ice3/Network
+In directory sheep:/tmp/cvs-serv11087/ice3/Network
+
+Modified Files:
+	Network.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: Network.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ice3/Network/Network.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Network.cs	31 Jan 2005 10:54:27 -0000	1.1.1.1
+--- Network.cs	9 Mar 2005 10:52:23 -0000	1.2
+***************
+*** 71,74 ****
+--- 71,76 ----
+  		}*/
+  
++ 		public void ChangeFISState(int type, byte[] buffer) {}
++ 
+  		public void ChangeState(int type, byte[] buffer)
+  		{
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:25 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:25 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/VT612/Network Network.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqON28884@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/VT612/Network
+In directory sheep:/tmp/cvs-serv11087/VT612/Network
+
+Modified Files:
+	Network.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: Network.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/VT612/Network/Network.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Network.cs	31 Jan 2005 10:54:27 -0000	1.1.1.1
+--- Network.cs	9 Mar 2005 10:52:22 -0000	1.2
+***************
+*** 81,84 ****
+--- 81,86 ----
+  		}  */
+  
++ 		public void ChangeFISState(int type, byte[] buffer) {}
++ 
+  		public void ChangeState(int type, byte[] buffer)
+  		{
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:52 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:52 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/Diagnose/Network Network.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqqN28928@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/Diagnose/Network
+In directory sheep:/tmp/cvs-serv11087/Diagnose/Network
+
+Modified Files:
+	Network.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: Network.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/Network/Network.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Network.cs	31 Jan 2005 10:54:28 -0000	1.1.1.1
+--- Network.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 85,88 ****
+--- 85,90 ----
+  		}  */
+  
++ 		public void ChangeFISState(int type, byte[] buffer) {}
++ 
+  		public void ChangeState(int type, byte[] buffer)
+  		{
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:53 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:53 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/EBuLaTools/Sound DxSound.cs,1.1.1.1,1.2 SoundInterface.cs,1.1.1.1,1.2 tonysound.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqrN28934@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Sound
+In directory sheep:/tmp/cvs-serv11087/EBuLaTools/Sound
+
+Modified Files:
+	DxSound.cs SoundInterface.cs tonysound.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: DxSound.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Sound/DxSound.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** DxSound.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- DxSound.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 49,52 ****
+--- 49,74 ----
+  		}
+  
++ 		public void PlayWBGesperrt()
++ 		{
++ 			try
++ 			{	
++ 				Audio a = Audio.FromFile(@".\Sounds\wb_gesperrt.WAV");
++ 				a.Play();
++ 				System.Threading.Thread.Sleep(1200);
++ 			}
++ 			catch(Exception){}
++ 		}
++ 
++ 		public void PlayWBFreigabe()
++ 		{
++ 			try
++ 			{	
++ 				Audio a = Audio.FromFile(@".\Sounds\wb_freigabe.WAV");
++ 				a.Play();
++ 				System.Threading.Thread.Sleep(1200);
++ 			}
++ 			catch(Exception){}
++ 		}
++ 
+  		/*
+  		 * CODE BELOW FOR DIRECT-SOUND 9
+
+Index: SoundInterface.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Sound/SoundInterface.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** SoundInterface.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- SoundInterface.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 25,28 ****
+--- 25,38 ----
+  		/// </summary>
+  		void PlayMalfunctionBombardierSound();
++ 
++ 		/// <summary>
++ 		/// Play "WB gesperrt"
++ 		/// </summary>
++ 		void PlayWBGesperrt();
++ 
++ 		/// <summary>
++ 		/// Play "WB Freigabe"
++ 		/// </summary>
++ 		void PlayWBFreigabe();
+  	}
+  }
+
+Index: tonysound.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Sound/tonysound.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** tonysound.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- tonysound.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 54,57 ****
+--- 54,75 ----
+  		}
+  
++ 		public void PlayWBGesperrt()
++ 		{
++ 			try
++ 			{
++ 				PlaySound(@".\Sounds\wb_gesperrt.wav", IntPtr.Zero, PlaySoundFlags.SND_ASYNC & PlaySoundFlags.SND_NOSTOP);
++ 			}
++ 			catch(Exception) {}
++ 		}
++ 
++ 		public void PlayWBFreigabe()
++ 		{
++ 			try
++ 			{
++ 				PlaySound(@".\Sounds\wb_freigabe.wav", IntPtr.Zero, PlaySoundFlags.SND_ASYNC & PlaySoundFlags.SND_NOSTOP);
++ 			}
++ 			catch(Exception) {}
++ 		}
++ 
+  		[DllImport("winmm.dll")] //inports the winmm.dll used for sound
+  		private static extern bool PlaySound( string szSound, IntPtr hMod, PlaySoundFlags flags );
+***************
+*** 78,81 ****
+--- 96,101 ----
+  		public void PlayMalfunctionSiemensSound() {}
+  		public void PlayMalfunctionBombardierSound() {}
++ 		public void PlayWBFreigabe() {}
++ 		public void PlayWBGesperrt() {}
+      }
+  }
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:53 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:53 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/EBuLa/Network Network.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqrN28938@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/EBuLa/Network
+In directory sheep:/tmp/cvs-serv11087/EBuLa/Network
+
+Modified Files:
+	Network.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: Network.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLa/Network/Network.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Network.cs	31 Jan 2005 10:54:19 -0000	1.1.1.1
+--- Network.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 15,18 ****
+--- 15,19 ----
+  	public class Network
+  	{
++ 		const string VERSION = "1.5.2";
+  		const int BUFFER_SIZE = 4096*128;
+  		const int REQUEST = 10;
+***************
+*** 386,392 ****
+  
+  			if (isDAVID)
+! 				id = System.Text.ASCIIEncoding.UTF8.GetBytes("EBuLa 1.4.99 (DAVID)");
+  			else
+! 				id = System.Text.ASCIIEncoding.UTF8.GetBytes("EBuLa 1.4.99");
+  
+  			int length = id.Length + 9;
+--- 387,393 ----
+  
+  			if (isDAVID)
+! 				id = System.Text.ASCIIEncoding.UTF8.GetBytes("EBuLa "+VERSION+" (DAVID)");
+  			else
+! 				id = System.Text.ASCIIEncoding.UTF8.GetBytes("EBuLa "+VERSION);
+  
+  			int length = id.Length + 9;
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:51 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:51 +0100
+Subject: [Zusidisplay-cvs] zusidisplay AboutBox.cs,1.2,1.3 AboutBox.resx,1.1.1.1,1.2 AssemblyInfo.cs,1.1.1.1,1.2 Form1.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqpN28917@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay
+In directory sheep:/tmp/cvs-serv11087
+
+Modified Files:
+	AboutBox.cs AboutBox.resx AssemblyInfo.cs Form1.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AboutBox.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/AboutBox.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** AboutBox.cs	2 Feb 2005 06:39:41 -0000	1.2
+--- AboutBox.cs	9 Mar 2005 10:52:19 -0000	1.3
+***************
+*** 153,157 ****
+  			this.label13.Size = new System.Drawing.Size(192, 16);
+  			this.label13.TabIndex = 10;
+! 			this.label13.Text = "ET423-426 Diagnosedisplay (alpha)";
+  			// 
+  			// label12
+--- 153,157 ----
+  			this.label13.Size = new System.Drawing.Size(192, 16);
+  			this.label13.TabIndex = 10;
+! 			this.label13.Text = "ET423-426 Diagnosedisplay";
+  			// 
+  			// label12
+
+Index: AboutBox.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/AboutBox.resx,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AboutBox.resx	31 Jan 2005 10:54:12 -0000	1.1.1.1
+--- AboutBox.resx	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 191,198 ****
+      <value>False</value>
+    </data>
+!   <data name="label3.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="label3.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+--- 191,198 ----
+      <value>False</value>
+    </data>
+!   <data name="label3.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="label3.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+***************
+*** 209,216 ****
+      <value>False</value>
+    </data>
+!   <data name="button1.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="button1.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+--- 209,216 ----
+      <value>False</value>
+    </data>
+!   <data name="button1.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="button1.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+***************
+*** 311,314 ****
+--- 311,317 ----
+      <value>8, 8</value>
+    </data>
++   <data name="$this.Name">
++     <value>AboutBox</value>
++   </data>
+    <data name="$this.DrawGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>True</value>
+***************
+*** 316,322 ****
+    <data name="$this.TrayHeight" type="System.Int32, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>80</value>
+-   </data>
+-   <data name="$this.Name">
+-     <value>AboutBox</value>
+    </data>
+    <data name="$this.SnapToGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+--- 319,322 ----
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:11 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.0.*")]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.2.*")]
+  
+  //
+
+Index: Form1.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Form1.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Form1.cs	31 Jan 2005 10:54:11 -0000	1.1.1.1
+--- Form1.cs	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 49,53 ****
+          private System.ComponentModel.IContainer components;
+  
+! 		public MainForm()
+  		{
+  			InitializeComponent();
+--- 49,53 ----
+          private System.ComponentModel.IContainer components;
+  
+! 		public MainForm(string[] args)
+  		{
+  			InitializeComponent();
+***************
+*** 57,60 ****
+--- 57,62 ----
+              Init();
+  
++ 			LoadDisplay(args);
++ 
+  			this.Focus();
+  		}
+***************
+*** 101,104 ****
+--- 103,107 ----
+  			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+  			this.Resize += new System.EventHandler(this.MainForm_Resize);
++ 			this.Move += new System.EventHandler(this.MainForm_Move);
+  
+  		}
+***************
+*** 106,113 ****
+  
+  		[STAThread]
+! 		static void Main() 
+  		{
+  			//Application.EnableVisualStyles();
+! 			Application.Run(new MainForm());
+          }
+  
+--- 109,116 ----
+  
+  		[STAThread]
+! 		static void Main(string[] args) 
+  		{
+  			//Application.EnableVisualStyles();
+! 			Application.Run(new MainForm(args));
+          }
+  
+***************
+*** 126,131 ****
+                      this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
+                  }
+!                 if (m_br185 != null && m_br185.IsDisposed)
+                  {
+                      // show main selection
+--- 129,135 ----
+                      this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
++ 					ActivateBorder();
+                  }
+!                 else if (m_br185 != null && m_br185.IsDisposed)
+                  {
+                      // show main selection
+***************
+*** 137,142 ****
+                      this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
+                  }   
+! 				if (m_david != null && m_david.IsDisposed)
+  				{
+  					// show main selection
+--- 141,147 ----
+                      this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
++ 					ActivateBorder();
+                  }   
+! 				else if (m_david != null && m_david.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 148,153 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
+  				}
+! 				if (m_ice3 != null && m_ice3.IsDisposed)
+  				{
+  					// show main selection
+--- 153,159 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
++ 					ActivateBorder();
+  				}
+! 				else if (m_ice3 != null && m_ice3.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 159,164 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
+  				}
+! 				if (m_et42x != null && m_et42x.IsDisposed)
+  				{
+  					// show main selection
+--- 165,171 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
++ 					ActivateBorder();
+  				}
+! 				else if (m_et42x != null && m_et42x.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 169,174 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
+  				}
+! 				if (m_vt612 != null && m_vt612.IsDisposed)
+  				{
+  					// show main selection
+--- 176,182 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
++ 					ActivateBorder();
+  				}
+! 				else if (m_vt612 != null && m_vt612.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 179,184 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
+  				}
+! 				if (m_diagnose != null && m_diagnose.IsDisposed)
+  				{
+  					// show main selection
+--- 187,193 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
++ 					ActivateBorder();
+  				}
+! 				else if (m_diagnose != null && m_diagnose.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 189,194 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
+  				}
+! 				if (m_tools != null && m_tools.IsDisposed)
+                  {
+                      // show main selection
+--- 198,204 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = "ZusiDisplay";
++ 					ActivateBorder();
+  				}
+! 				else if (m_tools != null && m_tools.IsDisposed)
+                  {
+                      // show main selection
+***************
+*** 205,210 ****
+                      m_menu = new SelectionMenu(m_handler);
+                      this.Controls.Add(m_menu);*/
+                  }
+!                 if (m_menu != null && m_menu.IsDisposed)
+                  {
+                      m_menu = null;
+--- 215,221 ----
+                      m_menu = new SelectionMenu(m_handler);
+                      this.Controls.Add(m_menu);*/
++ 					ActivateBorder();
+                  }
+!                 else if (m_menu != null && m_menu.IsDisposed)
+                  {
+                      m_menu = null;
+***************
+*** 212,215 ****
+--- 223,227 ----
+                      {
+                          case Loadwhat.EBuLa:
++ 							SetWindow(enumDisplay.EBuLa);
+                              m_widget = new EBuLa.ControlContainer(XmlConf);
+                              this.Controls.Add(m_widget);
+***************
+*** 225,229 ****
+                          case Loadwhat.MMI:
+  							//MMI.BR185_MMI.Network net = new MMI.BR185_MMI.Network();
+!                             m_br185 = new MMIBR185.ControlContainer(XmlConf);
+                              this.Controls.Add(m_br185);
+                              m_handler.Load = Loadwhat.Menu;
+--- 237,242 ----
+                          case Loadwhat.MMI:
+  							//MMI.BR185_MMI.Network net = new MMI.BR185_MMI.Network();
+! 							SetWindow(enumDisplay.MMI);
+! 							m_br185 = new MMIBR185.ControlContainer(XmlConf);
+                              this.Controls.Add(m_br185);
+                              m_handler.Load = Loadwhat.Menu;
+***************
+*** 231,234 ****
+--- 244,248 ----
+                              break;
+  						case Loadwhat.DAVID:
++ 							SetWindow(enumDisplay.DAVID1);
+  							m_david = new MMI.DAVID.ControlContainer(XmlConf, 1);
+  							m_david.m_widget.localstate.Type = MMI.DAVID.TYPE.David1;
+***************
+*** 241,244 ****
+--- 255,259 ----
+  							break;
+  						case Loadwhat.DAVID2:
++ 							SetWindow(enumDisplay.DAVID2);
+  							m_david = new MMI.DAVID.ControlContainer(XmlConf, 2);
+  							m_david.m_widget.localstate.Type = MMI.DAVID.TYPE.David2;
+***************
+*** 249,252 ****
+--- 264,268 ----
+  							break;
+  						case Loadwhat.ICE3_1:
++ 							SetWindow(enumDisplay.ICE3_1);
+  							m_ice3 = new MMI.ICE3.ControlContainer(XmlConf, 1);
+  							m_ice3.m_widget.localstate.Type = MMI.ICE3.TYPE.David1;
+***************
+*** 259,262 ****
+--- 275,279 ----
+  							break;
+  						case Loadwhat.ICE3_2:
++ 							SetWindow(enumDisplay.ICE3_2);
+  							m_ice3 = new MMI.ICE3.ControlContainer(XmlConf, 2);
+  							m_ice3.m_widget.olddisplay = ICE3.CURRENT_DISPLAY.D1_Grundb;
+***************
+*** 269,272 ****
+--- 286,290 ----
+  							break;
+  						case Loadwhat.ET42X:
++ 							SetWindow(enumDisplay.ET42X);
+  							m_et42x = new MMI.ET42X.ControlContainer(XmlConf);
+  							this.Controls.Add(m_et42x);
+***************
+*** 275,278 ****
+--- 293,297 ----
+  							break;
+  						case Loadwhat.VT612:
++ 							SetWindow(enumDisplay.VT612);
+  							m_vt612 = new MMI.VT612.ControlContainer(XmlConf);
+  							this.Controls.Add(m_vt612);
+***************
+*** 281,284 ****
+--- 300,304 ----
+  							break;
+  						case Loadwhat.DIAGNOSE:
++ 							SetWindow(enumDisplay.DIAGNOSE);
+  							m_diagnose = new MMI.DIAGNOSE.ControlContainer(XmlConf);
+  							this.Controls.Add(m_diagnose);
+***************
+*** 312,315 ****
+--- 332,353 ----
+          }
+  
++ 		private void SetWindow(enumDisplay display)
++ 		{
++ 			this.Location = new Point(XmlConf.GetWidth(display), XmlConf.GetHeight(display));
++ 
++ 			if (XmlConf.GetBorder(display)) 
++ 			{
++ 				this.FormBorderStyle = FormBorderStyle.FixedDialog;
++ 			}
++ 			else
++ 			{
++ 				this.FormBorderStyle = FormBorderStyle.None;
++ 			}
++ 		}
++ 		private void ActivateBorder()
++ 		{
++ 			this.FormBorderStyle = FormBorderStyle.FixedDialog;
++ 		}
++ 
+          public void Init()
+          {
+***************
+*** 326,338 ****
+                  this.Controls.Add(m_menu);
+  
+!                 this.Location = new Point(XmlConf.Width,XmlConf.Height);
+!                 if (XmlConf.Border) 
+!                 {
+!                     this.FormBorderStyle = FormBorderStyle.FixedDialog;
+!                 }
+!                 else
+!                 {
+!                     this.FormBorderStyle = FormBorderStyle.None;
+!                 }
+  
+                  this.TopMost = XmlConf.TopMost;
+--- 364,371 ----
+                  this.Controls.Add(m_menu);
+  
+!                 
+! 				MainForm_Move(this, new EventArgs());
+!                 
+! 				
+  
+                  this.TopMost = XmlConf.TopMost;
+***************
+*** 356,359 ****
+--- 389,450 ----
+          }
+  
++ 		private void LoadDisplay(string[] args)
++ 		{
++ 			foreach(string strg in args)
++ 			{
++ 				if (!isKnownArgument(strg)) continue;
++ 				OpenDisplay(strg);
++ 				m_menu.Dispose();
++ 				return;
++ 			}
++ 		}
++ 
++ 		private bool isKnownArgument(string arg)
++ 		{
++ 			return (arg == "-ebula" ||
++ 					arg == "-mmi" ||
++ 					arg == "-et42x" ||
++ 					arg == "-vt612" ||
++ 					arg == "-diagnose" ||
++ 					arg == "-david_1" ||
++ 					arg == "-david_2" ||
++ 					arg == "-ice3_1" ||
++ 					arg == "-ice3_2");
++ 		}
++ 
++ 		private void OpenDisplay(string arg)
++ 		{
++ 			switch(arg)
++ 			{
++ 				case "-ebula":
++ 					m_handler.Load = Loadwhat.EBuLa;
++ 					break;
++ 				case "-mmi":
++ 					m_handler.Load = Loadwhat.MMI;
++ 					break;
++ 				case "-et42x":
++ 					m_handler.Load = Loadwhat.ET42X;
++ 					break;
++ 				case "-vt612":
++ 					m_handler.Load = Loadwhat.VT612;
++ 					break;
++ 				case "-diagnose":
++ 					m_handler.Load = Loadwhat.DIAGNOSE;
++ 					break;
++ 				case "-david_1":
++ 					m_handler.Load = Loadwhat.DAVID;
++ 					break;
++ 				case "-david_2":
++ 					m_handler.Load = Loadwhat.DAVID2;
++ 					break;
++ 				case "-ice3_1":
++ 					m_handler.Load = Loadwhat.ICE3_1;
++ 					break;
++ 				case "-ice3_2":
++ 					m_handler.Load = Loadwhat.ICE3_2;
++ 					break;			
++ 			}
++ 		}
++ 
+  		private void MainForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+  		{
+***************
+*** 362,365 ****
+--- 453,457 ----
+  		private void MainForm_Resize(object sender, System.EventArgs e)
+  		{
++ 			/*
+  			foreach(UserControl c in this.Controls)
+  			{
+***************
+*** 368,371 ****
+--- 460,469 ----
+  				c.Size = new Size(this.Width, this.Height);
+  			}
++ 			*/
++ 		}
++ 
++ 		private void MainForm_Move(object sender, System.EventArgs e)
++ 		{
++ 				XmlConf.Position = new System.Drawing.Point(this.Location.X, this.Location.Y);
+  		}
+  
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:52 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:52 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/David/Network Network.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqqN28921@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/David/Network
+In directory sheep:/tmp/cvs-serv11087/David/Network
+
+Modified Files:
+	Network.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: Network.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/David/Network/Network.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Network.cs	31 Jan 2005 10:54:23 -0000	1.1.1.1
+--- Network.cs	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 80,83 ****
+--- 80,85 ----
+  		}*/
+  
++ 		public void ChangeFISState(int type, byte[] buffer) {}
++ 
+  		public void ChangeState(int type, byte[] buffer)
+  		{
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:53 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:53 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/EBuLa AssemblyInfo.cs,1.1.1.1,1.2 UserControl1.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqrN28936@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/EBuLa
+In directory sheep:/tmp/cvs-serv11087/EBuLa
+
+Modified Files:
+	AssemblyInfo.cs UserControl1.cs UserControler.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLa/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:12 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 26,30 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.0.*")]
+  
+  //
+--- 26,30 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.2.*")]
+  
+  //
+
+Index: UserControl1.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLa/UserControl1.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** UserControl1.cs	31 Jan 2005 10:54:12 -0000	1.1.1.1
+--- UserControl1.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 40,43 ****
+--- 40,45 ----
+          private int firsttime = 3;
+  
++ 		private XMLLoader m_conf;
++ 
+  		public bool isGNT = true;
+  
+***************
+*** 271,274 ****
+--- 273,278 ----
+  				control.vtime = vtime;
+  
++ 				m_conf = XMLConf;
++ 
+                  if (XMLConf.Sound == 0)
+                  {
+***************
+*** 3268,3272 ****
+          {
+              ControlSwitch cw = new ControlSwitch(control);
+! 			cw.Location = new Point(this.Location.X+430, this.Location.Y+130);
+              SetButtons(true);
+              kh.Form = cw;
+--- 3272,3276 ----
+          {
+              ControlSwitch cw = new ControlSwitch(control);
+! 			cw.Location = new Point(m_conf.Position.X+430, m_conf.Position.Y+130);
+              SetButtons(true);
+              kh.Form = cw;
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLa/UserControler.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** UserControler.cs	31 Jan 2005 10:54:12 -0000	1.1.1.1
+--- UserControler.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 20,24 ****
+          private SystemTools.System sys = new SystemTools.System();
+  
+!         private MMI.EBuLa.Tools.XMLLoader m_XMLConf = null;
+  
+  		public static String Version = "TODO"; // System.Reflection.Assembly.GetAssembly(new ControlContainer(new MMI.EBuLa.Tools.XMLLoader("")).GetType()).GetName().Version.ToString();
+--- 20,24 ----
+          private SystemTools.System sys = new SystemTools.System();
+  
+!         public MMI.EBuLa.Tools.XMLLoader m_XMLConf = null;
+  
+  		public static String Version = "TODO"; // System.Reflection.Assembly.GetAssembly(new ControlContainer(new MMI.EBuLa.Tools.XMLLoader("")).GetType()).GetName().Version.ToString();
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:52 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:52 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/David AssemblyInfo.cs,1.1.1.1,1.2 DavidControl.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqqN28918@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/David
+In directory sheep:/tmp/cvs-serv11087/David
+
+Modified Files:
+	AssemblyInfo.cs DavidControl.cs UserControler.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/David/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:21 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.0.*")]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.2.*")]
+  
+  //
+
+Index: DavidControl.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/David/DavidControl.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** DavidControl.cs	31 Jan 2005 10:54:21 -0000	1.1.1.1
+--- DavidControl.cs	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 34,37 ****
+--- 34,40 ----
+  		DateTime lastTime = new DateTime(0);
+  
++ 		SoundInterface sound;
++ 		int stoerung_counter = 0;
++ 
+  
+  		#region Declarations
+***************
+*** 93,96 ****
+--- 96,113 ----
+  			timer1.Interval = interval;
+  			timer1.Enabled = true;
++ 
++ 			switch (m_conf.Sound)
++ 			{
++ 				case 1:
++ 					sound = new APISound();
++ 					break;
++ 				case 2:
++ 					sound = new DxSound();
++ 					break;
++ 				default:
++ 					sound = new NullSound();
++ 					break;
++ 			}
++ 			Button_SW_Pressed(this, new EventArgs());			
+  		}
+  
+***************
+*** 126,130 ****
+  			// 
+  			this.timer_st.Enabled = true;
+! 			this.timer_st.Interval = 750;
+  			this.timer_st.Tick += new System.EventHandler(this.timer_st_Tick);
+  			// 
+--- 143,147 ----
+  			// 
+  			this.timer_st.Enabled = true;
+! 			this.timer_st.Interval = 1000;
+  			this.timer_st.Tick += new System.EventHandler(this.timer_st_Tick);
+  			// 
+***************
+*** 399,402 ****
+--- 416,435 ----
+  					{
+  						localstate.st?rungmgr.Add(new St?rung(ENUMSt?rung.S01_ZUSIKomm));
++ 						if (m_conf.Sound != 0)
++ 						{
++ 							switch (m_conf.Sound)
++ 							{
++ 								case 1:
++ 									sound.PlayMalfunctionBombardierSound();
++ 									sound.PlayMalfunctionBombardierSound();
++ 									sound.PlayMalfunctionBombardierSound();
++ 									break;
++ 								case 2:
++ 									sound.PlayMalfunctionBombardierSound();
++ 									sound.PlayMalfunctionBombardierSound();
++ 									sound.PlayMalfunctionBombardierSound();
++ 									break;
++ 							}
++ 						}
+  					}
+  				}
+***************
+*** 1961,1964 ****
+--- 1994,2004 ----
+  					ST?RUNG_BG = Color.Gold;
+  					ST?RUNG_FG = Color.Blue;
++ 				}
++ 				// SOUND
++ 				stoerung_counter++;
++ 				if (stoerung_counter == 30)
++ 				{
++ 					stoerung_counter = 0;
++ 					sound.PlayMalfunctionBombardierSound();
+  				}
+  			}
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/David/UserControler.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** UserControler.cs	31 Jan 2005 10:54:21 -0000	1.1.1.1
+--- UserControler.cs	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 13,17 ****
+  	public class ControlContainer : System.Windows.Forms.UserControl
+  	{
+! 		const string BACKGROUND_IMAGE_ADTRANZ = @".\Pictures\adtranz.jpg";
+  		const string BACKGROUND_IMAGE_ABB     = @".\Pictures\abb.jpg";
+  
+--- 13,17 ----
+  	public class ControlContainer : System.Windows.Forms.UserControl
+  	{
+! 		const string BACKGROUND_IMAGE_ADTRANZ = @".\Pictures\adtranz_ice.jpg";
+  		const string BACKGROUND_IMAGE_ABB     = @".\Pictures\abb.jpg";
+  
+***************
+*** 92,96 ****
+  				}
+  			}
+- 
+  		}
+  
+--- 92,95 ----
+
+
+
+From nobody at sheep.berlios.de  Wed Mar  9 11:52:52 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 9 Mar 2005 11:52:52 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/Diagnose AssemblyInfo.cs,1.1.1.1,1.2 DIAGNOSEControl.cs,1.2,1.3 State.cs,1.2,1.3 Switcher.cs,1.2,1.3 Switcher.resx,1.2,1.3 UserControler.cs,1.1.1.1,1.2
+Message-ID: <200503091052.j29AqqN28926@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/Diagnose
+In directory sheep:/tmp/cvs-serv11087/Diagnose
+
+Modified Files:
+	AssemblyInfo.cs DIAGNOSEControl.cs State.cs Switcher.cs 
+	Switcher.resx UserControler.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f?r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:27 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.0.*")]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion("1.5.2.*")]
+  
+  //
+
+Index: DIAGNOSEControl.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/DIAGNOSEControl.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** DIAGNOSEControl.cs	2 Feb 2005 06:39:41 -0000	1.2
+--- DIAGNOSEControl.cs	9 Mar 2005 10:52:20 -0000	1.3
+***************
+*** 804,808 ****
+  						localstate.marker_changed2 = false;
+  						localstate.marker = 0;
+! 						localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					}
+  					break;
+--- 804,811 ----
+  						localstate.marker_changed2 = false;
+  						localstate.marker = 0;
+! 						if (IsBR101())
+!                             localstate.DISPLAY = CURRENT_DISPLAY.G;
+! 						else
+! 							localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					}
+  					break;
+***************
+*** 962,969 ****
+  			{
+  				case CURRENT_DISPLAY.G:
+! 					localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+! 					if (IsBombardier())
+  						localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					break;
+--- 965,975 ----
+  			{
+  				case CURRENT_DISPLAY.G:
+! 					if (IsBR101())
+!                         localstate.DISPLAY = CURRENT_DISPLAY.Zug_Tf_Nr;
+! 					else
+! 						localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+! 					if (IsBombardier() || IsADtranz())
+  						localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					break;
+***************
+*** 1297,1301 ****
+  							{
+  								case 1:
+! 									if (IsBombardier())
+  									{
+  										Sound.PlayMalfunctionBombardierSound();
+--- 1303,1307 ----
+  							{
+  								case 1:
+! 									if (IsBombardier() || IsADtranz())
+  									{
+  										Sound.PlayMalfunctionBombardierSound();
+***************
+*** 1311,1315 ****
+  									break;
+  								case 2:
+! 									if (IsBombardier())
+  									{
+  										Sound.PlayMalfunctionBombardierSound();
+--- 1317,1321 ----
+  									break;
+  								case 2:
+! 									if (IsBombardier() || IsADtranz())
+  									{
+  										Sound.PlayMalfunctionBombardierSound();
+***************
+*** 1334,1338 ****
+  		private void DrawFrame(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			if (IsBombardier())
+  			{
+  				DrawFrameSunken(ref pg, x, y, width, height);
+--- 1340,1344 ----
+  		private void DrawFrame(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			if (IsBombardier() || IsADtranz())
+  			{
+  				DrawFrameSunken(ref pg, x, y, width, height);
+***************
+*** 1348,1385 ****
+  		private void DrawFrameRaised(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			// Stift
+! 			Pen pen_dg = new Pen(DARK, 1);
+! 			Pen pen_ws = new Pen(BRIGHT, 1);
+! 
+! 			pg.DrawLine(pen_ws, x, y, x+width, y);
+! 			pg.DrawLine(pen_ws, x, y, x,       y+height);
+! 
+! 			pg.DrawLine(pen_dg, x+width, y,        x+width, y+height);
+! 			pg.DrawLine(pen_dg, x,       y+height, x+width, y+height);
+  		}
+  
+  		private void DrawFrameSunken(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			// Stift
+! 			Pen pen_dg = new Pen(DARK, 1);
+! 			Pen pen_ws = new Pen(BRIGHT, 2);
+! 
+! 			pg.DrawLine(pen_dg, x, y, x+width, y);
+! 			pg.DrawLine(pen_dg, x, y, x,       y+height);
+! 
+! 			pg.DrawLine(pen_ws, x+width, y,        x+width, y+height);
+! 			pg.DrawLine(pen_ws, x,       y+height, x+width, y+height);
+  		}
+  		private void DrawFrameSunkenSmall(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			// Stift
+! 			Pen pen_dg = new Pen(DARK, 1);
+! 			Pen pen_ws = new Pen(BRIGHT, 1);
+! 
+! 			pg.DrawLine(pen_dg, x, y, x+width, y);
+! 			pg.DrawLine(pen_dg, x, y, x,       y+height);
+! 
+! 			pg.DrawLine(pen_ws, x+width, y,        x+width, y+height);
+! 			pg.DrawLine(pen_ws, x,       y+height, x+width, y+height);
+  		}
+  
+--- 1354,1368 ----
+  		private void DrawFrameRaised(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			MMI.EBuLa.Tools.DisplayDraw.DrawFrameRaised(ref pg, x, y, width, height, DARK, BRIGHT);
+  		}
+  
+  		private void DrawFrameSunken(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			MMI.EBuLa.Tools.DisplayDraw.DrawFrameSunken(ref pg, x, y, width, height, DARK, BRIGHT);
+  		}
++ 
+  		private void DrawFrameSunkenSmall(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			MMI.EBuLa.Tools.DisplayDraw.DrawFrameSunkenSmall(ref pg, x, y, width, height, DARK, BRIGHT);
+  		}
+  
+***************
+*** 1728,1739 ****
+  			zugkraft = ReduziereZugkraft(localstate.ZugkraftGesammt, 1) * 2f;
+  
+- 			/*
+- 			if (localstate.VT612type2 != VT612TYPE.NONE)
+- 				zugkraft += ReduziereZugkraft(localstate.ZugkraftGesammt, 2) * 2f;
+- 
+- 			if (localstate.VT612type3 != VT612TYPE.NONE)
+- 				zugkraft += ReduziereZugkraft(localstate.ZugkraftGesammt, 3) * 2f;
+- 				*/
+- 
+  			if (zugkraft < 0) zugkraft *= -1;
+  
+--- 1711,1714 ----
+***************
+*** 1832,1836 ****
+  		public void DrawSpannung(ref Graphics pg)
+  		{
+! 			if (IsBombardier()) DrawSpannungBombardier(ref pg);
+  			else DrawSpannungSiemens(ref pg);
+  		}
+--- 1807,1811 ----
+  		public void DrawSpannung(ref Graphics pg)
+  		{
+! 			if (IsBombardier() || IsADtranz()) DrawSpannungBombardier(ref pg);
+  			else DrawSpannungSiemens(ref pg);
+  		}
+***************
+*** 1956,1962 ****
+  			// Seitenschrift
+  			float oldsize = f.Size;
+! 			f = new Font("Arial", 5, FontStyle.Bold, GraphicsUnit.Millimeter);
+! 			pg.DrawString("Spannung", f, new SolidBrush(BLACK), 500, 230);
+! 			pg.DrawString("Oberstrom", f, new SolidBrush(BLACK), 500, 255);
+  			f = new Font("Arial", oldsize, FontStyle.Bold, GraphicsUnit.Millimeter);
+  
+--- 1931,1947 ----
+  			// Seitenschrift
+  			float oldsize = f.Size;
+! 			if (IsADtranz())
+! 			{
+! 				f = new Font(GetFontString(), 22, FontStyle.Bold, GraphicsUnit.Point);
+! 				pg.DrawString("Spannung", f, new SolidBrush(BLACK), 465, 230);
+! 				pg.DrawString("Oberstrom", f, new SolidBrush(BLACK), 460, 260);
+! 			}
+! 			else
+! 			{
+! 				f = new Font("Arial", 5, FontStyle.Bold, GraphicsUnit.Millimeter);
+! 				pg.DrawString("Spannung", f, new SolidBrush(BLACK), 500, 230);
+! 				pg.DrawString("Oberstrom", f, new SolidBrush(BLACK), 500, 255);
+! 			}
+! 
+  			f = new Font("Arial", oldsize, FontStyle.Bold, GraphicsUnit.Millimeter);
+  
+***************
+*** 1990,1994 ****
+  		public void DrawOberstrom(ref Graphics pg)
+  		{
+! 			if (IsBombardier())
+  				DrawOberstromBombardier(ref pg);
+  			else
+--- 1975,1979 ----
+  		public void DrawOberstrom(ref Graphics pg)
+  		{
+! 			if (IsBombardier()  || IsADtranz())
+  				DrawOberstromBombardier(ref pg);
+  			else
+***************
+*** 2258,2261 ****
+--- 2243,2255 ----
+  				DrawFrame(ref pg, 1, 335, 629, 56);
+  			}
++ 			else if (IsADtranz())
++ 			{
++ 				//kleine Felder
++ 				DrawFrame(ref pg, 145, 338, 50, 50);
++ 				DrawFrame(ref pg, 4, 338, 140, 50);
++ 
++ 				// gro?er Rahmen
++ 				DrawFrame(ref pg, 1, 335, 629, 56);
++ 			}
+  
+  		}
+***************
+*** 2799,2802 ****
+--- 2793,2801 ----
+  		private void DrawST(ref Graphics pg)
+  		{
++ 			if (localstate.type == TRAIN_TYPE.BR152 || localstate.type == TRAIN_TYPE.BR189)
++ 			{
++ 				pg.FillRectangle(new SolidBrush(Color.LemonChiffon), 0, 40, 800, 353);
++ 			}
++ 
+  			int y = 60;
+  			Brush b_ws;
+***************
+*** 3080,3095 ****
+  				DrawFrame(ref pg, 468, 1, 160, 30);
+  
+! 				string s = "";
+! 
+! 				s = DayOfWeekGerman(vtime.DayOfWeek).Substring(0, 2) + ", ";	
+! 				if (vtime.DayOfYear < 10)
+! 					s += "0"+vtime.DayOfYear.ToString() + ".";
+! 				else
+! 					s += vtime.DayOfYear.ToString() + ".";
+! 				if (vtime.Month < 10)
+! 					s += "0"+vtime.Month.ToString() + ".";
+! 				else
+! 					s += vtime.Month.ToString() + ".";
+! 				s += vtime.Year.ToString();
+  
+  				Font f = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+--- 3079,3083 ----
+  				DrawFrame(ref pg, 468, 1, 160, 30);
+  
+! 				string s = MMI.EBuLa.Tools.Misc.getDateString(vtime);
+  
+  				Font f = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+***************
+*** 3102,3117 ****
+  				DrawFrame(ref pg, 1, 1, 120, 38);
+  
+! 				string s = "";
+! 
+! 				s = DayOfWeekGerman(vtime.DayOfWeek).Substring(0, 2) + ", ";	
+! 				if (vtime.DayOfYear < 10)
+! 					s += "0"+vtime.DayOfYear.ToString() + ".";
+! 				else
+! 					s += vtime.DayOfYear.ToString() + ".";
+! 				if (vtime.Month < 10)
+! 					s += "0"+vtime.Month.ToString() + ".";
+! 				else
+! 					s += vtime.Month.ToString() + ".";
+! 				s += vtime.Year.ToString();
+  
+  				Font f = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+--- 3090,3094 ----
+  				DrawFrame(ref pg, 1, 1, 120, 38);
+  
+! 				string s = MMI.EBuLa.Tools.Misc.getDateString(vtime);
+  
+  				Font f = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+***************
+*** 3160,3164 ****
+  			{
+  				case CURRENT_DISPLAY.G:
+! 					if (IsBombardier())
+                          l_Button1.Text = "An-triebe";
+  					else
+--- 3137,3141 ----
+  			{
+  				case CURRENT_DISPLAY.G:
+! 					if (IsBombardier() || IsADtranz())
+                          l_Button1.Text = "An-triebe";
+  					else
+***************
+*** 3166,3170 ****
+  					l_Button2.Text = "W";
+  					l_Button3.Text = "";
+! 					l_Button4.Text = "Zug- Besy";
+  					l_Button5.Text = "";
+  					if (IsMMI())
+--- 3143,3150 ----
+  					l_Button2.Text = "W";
+  					l_Button3.Text = "";
+! 					if (IsBR101())
+!                         l_Button4.Text = "Zug- Num.";
+! 					else
+! 						l_Button4.Text = "Zug- Besy";
+  					l_Button5.Text = "";
+  					if (IsMMI())
+***************
+*** 3178,3182 ****
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+! 					if (IsBombardier())
+  						l_Button1.Text = "An-triebe";
+  					else
+--- 3158,3162 ----
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+! 					if (IsBombardier() || IsADtranz())
+  						l_Button1.Text = "An-triebe";
+  					else
+***************
+*** 3184,3188 ****
+  					l_Button2.Text = "W";
+  					l_Button3.Text = "";
+! 					if (IsBombardier())
+  						l_Button4.Text = "Zug- Besy";
+  					else
+--- 3164,3168 ----
+  					l_Button2.Text = "W";
+  					l_Button3.Text = "";
+! 					if (IsBombardier() || IsADtranz())
+  						l_Button4.Text = "Zug- Besy";
+  					else
+***************
+*** 3206,3210 ****
+  					l_Button6.Text = "";
+  					l_Button7.Text = "DSK";
+! 					if (IsBombardier())
+  						l_Button8.Text = "Pr?-fen";
+  					else
+--- 3186,3190 ----
+  					l_Button6.Text = "";
+  					l_Button7.Text = "DSK";
+! 					if (IsBombardier() || IsADtranz())
+  						l_Button8.Text = "Pr?-fen";
+  					else
+***************
+*** 3459,3463 ****
+  			}
+  
+! 			if (IsBombardier())
+  			{
+  				if (localstate.Brh > 0f && IsCONNECTED)
+--- 3439,3443 ----
+  			}
+  
+! 			if (IsBombardier() || IsADtranz())
+  			{
+  				if (localstate.Brh > 0f && IsCONNECTED)
+***************
+*** 3497,3501 ****
+  			{
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+! 					if (IsBombardier())
+  					{
+  						pg.DrawString("Grundbild", f, new SolidBrush(BLACK), 525, 56);
+--- 3477,3481 ----
+  			{
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+! 					if (IsBombardier() || IsADtranz())
+  					{
+  						pg.DrawString("Grundbild", f, new SolidBrush(BLACK), 525, 56);
+***************
+*** 3531,3535 ****
+  					break;
+  				case CURRENT_DISPLAY.DSK:
+! 					if (IsBombardier())
+  					{
+  						pg.DrawString("Grundbild", f, new SolidBrush(BLACK), 525, 56);
+--- 3511,3515 ----
+  					break;
+  				case CURRENT_DISPLAY.DSK:
+! 					if (IsBombardier() || IsADtranz())
+  					{
+  						pg.DrawString("Grundbild", f, new SolidBrush(BLACK), 525, 56);
+***************
+*** 3612,3621 ****
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48, y+10, 30, 40);
+  					if ((i < localstate.marker && localstate.marker_changed))
+! 						if (IsBombardier())
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Blue, 110+i*48, y +19);
+  					else if (!localstate.marker_changed || localstate.marker > 5)
+! 						if (IsBombardier())
+  							pg.DrawString(org.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+--- 3592,3601 ----
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48, y+10, 30, 40);
+  					if ((i < localstate.marker && localstate.marker_changed))
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Blue, 110+i*48, y +19);
+  					else if (!localstate.marker_changed || localstate.marker > 5)
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(org.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+***************
+*** 3657,3666 ****
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48, y+10, 30, 40);
+  					if ((i < localstate.marker-6 && localstate.marker_changed2))
+! 						if (IsBombardier())
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Blue, 110+i*48, y +19);
+  					else if (!localstate.marker_changed2 || localstate.marker-6 > 5)
+! 						if (IsBombardier())
+  							pg.DrawString(org.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+--- 3637,3646 ----
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48, y+10, 30, 40);
+  					if ((i < localstate.marker-6 && localstate.marker_changed2))
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Blue, 110+i*48, y +19);
+  					else if (!localstate.marker_changed2 || localstate.marker-6 > 5)
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(org.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+***************
+*** 3705,3709 ****
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48+x, y+10, 30, 40);
+  					if (i < localstate.marker)
+! 						if (IsBombardier())
+  							pg.DrawString(localstate.DSK_BUFFER.Substring(i, 1), f, Brushes.Black, 110+i*48+x, y +19);
+  						else
+--- 3685,3689 ----
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48+x, y+10, 30, 40);
+  					if (i < localstate.marker)
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(localstate.DSK_BUFFER.Substring(i, 1), f, Brushes.Black, 110+i*48+x, y +19);
+  						else
+***************
+*** 3933,3937 ****
+  					DrawSt?rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier())	DrawStatusSt?rRahmen(ref g, true, true);
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+--- 3913,3917 ----
+  					DrawSt?rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier() || IsADtranz()) DrawStatusSt?rRahmen(ref g, true, true);
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+***************
+*** 3941,3945 ****
+  					DrawSt?rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier())	DrawStatusSt?rRahmen(ref g, true, true);
+  					break;
+  				case CURRENT_DISPLAY.Zugbesy:
+--- 3921,3925 ----
+  					DrawSt?rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier() || IsADtranz())	DrawStatusSt?rRahmen(ref g, true, true);
+  					break;
+  				case CURRENT_DISPLAY.Zugbesy:
+***************
+*** 3948,3952 ****
+  					DrawSt?rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier())	DrawStatusSt?rRahmen(ref g, true, true);					
+  					break;
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+--- 3928,3932 ----
+  					DrawSt?rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier() || IsADtranz())	DrawStatusSt?rRahmen(ref g, true, true);					
+  					break;
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+***************
+*** 3973,3998 ****
+  			//graph_main.Render(this.CreateGraphics());
+  		}
+! 		private string DayOfWeekGerman(DayOfWeek dayofweek)
+! 		{
+! 			switch (dayofweek)
+! 			{
+! 				case DayOfWeek.Monday:
+! 					return "Montag";
+! 				case DayOfWeek.Tuesday:
+! 					return "Dienstag";
+! 				case DayOfWeek.Wednesday:
+! 					return "Mittwoch";
+! 				case DayOfWeek.Thursday:
+! 					return "Donnerstag";
+! 				case DayOfWeek.Friday:
+! 					return "Freitag";
+! 				case DayOfWeek.Saturday:
+! 					return "Samstag";
+! 				case DayOfWeek.Sunday:
+! 					return "Sonntag";
+! 			}
+! 			return "";
+! 
+! 		}
+  		private void MoveZugkraft()
+  		{
+--- 3953,3957 ----
+  			//graph_main.Render(this.CreateGraphics());
+  		}
+! 	
+  		private void MoveZugkraft()
+  		{
+***************
+*** 4038,4042 ****
+  				{
+  					stoerung_counter = 0;
+! 					if (IsBombardier())
+  						Sound.PlayMalfunctionBombardierSound();
+  					else
+--- 3997,4001 ----
+  				{
+  					stoerung_counter = 0;
+! 					if (IsBombardier() || IsADtranz())
+  						Sound.PlayMalfunctionBombardierSound();
+  					else
+***************
+*** 4143,4151 ****
+  		public bool IsBombardier()
+  		{
+! 			return (localstate.type == TRAIN_TYPE.BR101 || localstate.type == TRAIN_TYPE.BR145 || localstate.type == TRAIN_TYPE.BR146 || localstate.type == TRAIN_TYPE.BR146_1 || localstate.type == TRAIN_TYPE.BR185);
+  		}
+  		public bool IsSiemens()
+  		{
+! 			return !IsBombardier();
+  		}
+  		public bool IsMMI()
+--- 4102,4114 ----
+  		public bool IsBombardier()
+  		{
+! 			return (localstate.type == TRAIN_TYPE.BR101_MET || localstate.type == TRAIN_TYPE.BR145 || localstate.type == TRAIN_TYPE.BR146 || localstate.type == TRAIN_TYPE.BR146_1 || localstate.type == TRAIN_TYPE.BR185);
+  		}
+  		public bool IsSiemens()
+  		{
+! 			return (!IsBombardier() && !IsADtranz());
+! 		}
+! 		public bool IsADtranz()
+! 		{
+! 			return localstate.type == TRAIN_TYPE.BR101;
+  		}
+  		public bool IsMMI()
+***************
+*** 4153,4156 ****
+--- 4116,4123 ----
+  			return (localstate.type == TRAIN_TYPE.BR185 || localstate.type == TRAIN_TYPE.BR146_1 || localstate.type == TRAIN_TYPE.BR189);
+  		}
++ 		public bool IsBR101()
++ 		{
++ 			return (localstate.type == TRAIN_TYPE.BR101 || localstate.type == TRAIN_TYPE.BR101_MET);
++ 		}
+  		public bool SwitchToMMIAllowed
+  		{
+***************
+*** 4183,4186 ****
+--- 4150,4160 ----
+  			
+  			return text;
++ 		}
++ 		public string GetFontString()
++ 		{
++ 			if (IsBR101())
++ 				return "FixedSysTTF";
++ 			else
++ 				return "Arial";
+  		}
+  		public float ReduziereZugkraft(float zugkraft, int tz)
+
+Index: State.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/State.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** State.cs	2 Feb 2005 06:39:41 -0000	1.2
+--- State.cs	9 Mar 2005 10:52:20 -0000	1.3
+***************
+*** 11,15 ****
+  	public enum TRAIN_TYPE
+  	{
+! 		BR101=1, BR145, BR146, BR146_1, BR152, BR182, BR185, BR189, ER20
+  	}
+  
+--- 11,15 ----
+  	public enum TRAIN_TYPE
+  	{
+! 		BR101=1, BR101_MET, BR145, BR146, BR146_1, BR152, BR182, BR185, BR189, ER20
+  	}
+  
+
+Index: Switcher.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/Switcher.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** Switcher.cs	2 Feb 2005 06:39:41 -0000	1.2
+--- Switcher.cs	9 Mar 2005 10:52:20 -0000	1.3
+***************
+*** 37,40 ****
+--- 37,41 ----
+  		private System.Windows.Forms.RadioButton rb_er20;
+  		private System.Windows.Forms.RadioButton rb_146_1;
++ 		private System.Windows.Forms.RadioButton rb_101MET;
+  
+  		MMI.DIAGNOSE.DIAGNOSEState m_state;
+***************
+*** 53,56 ****
+--- 54,60 ----
+  					rb_101.Checked = true;
+  					break;
++ 				case TRAIN_TYPE.BR101_MET:
++ 					rb_101MET.Checked = true;
++ 					break;
+  				case TRAIN_TYPE.BR145:
+  					rb_145.Checked = true;
+***************
+*** 127,130 ****
+--- 131,135 ----
+  			this.cb_12std = new System.Windows.Forms.CheckBox();
+  			this.groupBox5 = new System.Windows.Forms.GroupBox();
++ 			this.rb_101MET = new System.Windows.Forms.RadioButton();
+  			this.rb_182 = new System.Windows.Forms.RadioButton();
+  			this.rb_152 = new System.Windows.Forms.RadioButton();
+***************
+*** 177,180 ****
+--- 182,186 ----
+  			// groupBox5
+  			// 
++ 			this.groupBox5.Controls.Add(this.rb_101MET);
+  			this.groupBox5.Controls.Add(this.rb_182);
+  			this.groupBox5.Controls.Add(this.rb_152);
+***************
+*** 196,199 ****
+--- 202,215 ----
+  			this.groupBox5.Text = "Bitte w?hlen Sie den gew?nschten Loktyp aus:";
+  			// 
++ 			// rb_101MET
++ 			// 
++ 			this.rb_101MET.Enabled = false;
++ 			this.rb_101MET.FlatStyle = System.Windows.Forms.FlatStyle.System;
++ 			this.rb_101MET.Location = new System.Drawing.Point(128, 56);
++ 			this.rb_101MET.Name = "rb_101MET";
++ 			this.rb_101MET.Size = new System.Drawing.Size(88, 24);
++ 			this.rb_101MET.TabIndex = 15;
++ 			this.rb_101MET.Text = "BR 101 (MET)";
++ 			// 
+  			// rb_182
+  			// 
+***************
+*** 241,245 ****
+  			this.rb_101.Location = new System.Drawing.Point(40, 56);
+  			this.rb_101.Name = "rb_101";
+! 			this.rb_101.Size = new System.Drawing.Size(168, 24);
+  			this.rb_101.TabIndex = 1;
+  			this.rb_101.TabStop = true;
+--- 257,261 ----
+  			this.rb_101.Location = new System.Drawing.Point(40, 56);
+  			this.rb_101.Name = "rb_101";
+! 			this.rb_101.Size = new System.Drawing.Size(72, 24);
+  			this.rb_101.TabIndex = 1;
+  			this.rb_101.TabStop = true;
+***************
+*** 381,384 ****
+--- 397,404 ----
+  			{
+  				m_state.type = TRAIN_TYPE.BR101;
++ 			}
++ 			if (rb_101MET.Checked)
++ 			{
++ 				m_state.type = TRAIN_TYPE.BR101_MET;
+  			}
+  			else if (rb_145.Checked)
+
+Index: Switcher.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/Switcher.resx,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** Switcher.resx	2 Feb 2005 06:39:41 -0000	1.2
+--- Switcher.resx	9 Mar 2005 10:52:20 -0000	1.3
+***************
+*** 143,146 ****
+--- 143,155 ----
+      <value>Private</value>
+    </data>
++   <data name="rb_101MET.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>False</value>
++   </data>
++   <data name="rb_101MET.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>Private</value>
++   </data>
++   <data name="rb_101MET.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>Private</value>
++   </data>
+    <data name="rb_182.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+***************
+*** 313,316 ****
+--- 322,328 ----
+    <data name="rb_3times.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
++   </data>
++   <data name="$this.Name">
++     <value>Switcher</value>
+    </data>
+    <data name="$this.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/UserControler.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** UserControler.cs	31 Jan 2005 10:54:28 -0000	1.1.1.1
+--- UserControler.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 12,15 ****
+--- 12,16 ----
+  	{
+  		const string BACKGROUND_IMAGE_BOMBARDIER = @".\Pictures\bombardier.jpg";
++ 		const string BACKGROUND_IMAGE_ADTRANZ = @".\Pictures\adtranz.jpg";
+  		const string BACKGROUND_IMAGE_SIEMENS    = @".\Pictures\siemens.jpg";
+  
+***************
+*** 42,45 ****
+--- 43,47 ----
+  				mmi_widget.Button_6_Pressed(this, new EventArgs());
+  				
++ 				
+  				m_widget = new DIAGNOSEControl(XMLConf,ref mmi_widget);
+                  P_Display.Controls.Add(m_widget);
+***************
+*** 61,65 ****
+  			try
+  			{
+! 				pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_BOMBARDIER);
+  			}
+  			catch(Exception)
+--- 63,93 ----
+  			try
+  			{
+! 				if (m_widget.IsSiemens())
+! 				{
+! 					if (System.IO.File.Exists(BACKGROUND_IMAGE_SIEMENS))
+! 					{
+! 						// change to siemens
+! 						pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_SIEMENS);
+! 					}
+! 				}
+! 				else
+! 				{
+! 					if (m_widget.IsBR101())
+! 					{
+! 						if (System.IO.File.Exists(BACKGROUND_IMAGE_ADTRANZ))
+! 						{
+! 							// change to adtranz
+! 							pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_ADTRANZ);
+! 						}
+! 					}
+! 					else
+! 					{
+! 						if (System.IO.File.Exists(BACKGROUND_IMAGE_BOMBARDIER))
+! 						{
+! 							// change to bombardier
+! 							pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_BOMBARDIER);
+! 						}
+! 					}
+! 				}
+  			}
+  			catch(Exception)
+***************
+*** 414,420 ****
+  				else if (e.X > 150 && e.X < 205) // nix
+  				{
+- 				}
+- 				else if (e.X > 216 && e.X < 270) // i
+- 				{
+  					if (m_widget.Visible)
+  					{
+--- 442,445 ----
+***************
+*** 431,441 ****
+  						else
+  						{
+! 							if (System.IO.File.Exists(BACKGROUND_IMAGE_BOMBARDIER))
+  							{
+! 								// change to bombardier
+! 								pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_BOMBARDIER);
+  							}
+  						}
+! 					}
+  				}
+  				else if (e.X > 282 && e.X < 402) // St
+--- 456,480 ----
+  						else
+  						{
+! 							if (m_widget.IsBR101())
+  							{
+! 								if (System.IO.File.Exists(BACKGROUND_IMAGE_ADTRANZ))
+! 								{
+! 									// change to adtranz
+! 									pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_ADTRANZ);
+! 								}
+! 							}
+! 							else
+! 							{
+! 								if (System.IO.File.Exists(BACKGROUND_IMAGE_BOMBARDIER))
+! 								{
+! 									// change to bombardier
+! 									pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_BOMBARDIER);
+! 								}
+  							}
+  						}
+! 					}				
+! 				}
+! 				else if (e.X > 216 && e.X < 270) // i
+! 				{
+  				}
+  				else if (e.X > 282 && e.X < 402) // St
+
+
+

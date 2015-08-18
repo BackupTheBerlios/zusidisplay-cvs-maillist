@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/br185mmi AssemblyInfo.cs,1.4,1.5 BR185Control.cs,1.2,1.3 UserControler.cs,1.2,1.3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-June/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/br185mmi%20AssemblyInfo.cs%2C1.4%2C1.5%20BR185Control.cs%2C1.2%2C1.3%20UserControler.cs%2C1.2%2C1.3&In-Reply-To=%3C200506141125.j5EBPW128521%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000044.html">
+   <LINK REL="Next"  HREF="000047.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/br185mmi AssemblyInfo.cs,1.4,1.5 BR185Control.cs,1.2,1.3 UserControler.cs,1.2,1.3</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/br185mmi%20AssemblyInfo.cs%2C1.4%2C1.5%20BR185Control.cs%2C1.2%2C1.3%20UserControler.cs%2C1.2%2C1.3&In-Reply-To=%3C200506141125.j5EBPW128521%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/br185mmi AssemblyInfo.cs,1.4,1.5 BR185Control.cs,1.2,1.3 UserControler.cs,1.2,1.3">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Tue Jun 14 13:25:32 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000044.html">[Zusidisplay-cvs] zusidisplay/ET42X_/Network Network.cs,1.3,1.4
+</A></li>
+        <LI>Next message: <A HREF="000047.html">[Zusidisplay-cvs] zusidisplay/SystemTools AssemblyInfo.vb,1.4,1.5
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#45">[ date ]</a>
+              <a href="thread.html#45">[ thread ]</a>
+              <a href="subject.html#45">[ subject ]</a>
+              <a href="author.html#45">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/br185mmi
+In directory sheep:/tmp/cvs-serv30727/br185mmi
+
+Modified Files:
+	AssemblyInfo.cs BR185Control.cs UserControler.cs 
+Log Message:
+Stand: 1.7.0-test3
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/br185mmi/AssemblyInfo.cs,v
+retrieving revision 1.4
+retrieving revision 1.5
+diff -C2 -d -r1.4 -r1.5
+*** AssemblyInfo.cs	6 Jun 2005 11:03:08 -0000	1.4
+--- AssemblyInfo.cs	14 Jun 2005 11:25:30 -0000	1.5
+***************
+*** 26,30 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.6.5.*&quot;)]
+  
+  //
+--- 26,30 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.7.0.*&quot;)]
+  
+  //
+
+Index: BR185Control.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/br185mmi/BR185Control.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** BR185Control.cs	26 May 2005 17:41:35 -0000	1.2
+--- BR185Control.cs	14 Jun 2005 11:25:30 -0000	1.3
+***************
+*** 111,115 ****
+  		public BR185Control(MMI.EBuLa.Tools.XMLLoader conf)
+  		{
+! 			if (!conf.DoubleBuffer)
+  			{
+  				//This turns off internal double buffering of all custom GDI+ drawing
+--- 111,116 ----
+  		public BR185Control(MMI.EBuLa.Tools.XMLLoader conf)
+  		{
+! 			USE_DOUBLE_BUFFER = conf.DoubleBuffer;
+! 			if (!USE_DOUBLE_BUFFER)
+  			{
+  				//This turns off internal double buffering of all custom GDI+ drawing
+***************
+*** 117,124 ****
+  				this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+  				this.SetStyle(ControlStyles.UserPaint, true);
+- 				USE_DOUBLE_BUFFER = false;
+  			}
+- 			else
+- 				USE_DOUBLE_BUFFER = true;
+  
+  			InitializeComponent();
+--- 118,122 ----
+***************
+*** 1236,1239 ****
+--- 1234,1247 ----
+  			if (localstate.SHOW_CLOCK) something_changed = true;
+  		}
++ 
++ 		public void SetUhrDatumDigital(double valu)
++ 		{
++ 			try
++ 			{
++ 				SetUhrDatum(MMI.EBuLa.Tools.State.ConvertToDateTime(valu));
++ 			}
++ 			catch(Exception){}
++ 		}
++ 
+  		public void DrawZugkraft_Fahrstufen(ref Graphics pg)
+  		{
+***************
+*** 1702,1706 ****
+  		public void UpdateScreen()
+  		{
+! 			if (!something_changed)
+  				return;
+  
+--- 1710,1714 ----
+  		public void UpdateScreen()
+  		{
+! 			if (!something_changed /*&amp;&amp; !m_conf.DoubleBuffer*/)
+  				return;
+  
+***************
+*** 2363,2367 ****
+  			if (PREVENT_DRAW) return;
+  
+! 			if (m_backBuffer == null &amp;&amp; m_conf.DoubleBuffer)
+  			{
+  				m_backBuffer= new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
+--- 2371,2375 ----
+  			if (PREVENT_DRAW) return;
+  
+! 			if (m_backBuffer == null &amp;&amp; USE_DOUBLE_BUFFER)
+  			{
+  				m_backBuffer= new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/br185mmi/UserControler.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** UserControler.cs	26 May 2005 17:41:35 -0000	1.2
+--- UserControler.cs	14 Jun 2005 11:25:30 -0000	1.3
+***************
+*** 67,71 ****
+  				t = new Thread(new ThreadStart(net.Connect));
+  				t.IsBackground = true;
+! 				t.Priority = m_XMLConf.thread_prio;
+  				t.Start();
+  				Thread.Sleep(1);
+--- 67,72 ----
+  				t = new Thread(new ThreadStart(net.Connect));
+  				t.IsBackground = true;
+! 				//t.Priority = m_XMLConf.thread_prio;
+! 				t.Priority = ThreadPriority.Highest;
+  				t.Start();
+  				Thread.Sleep(1);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000044.html">[Zusidisplay-cvs] zusidisplay/ET42X_/Network Network.cs,1.3,1.4
+</A></li>
+	<LI>Next message: <A HREF="000047.html">[Zusidisplay-cvs] zusidisplay/SystemTools AssemblyInfo.vb,1.4,1.5
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#45">[ date ]</a>
+              <a href="thread.html#45">[ thread ]</a>
+              <a href="subject.html#45">[ subject ]</a>
+              <a href="author.html#45">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,320 @@
+From nobody at sheep.berlios.de  Wed Feb  2 07:39:43 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 2 Feb 2005 07:39:43 +0100
+Subject: [Zusidisplay-cvs] zusidisplay/Diagnose DIAGNOSEControl.cs,1.1.1.1,1.2 State.cs,1.1.1.1,1.2 Switcher.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2
+Message-ID: <200502020639.j126dhN23523@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay/Diagnose
+In directory sheep:/tmp/cvs-serv10328/Diagnose
+
+Modified Files:
+	DIAGNOSEControl.cs State.cs Switcher.cs Switcher.resx 
+Log Message:
+AboutBox: LGPL link auf lokal umgestellt
+Diagnose: DSK sperren/entsperren Text verbessert
+Diagnose: BR101 deaktiviert (die kommt spaeter)
+SelectionMenu: Text "Diagnose Display" -> "Diagnosedisplay"
+
+
+Index: DIAGNOSEControl.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/DIAGNOSEControl.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** DIAGNOSEControl.cs	31 Jan 2005 10:54:28 -0000	1.1.1.1
+--- DIAGNOSEControl.cs	2 Feb 2005 06:39:41 -0000	1.2
+***************
+*** 166,170 ****
+  					break;
+  			}
+! 			
+  		}
+  
+--- 166,170 ----
+  					break;
+  			}
+! 			Button_SW_Pressed(this, new EventArgs());			
+  		}
+  
+***************
+*** 3539,3543 ****
+  						pg.DrawString("Kurzzeit-", f, new SolidBrush(BLACK), 538, 264);
+  						pg.DrawString("speicher", f, new SolidBrush(BLACK), 538, 282);
+! 						pg.DrawString("sperren", f, new SolidBrush(BLACK), 538, 299);
+  					}
+  					else
+--- 3539,3546 ----
+  						pg.DrawString("Kurzzeit-", f, new SolidBrush(BLACK), 538, 264);
+  						pg.DrawString("speicher", f, new SolidBrush(BLACK), 538, 282);
+! 						if (localstate.DSK_Gesperrt)
+! 							pg.DrawString("entsperren", f, new SolidBrush(BLACK), 518, 299);
+! 						else
+! 							pg.DrawString("sperren", f, new SolidBrush(BLACK), 538, 299);
+  					}
+  					else
+***************
+*** 3552,3556 ****
+  						pg.DrawString("Kurzzeit-", f, new SolidBrush(BLACK), 538, 264);
+  						pg.DrawString("speicher", f, new SolidBrush(BLACK), 538, 282);
+! 						pg.DrawString("sperren", f, new SolidBrush(BLACK), 538, 299);
+  					}
+  					break;
+--- 3555,3562 ----
+  						pg.DrawString("Kurzzeit-", f, new SolidBrush(BLACK), 538, 264);
+  						pg.DrawString("speicher", f, new SolidBrush(BLACK), 538, 282);
+! 						if (localstate.DSK_Gesperrt)
+!                             pg.DrawString("entsperren", f, new SolidBrush(BLACK), 518, 299);
+! 						else
+! 							pg.DrawString("sperren", f, new SolidBrush(BLACK), 538, 299);
+  					}
+  					break;
+
+Index: State.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/State.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** State.cs	31 Jan 2005 10:54:28 -0000	1.1.1.1
+--- State.cs	2 Feb 2005 06:39:41 -0000	1.2
+***************
+*** 23,27 ****
+  		public CURRENT_DISPLAY DISPLAY = CURRENT_DISPLAY.G;
+  		public CURRENT_DISPLAY OLD_DISPLAY = CURRENT_DISPLAY.NONE;
+! 		public TRAIN_TYPE type = TRAIN_TYPE.BR101;
+  		public int traction = 1;
+  
+--- 23,27 ----
+  		public CURRENT_DISPLAY DISPLAY = CURRENT_DISPLAY.G;
+  		public CURRENT_DISPLAY OLD_DISPLAY = CURRENT_DISPLAY.NONE;
+! 		public TRAIN_TYPE type = TRAIN_TYPE.BR145;
+  		public int traction = 1;
+  
+
+Index: Switcher.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/Switcher.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Switcher.cs	31 Jan 2005 10:54:28 -0000	1.1.1.1
+--- Switcher.cs	2 Feb 2005 06:39:41 -0000	1.2
+***************
+*** 237,240 ****
+--- 237,241 ----
+  			// 
+  			this.rb_101.Checked = true;
++ 			this.rb_101.Enabled = false;
+  			this.rb_101.FlatStyle = System.Windows.Forms.FlatStyle.System;
+  			this.rb_101.Location = new System.Drawing.Point(40, 56);
+
+Index: Switcher.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/Switcher.resx,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Switcher.resx	31 Jan 2005 10:54:28 -0000	1.1.1.1
+--- Switcher.resx	2 Feb 2005 06:39:41 -0000	1.2
+***************
+*** 155,162 ****
+      <value>False</value>
+    </data>
+!   <data name="rb_152.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="rb_152.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+--- 155,162 ----
+      <value>False</value>
+    </data>
+!   <data name="rb_152.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="rb_152.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+***************
+*** 329,335 ****
+      <value>8, 8</value>
+    </data>
+-   <data name="$this.Name">
+-     <value>Switcher</value>
+-   </data>
+    <data name="$this.DrawGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>True</value>
+--- 329,332 ----
+***************
+*** 340,343 ****
+--- 337,343 ----
+    <data name="$this.SnapToGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>True</value>
++   </data>
++   <data name="$this.Name">
++     <value>Switcher</value>
+    </data>
+    <data name="$this.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+
+
+
+From nobody at sheep.berlios.de  Wed Feb  2 07:39:43 2005
+From: nobody at sheep.berlios.de (jens_h)
+Date: Wed, 2 Feb 2005 07:39:43 +0100
+Subject: [Zusidisplay-cvs] zusidisplay AboutBox.cs,1.1.1.1,1.2 SelectionMenu.cs,1.1.1.1,1.2 SelectionMenu.resx,1.1.1.1,1.2
+Message-ID: <200502020639.j126dhN23519@bat.berlios.de>
+
+Update of /cvsroot/zusidisplay/zusidisplay
+In directory sheep:/tmp/cvs-serv10328
+
+Modified Files:
+	AboutBox.cs SelectionMenu.cs SelectionMenu.resx 
+Log Message:
+AboutBox: LGPL link auf lokal umgestellt
+Diagnose: DSK sperren/entsperren Text verbessert
+Diagnose: BR101 deaktiviert (die kommt spaeter)
+SelectionMenu: Text "Diagnose Display" -> "Diagnosedisplay"
+
+
+Index: AboutBox.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/AboutBox.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AboutBox.cs	31 Jan 2005 10:54:11 -0000	1.1.1.1
+--- AboutBox.cs	2 Feb 2005 06:39:41 -0000	1.2
+***************
+*** 62,66 ****
+  		    this.linkLabel3.Text = "Diese Programm ist durch die LGPL gesch?tzt";
+  			this.linkLabel3.Links[0].LinkData = "Register";
+! 			this.linkLabel3.Links.Add(28, 5, "http://www.gpl.org");
+  		}
+  
+--- 62,66 ----
+  		    this.linkLabel3.Text = "Diese Programm ist durch die LGPL gesch?tzt";
+  			this.linkLabel3.Links[0].LinkData = "Register";
+! 			this.linkLabel3.Links.Add(28, 5, ".\\lgpl.txt");
+  		}
+  
+***************
+*** 394,398 ****
+  			// If the value looks like a URL, navigate to it.
+  			// Otherwise, display it in a message box.
+! 			if(null != target && target.StartsWith("http"))
+  			{
+  				System.Diagnostics.Process.Start(target);
+--- 394,398 ----
+  			// If the value looks like a URL, navigate to it.
+  			// Otherwise, display it in a message box.
+! 			if(null != target /*&& target.StartsWith("http")*/)
+  			{
+  				System.Diagnostics.Process.Start(target);
+
+Index: SelectionMenu.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/SelectionMenu.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** SelectionMenu.cs	31 Jan 2005 10:54:11 -0000	1.1.1.1
+--- SelectionMenu.cs	2 Feb 2005 06:39:41 -0000	1.2
+***************
+*** 224,228 ****
+  			this.B_Diagnose.Size = new System.Drawing.Size(216, 80);
+  			this.B_Diagnose.TabIndex = 14;
+! 			this.B_Diagnose.Text = "Diagnose Display";
+  			this.B_Diagnose.Click += new System.EventHandler(this.B_Diagnose_Click);
+  			// 
+--- 224,228 ----
+  			this.B_Diagnose.Size = new System.Drawing.Size(216, 80);
+  			this.B_Diagnose.TabIndex = 14;
+! 			this.B_Diagnose.Text = "Diagnosedisplay";
+  			this.B_Diagnose.Click += new System.EventHandler(this.B_Diagnose_Click);
+  			// 
+
+Index: SelectionMenu.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/SelectionMenu.resx,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** SelectionMenu.resx	31 Jan 2005 10:54:12 -0000	1.1.1.1
+--- SelectionMenu.resx	2 Feb 2005 06:39:41 -0000	1.2
+***************
+*** 125,131 ****
+      <value>Private</value>
+    </data>
+-   <data name="B_EBuLaTools.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+-     <value>Private</value>
+-   </data>
+    <data name="B_EBuLaTools.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+--- 125,128 ----
+***************
+*** 134,137 ****
+--- 131,137 ----
+      <value>Private</value>
+    </data>
++   <data name="B_EBuLaTools.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>Private</value>
++   </data>
+    <data name="L_version.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+***************
+*** 164,174 ****
+      <value>False</value>
+    </data>
+-   <data name="B_David2.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+-     <value>Private</value>
+-   </data>
+    <data name="B_David2.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="B_ICE3_2.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+--- 164,171 ----
+      <value>False</value>
+    </data>
+    <data name="B_David2.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+!   <data name="B_David2.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+***************
+*** 179,182 ****
+--- 176,182 ----
+      <value>Private</value>
+    </data>
++   <data name="B_ICE3_2.Modifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
++     <value>Private</value>
++   </data>
+    <data name="B_ICE3_1.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>False</value>
+***************
+*** 236,244 ****
+      <value>False</value>
+    </data>
+-   <data name="$this.Name">
+-     <value>SelectionMenu</value>
+-   </data>
+    <data name="$this.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
+    </data>
+    <data name="$this.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+--- 236,244 ----
+      <value>False</value>
+    </data>
+    <data name="$this.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <value>Private</value>
++   </data>
++   <data name="$this.Name">
++     <value>SelectionMenu</value>
+    </data>
+    <data name="$this.GridSize" type="System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+
+
+

@@ -1,0 +1,365 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/EBuLaTools FIS.cs,NONE,1.1 St&#246;rung.cs,NONE,1.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-June/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/EBuLaTools%20FIS.cs%2CNONE%2C1.1%20St%F6rung.cs%2CNONE%2C1.1&In-Reply-To=%3C200506141129.j5EBTH128743%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000054.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/EBuLaTools FIS.cs,NONE,1.1 St&#246;rung.cs,NONE,1.1</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/EBuLaTools%20FIS.cs%2CNONE%2C1.1%20St%F6rung.cs%2CNONE%2C1.1&In-Reply-To=%3C200506141129.j5EBTH128743%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/EBuLaTools FIS.cs,NONE,1.1 St&#246;rung.cs,NONE,1.1">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Tue Jun 14 13:29:17 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000054.html">[Zusidisplay-cvs] zusidisplay/David AssemblyInfo.cs,1.4,1.5
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/EBuLaTools
+In directory sheep:/tmp/cvs-serv31673/EBuLaTools
+
+Added Files:
+	FIS.cs St&#246;rung.cs 
+Log Message:
+fis.cs und st&#246;rung.cs neu im Repository
+
+--- NEW FILE: FIS.cs ---
+using System;
+using System.Collections;
+using System.IO;
+using System.Xml;
+using System.Threading;
+using Microsoft.Win32;
+
+namespace MMI.EBuLa.Tools
+{
+	public enum FIS_DATA
+	{
+		Status=1, GPS_Status, Naechster_Halt, Route_Data, Next_Entry, Prev_Entry, 
+		FIS_Ausloesen, FIS_Start, FIS_Aus,
+		Set_Status, Set_NaechsterHalt, Set_Route_Netz, Set_Route_Linie, 
+		Set_Route_Start, Set_Route_Ziel, Set_FISTYPE
+	}
+
+	public enum FIS_TYPE
+	{
+[...1206 lines suppressed...]
+
+			int retval = -1;
+            
+			foreach(Struct_Start start in netz.Start)
+			{
+				retval++;
+				if (start.Start == name) return retval;
+			}            
+
+			return -1;
+		}
+
+		private void GetStartZiel(string track, out string start, out string ziel)
+		{
+			int pos = track.IndexOf(&quot;-&quot;);
+			start = track.Substring(0, pos).Trim();
+			ziel = track.Substring(pos+1, track.Length-pos-1).Trim();
+		}	
+	}
+}
+
+--- NEW FILE: St&#246;rung.cs ---
+using System;
+using System.Collections;
+
+namespace MMI.EBuLa.Tools
+{
+	public enum ENUMSt&#246;rung
+	{
+		NONE=1, S01_ZUSIKomm, S02_Trennsch&#252;tz, S11_ZUSIKomm
+	}
+
+	public class St&#246;rung
+	{
+		ENUMSt&#246;rung enum_st;
+		int priority;
+		string name, description;
+		bool read = false;
+
+		public St&#246;rung(ENUMSt&#246;rung new_st)
+		{
+			switch (new_st)
+			{
+				case ENUMSt&#246;rung.NONE:
+					enum_st = new_st;
+					priority = int.MaxValue;
+					name = &quot;&quot;;
+					break;
+
+				case ENUMSt&#246;rung.S01_ZUSIKomm:
+					enum_st = new_st;
+					priority = 1;
+					name = &quot;ZUSI-Kom 1&quot;;
+					description = &quot;Kommunikation mit ZUSI gest&#246;rt&quot;;
+					break;
+
+				case ENUMSt&#246;rung.S11_ZUSIKomm:
+					enum_st = new_st;
+					priority = 1;
+					name = &quot;ZUSI-Kom 2&quot;;
+					description = &quot;ZUSI mit TCP Server verbunden&quot;;
+					break;
+				
+				case ENUMSt&#246;rung.S02_Trennsch&#252;tz:
+					enum_st = new_st;
+					priority = 2;
+					name = &quot;Traktion&quot;;
+					description = &quot;Trennsch&#252;tze gefallen&quot;;
+					break;
+			}
+		}
+
+		public ENUMSt&#246;rung Type {get{return enum_st;}}
+		public int Priority {get{return priority;}}
+		public string Name {get{return name;}}
+		public string Description {get{return description;}}
+		public bool Read {get{return read;}set{read = value;}}
+
+		public override bool Equals(Object other)
+		{
+			St&#246;rung st;
+			try
+			{
+				st = (St&#246;rung)other;
+				return (enum_st == st.enum_st);
+			}
+			catch(Exception)
+			{
+				return false;
+			}
+			
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode ()+(int)enum_st;
+		}
+
+	}
+
+	public class St&#246;rungsManager
+	{
+		ArrayList m_st&#246;rungen = new ArrayList();
+		ArrayList m_pass_st&#246;rungen = new ArrayList();
+
+		public St&#246;rung St&#246;rStack = null;
+
+		XMLLoader m_conf;
+		SoundInterface sound;
+
+		public St&#246;rungsManager(/*ref XMLLoader conf, ref SoundInterface si*/)
+		{
+			St&#246;rung s = new St&#246;rung(ENUMSt&#246;rung.NONE);
+			m_st&#246;rungen.Add(s);
+			m_pass_st&#246;rungen.Add(s);
+			/*m_conf = conf;
+			sound = si;*/
+		}
+
+		public St&#246;rung LastSt&#246;rung
+		{
+			get
+			{
+				St&#246;rung s = (St&#246;rung)m_st&#246;rungen[0];
+				if (s.Type == ENUMSt&#246;rung.NONE)
+				{
+					return (St&#246;rung)m_pass_st&#246;rungen[0];
+				}
+				else
+				{
+					return s;
+				}
+			}
+		}
+		public St&#246;rung FirstPassiveSt&#246;rung
+		{
+			get
+			{
+				St&#246;rung st = (St&#246;rung)m_pass_st&#246;rungen[0];
+				return st;
+			}
+		}
+	
+
+		public St&#246;rung Current
+		{
+			get
+			{
+				St&#246;rung s = (St&#246;rung)m_st&#246;rungen[0];
+				return s;
+			}
+		}
+
+		public ArrayList GetPassives()
+		{
+			return m_pass_st&#246;rungen;
+		}
+
+		public void PopCurrent()
+		{
+			St&#246;rung st = (St&#246;rung)m_st&#246;rungen[0];
+			if (st.Priority != int.MaxValue) 
+			{
+				St&#246;rStack = st;
+				m_st&#246;rungen.Remove(st);
+				AddToPassive(st);
+			}
+		}
+
+		public void DeleteCurrent()
+		{
+			St&#246;rung st = (St&#246;rung)m_st&#246;rungen[0];
+			if (st.Priority != int.MaxValue) 
+			{
+				m_st&#246;rungen.Remove(st);
+				if (m_st&#246;rungen.Count &lt; 2) St&#246;rStack = null;
+			}
+		}
+
+		public void DeleteSt&#246;rung(ENUMSt&#246;rung st)
+		{
+			try
+			{
+				if (st != ENUMSt&#246;rung.NONE)
+				{
+					bool endnow;
+					do
+					{
+						endnow = true;
+						for (int i = 0; i &lt; m_st&#246;rungen.Count; i++)
+						{
+							if (((St&#246;rung)m_st&#246;rungen[i]).Type == st)
+							{
+								m_st&#246;rungen.RemoveAt(i);
+								endnow = false;
+							}
+						}
+						for (int i = 0; i &lt; m_pass_st&#246;rungen.Count; i++)
+						{
+							if (((St&#246;rung)m_pass_st&#246;rungen[i]).Type == st)
+							{
+								m_pass_st&#246;rungen.RemoveAt(i);
+								endnow = false;
+							}
+						}
+					}
+					while(!endnow);
+				}
+			}
+			catch(Exception){}
+		}
+
+		public void Add(St&#246;rung newst)
+		{
+			if (m_st&#246;rungen.IndexOf(newst,0) &gt; -1) return;
+			if (m_pass_st&#246;rungen.IndexOf(newst,0) &gt; -1) return;
+
+			/*if (m_conf.Sound &gt; 0  &amp;&amp; (getSt&#246;rungen.IndexOf(newst) &lt; 0))
+			{
+				sound.PlayErrorSound();
+			}*/
+
+			int target = m_st&#246;rungen.Count;
+			for (int i = 0; i &lt; target; i++)
+			{
+				St&#246;rung curr = (St&#246;rung)m_st&#246;rungen[i];
+
+				if (curr.Priority &gt; newst.Priority)
+				{
+					m_st&#246;rungen.Insert(i, newst);
+					St&#246;rStack = (St&#246;rung)m_st&#246;rungen[0];
+					break;
+				}
+			}
+			
+		}
+
+		private void AddToPassive(St&#246;rung newst)
+		{
+			int target = m_pass_st&#246;rungen.Count;
+			for (int i = 0; i &lt; target; i++)
+			{
+				St&#246;rung curr = (St&#246;rung)m_pass_st&#246;rungen[i];
+
+				if (curr.Priority &gt; newst.Priority)
+				{
+					m_pass_st&#246;rungen.Insert(i, newst);
+				}
+			}
+		}
+
+		public int getSt&#246;rungsCount
+		{
+			get
+			{
+				return (m_st&#246;rungen.Count + m_pass_st&#246;rungen.Count - 2);
+			}
+		}
+
+		public ArrayList getSt&#246;rungen
+		{
+			get
+			{
+				return m_st&#246;rungen;
+			}
+		}
+
+		public ArrayList getPSt&#246;rungen
+		{
+			get
+			{
+				return m_pass_st&#246;rungen;
+			}
+		}
+	}
+}
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000054.html">[Zusidisplay-cvs] zusidisplay/David AssemblyInfo.cs,1.4,1.5
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

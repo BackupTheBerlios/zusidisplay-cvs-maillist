@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/br185mmi/Network Network.cs,1.2,1.3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-May/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/br185mmi/Network%20Network.cs%2C1.2%2C1.3&In-Reply-To=%3C200505261741.j4QHfcm12093%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000022.html">
+   <LINK REL="Next"  HREF="000028.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/br185mmi/Network Network.cs,1.2,1.3</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/br185mmi/Network%20Network.cs%2C1.2%2C1.3&In-Reply-To=%3C200505261741.j4QHfcm12093%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/br185mmi/Network Network.cs,1.2,1.3">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Thu May 26 19:41:38 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000022.html">[Zusidisplay-cvs] zusidisplay/ice3 AssemblyInfo.cs,1.2,1.3 ICE3Control.cs,1.2,1.3 Switcher.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2 UserControler.cs,1.2,1.3
+</A></li>
+        <LI>Next message: <A HREF="000028.html">[Zusidisplay-cvs] zusidisplay/Diagnose/Network Network.cs,1.2,1.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#25">[ date ]</a>
+              <a href="thread.html#25">[ thread ]</a>
+              <a href="subject.html#25">[ subject ]</a>
+              <a href="author.html#25">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/br185mmi/Network
+In directory sheep:/tmp/cvs-serv19686/br185mmi/Network
+
+Modified Files:
+	Network.cs 
+Log Message:
+STAND: 1.6.4
+
+Index: Network.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/br185mmi/Network/Network.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** Network.cs	9 Mar 2005 10:52:23 -0000	1.2
+--- Network.cs	26 May 2005 17:41:35 -0000	1.3
+***************
+*** 11,14 ****
+--- 11,15 ----
+  	public class Network : MMI.EBuLa.Tools.INetwork
+  	{
++ 		public new bool isEmbeded = false;
+  		Socket s;
+  		Socket new_socket;
+***************
+*** 37,40 ****
+--- 38,42 ----
+  			
+  			sn = new MMI.EBuLa.Tools.SuperNetwork(this);
++ 			sn.isEmbeded = isEmbeded;
+  			c.IsCONNECTED = true;
+  
+***************
+*** 51,54 ****
+--- 53,57 ----
+  		}
+  
++ 
+  		public void SetConnected(bool con)
+  		{
+***************
+*** 56,59 ****
+--- 59,87 ----
+  		}
+  
++ 		public bool GetConnectedStatus()
++ 		{
++ 			return c.IsCONNECTED;
++ 		}
++ 
++ 		public void SetStatus(MMI.EBuLa.Tools.ENUMSt&#246;rung Stoerung)
++ 		{
++ 			SetStatus(Stoerung, false);
++ 		}
++ 
++ 		public void SetStatus(MMI.EBuLa.Tools.ENUMSt&#246;rung Stoerung, bool delete)
++ 		{
++ 			if (delete)
++ 			{
++ 				if (Stoerung == MMI.EBuLa.Tools.ENUMSt&#246;rung.S11_ZUSIKomm)
++ 					c.ZUSI_AT_TCP_SERVER = false;
++ 			}
++ 			else
++ 			{
++ 				if (Stoerung == MMI.EBuLa.Tools.ENUMSt&#246;rung.S11_ZUSIKomm)
++ 					c.ZUSI_AT_TCP_SERVER = true;
++ 			}
++ 			c.something_changed = true;
++ 		}
++ 
+  		/*public void Listen()
+  		{
+***************
+*** 180,198 ****
+  					break;
+  				case 74: // INTEGRA SIGNUM
+! 					c.SetLM_INTEGRA_GELB(state);
+  					break;
+  				case 75: // LZB Zielweg ab 0
+  					float old_valu = c.localstate.LZB_ZielWeg;
+! 					double rest = Math.IEEERemainder(valu, 10);
+! 					if (rest != 0)
+  					{
+! 						valu += (10f - (float)rest);
+  					}
+! 					old_valu = Math.Abs(old_valu - valu);
+! 					if (old_valu &gt;= 10) // mehr als 10 ge&#228;ndert
+! 						c.SetLZB_ZielWeg(Convert.ToInt32(valu));
+  					break;
+  				case 76:
+  					c.SetLZB_Sollgeschwindigkeit(valu);
+  					break;
+  				case 85:
+--- 208,243 ----
+  					break;
+  				case 74: // INTEGRA SIGNUM
+! 					c.SetLM_INTEGRA(valu);
+  					break;
+  				case 75: // LZB Zielweg ab 0
+  					float old_valu = c.localstate.LZB_ZielWeg;
+! 					double rest = Math.IEEERemainder(valu, 10d);
+! 					if (rest &gt; 0d)
+  					{
+! 						valu = Convert.ToSingle(Math.Ceiling(valu / 10d) * 10d);
+! 						//valu += (10f - (float)rest);
+  					}
+! 					//old_valu = Math.Abs(old_valu - valu);
+! 					//if (old_valu &gt;= 10) // mehr als 10 ge&#228;ndert
+! 
+! 					if (Math.IEEERemainder(valu, 10d) &lt; 0d)
+! 						break;
+! 
+! 					c.SetLZB_ZielWeg(valu);
+  					break;
+  				case 76:
+  					c.SetLZB_Sollgeschwindigkeit(valu);
++ 					break;
++ 				case 79: //GNT G
++ 					c.SetLM_GNT_G(state);
++ 					break;
++ 				case 80: //GNT &#220;
++ 					c.SetLM_GNT_&#220;(state);
++ 					break;
++ 				case 81: //GNT B
++ 					c.SetLM_GNT_B(state);
++ 					break;
++ 				case 82: //GNT S
++ 					c.SetLM_GNT_S(state);
+  					break;
+  				case 85:
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000022.html">[Zusidisplay-cvs] zusidisplay/ice3 AssemblyInfo.cs,1.2,1.3 ICE3Control.cs,1.2,1.3 Switcher.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2 UserControler.cs,1.2,1.3
+</A></li>
+	<LI>Next message: <A HREF="000028.html">[Zusidisplay-cvs] zusidisplay/Diagnose/Network Network.cs,1.2,1.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#25">[ date ]</a>
+              <a href="thread.html#25">[ thread ]</a>
+              <a href="subject.html#25">[ subject ]</a>
+              <a href="author.html#25">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

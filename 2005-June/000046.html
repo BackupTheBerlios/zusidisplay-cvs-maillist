@@ -1,0 +1,868 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/ET42X_ AssemblyInfo.cs,1.4,1.5 ET42XControl.cs,1.3,1.4 ET42XControl.resx,1.3,1.4 State.cs,1.3,1.4 Switcher.cs,1.2,1.3 Switcher.resx,1.3,1.4
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-June/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/ET42X_%20AssemblyInfo.cs%2C1.4%2C1.5%20ET42XControl.cs%2C1.3%2C1.4%20ET42XControl.resx%2C1.3%2C1.4%20State.cs%2C1.3%2C1.4%20Switcher.cs%2C1.2%2C1.3%20Switcher.resx%2C1.3%2C1.4&In-Reply-To=%3C200506141125.j5EBPV128509%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000043.html">
+   <LINK REL="Next"  HREF="000044.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/ET42X_ AssemblyInfo.cs,1.4,1.5 ET42XControl.cs,1.3,1.4 ET42XControl.resx,1.3,1.4 State.cs,1.3,1.4 Switcher.cs,1.2,1.3 Switcher.resx,1.3,1.4</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/ET42X_%20AssemblyInfo.cs%2C1.4%2C1.5%20ET42XControl.cs%2C1.3%2C1.4%20ET42XControl.resx%2C1.3%2C1.4%20State.cs%2C1.3%2C1.4%20Switcher.cs%2C1.2%2C1.3%20Switcher.resx%2C1.3%2C1.4&In-Reply-To=%3C200506141125.j5EBPV128509%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/ET42X_ AssemblyInfo.cs,1.4,1.5 ET42XControl.cs,1.3,1.4 ET42XControl.resx,1.3,1.4 State.cs,1.3,1.4 Switcher.cs,1.2,1.3 Switcher.resx,1.3,1.4">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Tue Jun 14 13:25:31 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000043.html">[Zusidisplay-cvs] zusidisplay/EBuLaTools/Sound DxSound.cs,1.2,1.3 SoundInterface.cs,1.2,1.3 tonysound.cs,1.2,1.3
+</A></li>
+        <LI>Next message: <A HREF="000044.html">[Zusidisplay-cvs] zusidisplay/ET42X_/Network Network.cs,1.3,1.4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#46">[ date ]</a>
+              <a href="thread.html#46">[ thread ]</a>
+              <a href="subject.html#46">[ subject ]</a>
+              <a href="author.html#46">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/ET42X_
+In directory sheep:/tmp/cvs-serv30727/ET42X_
+
+Modified Files:
+	AssemblyInfo.cs ET42XControl.cs ET42XControl.resx State.cs 
+	Switcher.cs Switcher.resx 
+Log Message:
+Stand: 1.7.0-test3
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/AssemblyInfo.cs,v
+retrieving revision 1.4
+retrieving revision 1.5
+diff -C2 -d -r1.4 -r1.5
+*** AssemblyInfo.cs	6 Jun 2005 11:03:07 -0000	1.4
+--- AssemblyInfo.cs	14 Jun 2005 11:25:29 -0000	1.5
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.6.5.*&quot;)]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.7.0.*&quot;)]
+  
+  //
+
+Index: ET42XControl.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/ET42XControl.cs,v
+retrieving revision 1.3
+retrieving revision 1.4
+diff -C2 -d -r1.3 -r1.4
+*** ET42XControl.cs	26 May 2005 17:41:34 -0000	1.3
+--- ET42XControl.cs	14 Jun 2005 11:25:29 -0000	1.4
+***************
+*** 40,43 ****
+--- 40,44 ----
+  		int St&#246;rPos = 0;
+  		private string[,] buttons = new string[11,2];
++ 		private bool[] buttons_highlighted = new bool[11];
+  
+  		Color ST&#214;RUNG_BG = Color.Gold, ST&#214;RUNG_FG = Color.Black;
+***************
+*** 75,78 ****
+--- 76,81 ----
+  		private System.Windows.Forms.Timer timer_eingabe;
+  		private System.Windows.Forms.Timer timer_verbrauch;
++ 		private System.Windows.Forms.Timer timerNaechsterHaltDealy;
++ 		private System.Windows.Forms.Timer timerButtonsHighlight;
+  
+  		bool on = true;
+***************
+*** 102,106 ****
+  			uhrsec = new ISphere(508+60, 41+60, 43);
+  			uhrmin = new ISphere(508+60, 41+60, 43);
+! 			uhrstd = new ISphere(508+60, 41+60, 30);
+  			uhrrest = new ISphere(508+60, 41+60, 7);
+  			center = new Point(508+60, 41+60);
+--- 105,109 ----
+  			uhrsec = new ISphere(508+60, 41+60, 43);
+  			uhrmin = new ISphere(508+60, 41+60, 43);
+! 			uhrstd = new ISphere(508+60, 41+60, 28);
+  			uhrrest = new ISphere(508+60, 41+60, 7);
+  			center = new Point(508+60, 41+60);
+***************
+*** 108,119 ****
+  			m_conf = conf;
+  
+- 			localstate = new MMI.ET42X.ET42XState();
+- 
+- 			localstate.Energie = conf.Energie;
+  
+  			// NOTBREMSE und E-BREMSE fehlen
+  
+- 			SetButtons();
+- 
+  			switch (m_conf.Sound)
+  			{
+--- 111,117 ----
+***************
+*** 129,132 ****
+--- 127,136 ----
+  			}
+  
++ 			localstate = new MMI.ET42X.ET42XState(ref conf, ref Sound);
++ 
++ 			SetButtons();
++ 
++ 			localstate.Energie = conf.Energie;
++ 
+  			vtime = DateTime.Now;
+  
+***************
+*** 185,188 ****
+--- 189,194 ----
+  			this.timer_eingabe = new System.Windows.Forms.Timer(this.components);
+  			this.timer_verbrauch = new System.Windows.Forms.Timer(this.components);
++ 			this.timerNaechsterHaltDealy = new System.Windows.Forms.Timer(this.components);
++ 			this.timerButtonsHighlight = new System.Windows.Forms.Timer(this.components);
+  			// 
+  			// timer1
+***************
+*** 214,217 ****
+--- 220,233 ----
+  			this.timer_verbrauch.Tick += new System.EventHandler(this.timer_verbrauch_Tick);
+  			// 
++ 			// timerNaechsterHaltDealy
++ 			// 
++ 			this.timerNaechsterHaltDealy.Interval = 500;
++ 			this.timerNaechsterHaltDealy.Tick += new System.EventHandler(this.timerNaechsterHaltDealy_Tick);
++ 			// 
++ 			// timerButtonsHighlight
++ 			// 
++ 			this.timerButtonsHighlight.Interval = 750;
++ 			this.timerButtonsHighlight.Tick += new System.EventHandler(this.timerButtonsHighlight_Tick);
++ 			// 
+  			// ET42XControl
+  			// 
+***************
+*** 254,258 ****
+  					break;
+  				case CURRENT_DISPLAY.FIS_HK:
+! 					Send(FIS_DATA.Next_Entry);
+  					break;
+  			}
+--- 270,276 ----
+  					break;
+  				case CURRENT_DISPLAY.FIS_HK:
+! 					//Send(FIS_DATA.Next_Entry);
+! 					// FIS-TODO
+! 					localstate.fis.SwitchNaechsterHalt();
+  					break;
+  			}
+***************
+*** 281,285 ****
+  					break;
+  				case CURRENT_DISPLAY.FIS_HK:
+! 					Send(FIS_DATA.Prev_Entry);
+  					break;
+  			}
+--- 299,305 ----
+  					break;
+  				case CURRENT_DISPLAY.FIS_HK:
+! 					//Send(FIS_DATA.Prev_Entry);
+! 					// FIS-TODO
+! 					localstate.fis.SwitchVorherigerHalt();
+  					break;
+  			}
+***************
+*** 297,303 ****
+--- 317,331 ----
+  						localstate.DISPLAY = CURRENT_DISPLAY.FIS_UPDATE;
+  						timer2.Enabled = true;
++ 						localstate.fis.Status = true;
++ 						localstate.fis.UserEnabled = false;
+  					}
+  					localstate.fis.NextFISPos((IFISNetwork)m_net, IsCONNECTED);
+  					break;
++ 				case CURRENT_DISPLAY.FIS_HK:
++ 					localstate.DISPLAY = CURRENT_DISPLAY.FIS;
++ 					if ((localstate.Geschwindigkeit &gt; 0f &amp;&amp; localstate.FISType == FIS_TYPE.FIS) ||
++ 						localstate.FISType != FIS_TYPE.FIS &amp;&amp; localstate.FISType != FIS_TYPE.NONE)
++ 						timerNaechsterHaltDealy.Enabled = true;
++ 					break;
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+  					if (localstate.marker &gt;= 0 &amp;&amp; localstate.marker &lt; 6)
+***************
+*** 426,429 ****
+--- 454,465 ----
+  			switch(localstate.DISPLAY)
+  			{
++ 				case CURRENT_DISPLAY.G:
++ 					if (FISAn())
++ 					{
++ 						localstate.fis.PlayAusstiegLinks();
++ 						buttons_highlighted[1] = true;
++ 						timerButtonsHighlight.Enabled = true;
++ 					}
++ 					break;
+  				case CURRENT_DISPLAY.OBERSTROM:
+  					localstate.OberstromGrenze = 1000f;
+***************
+*** 691,695 ****
+  					{
+  						if (IsCONNECTED)
+! 							Send(FIS_DATA.FIS_Aus);
+  						else
+  							localstate.fis.FISAus();
+--- 727,732 ----
+  					{
+  						if (IsCONNECTED)
+! 							// FIS TODO Send(FIS_DATA.FIS_Aus);
+! 							localstate.fis.FISAus();
+  						else
+  							localstate.fis.FISAus();
+***************
+*** 743,750 ****
+  					break;
+  				case CURRENT_DISPLAY.FIS:
+! 					Send(FIS_DATA.FIS_Start);
+  					break;
+  				case CURRENT_DISPLAY.FIS_ROUTE:
+! 					Send(FIS_DATA.FIS_Start);
+  					break;
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+--- 780,795 ----
+  					break;
+  				case CURRENT_DISPLAY.FIS:
+! 					//Send(FIS_DATA.FIS_Start);
+! 					// FIS TODO
+! 					buttons_highlighted[8] = true;
+! 					timerButtonsHighlight.Enabled = true;
+! 					localstate.fis.UserEnabled = true;
+  					break;
+  				case CURRENT_DISPLAY.FIS_ROUTE:
+! 					//Send(FIS_DATA.FIS_Start);
+! 					// FIS TODO
+! 					buttons_highlighted[8] = true;
+! 					timerButtonsHighlight.Enabled = true;
+! 					localstate.fis.UserEnabled = true;
+  					break;
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+***************
+*** 788,792 ****
+  				case CURRENT_DISPLAY.FIS:
+  					if (buttons[9,0].IndexOf(&quot;FIS&quot;) &gt; -1)
+! 						Send(FIS_DATA.FIS_Ausloesen);
+  					break;
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+--- 833,845 ----
+  				case CURRENT_DISPLAY.FIS:
+  					if (buttons[9,0].IndexOf(&quot;FIS&quot;) &gt; -1)
+! 					{
+! 						//Send(FIS_DATA.FIS_Ausloesen);
+! 						//TODO FIS
+! 						buttons_highlighted[9] = true;
+! 						something_changed = true;
+! 						Application.DoEvents();
+! 						timerButtonsHighlight.Enabled = true;
+! 						localstate.fis.PlayNaechsterHalt();
+! 					}
+  					break;
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+***************
+*** 821,829 ****
+  			switch(localstate.DISPLAY)
+  			{
+  				case CURRENT_DISPLAY.FIS:
+  					localstate.DISPLAY = CURRENT_DISPLAY.G;
+  					break;
+  				case CURRENT_DISPLAY.FIS_HK:
+! 					localstate.DISPLAY = CURRENT_DISPLAY.G;
+  					break;
+  				case CURRENT_DISPLAY.FIS_ROUTE:
+--- 874,890 ----
+  			switch(localstate.DISPLAY)
+  			{
++ 				case CURRENT_DISPLAY.G:
++ 					if (FISAn())
++ 					{
++ 						localstate.fis.PlayAusstiegRechts();
++ 						buttons_highlighted[10] = true;
++ 						timerButtonsHighlight.Enabled = true;
++ 					}
++ 					break;
+  				case CURRENT_DISPLAY.FIS:
+  					localstate.DISPLAY = CURRENT_DISPLAY.G;
+  					break;
+  				case CURRENT_DISPLAY.FIS_HK:
+! 					//localstate.DISPLAY = CURRENT_DISPLAY.G;
+  					break;
+  				case CURRENT_DISPLAY.FIS_ROUTE:
+***************
+*** 1039,1042 ****
+--- 1100,1189 ----
+  		}
+  
++ 		public void SetT&#252;ren(float valu)
++ 		{
++ 			if ((valu * Math.Pow(10, 45) &gt; 7.3) &amp;&amp; (valu * Math.Pow(10, 45) &lt; 8.7))
++ 			{
++ 				localstate.T&#252;ren = T&#220;REN.ZU_ABFAHRT;
++ 			}
++ 			else if ((valu * Math.Pow(10, 45) &gt; 6.3) &amp;&amp; (valu * Math.Pow(10, 45) &lt; 7.7))
++ 			{
++ 				localstate.T&#252;ren = T&#220;REN.ZU;
++ 			}
++ 			else if ((valu * Math.Pow(10, 45) &gt; 4.3) &amp;&amp; (valu * Math.Pow(10, 45) &lt; 5.7))
++ 			{
++ 				localstate.T&#252;ren = T&#220;REN.SCHLIESSEN;
++ 			}
++ 			else if ((valu * Math.Pow(10, 45) &gt; 1.5) &amp;&amp; (valu * Math.Pow(10, 45) &lt; 2.9))
++ 			{
++ 				localstate.T&#252;ren = T&#220;REN.FAHRG&#196;STE_I_O;
++ 			}
++ 			else if ((valu * Math.Pow(10, 45) &lt; 1.5) &amp;&amp; (valu * Math.Pow(10, 45) &gt; 1.3))
++ 			{
++ 				localstate.T&#252;ren = T&#220;REN.AUF;
++ 				localstate.TuerenWarenOffen = true;
++ 				localstate.TuerenWarenOffenSound = true;
++ 				localstate.TuerenWarenOffenKM = localstate.StreckenKM;
++ 			}
++ 			else if (valu * Math.Pow(10, 45) &lt; 1.0)
++ 			{
++ 				localstate.T&#252;ren = T&#220;REN.FREIGEGEBEN;
++ 			}
++ 		}
++ 		public void SetKm(float valu)
++ 		{
++ 			localstate.fis.GPSStatus = IsCONNECTED;
++ 			if (localstate.StreckenKM == float.MinValue)
++ 			{
++ 				if (valu != 0f)
++ 				{
++ 					localstate.StreckenKM = valu;
++ 					localstate.TuerenWarenOffenKM = localstate.StreckenKM;
++ 				}
++ 				return;
++ 			}
++ 
++ 			localstate.StreckenKM = valu;
++ 
++ 			if (!localstate.fis.UserEnabled) return;
++ 
++ 			if ((Math.Abs(localstate.StreckenKM - localstate.TuerenWarenOffenKM) &gt; 2f) &amp;&amp; localstate.TuerenWarenOffen)
++ 			{
++ 				localstate.TuerenWarenOffen = false;
++ 				localstate.fis.SwitchNaechsterHalt();
++ 			}
++ 			
++ 			if (localstate.FISType == FIS_TYPE.GPS_FIS || localstate.FISType == FIS_TYPE.GPS_ZN_FIS)
++ 			{
++ 				Struct_Netz netz = (Struct_Netz)localstate.fis.Netze[localstate.fis.Netze_ID];
++ 				Struct_Start start = (Struct_Start)netz.Start[netz.Start_ID];
++ 				string pos = &quot;INIT&quot;;
++ 				float Fpos = float.MinValue;
++ 				try
++ 				{
++ 					pos = (string)start.Position[localstate.fis.NaechsterHalt];
++ 					pos = pos.Replace(&quot;.&quot;,&quot;,&quot;);
++ 					Fpos = Convert.ToSingle(pos) * 1000f;
++ 				}
++ 				catch(Exception){}
++                 
++ 				if (Fpos == float.MinValue) return;
++ 
++ 				if ((Math.Abs(localstate.StreckenKM - Fpos) &lt; 70f) &amp;&amp; localstate.TuerenWarenOffenSound)
++ 				{
++ 					localstate.TuerenWarenOffenSound = false;
++ 					localstate.fis.PlayNaechsterHalt();
++ 				}
++ 			}
++ 			else
++ 			{
++ 				if ((Math.Abs(localstate.StreckenKM - localstate.TuerenWarenOffenKM) &gt; 30f) &amp;&amp; localstate.TuerenWarenOffenSound)
++ 				{
++ 					localstate.TuerenWarenOffenSound = false;
++ 					localstate.fis.PlayNaechsterHalt();
++ 				}
++ 			}
++ 			
++ 			something_changed = true;
++ 		}
+  		public void SetLMZugart(bool state, string text)
+  		{
+***************
+*** 1791,1796 ****
+  
+  		}
+! 		public void SetButtons()
+  		{
+  			switch(localstate.DISPLAY)
+  			{
+--- 1938,1950 ----
+  
+  		}
+! 
+! 		// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; BUTTONS &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+! 		public void SetButtons() 
+  		{
++ 			/*for(int i = 0; i &lt; 10; i++)
++ 			{
++ 				buttons_highlighted[i] = false;
++ 			}*/
++ 
+  			switch(localstate.DISPLAY)
+  			{
+***************
+*** 1933,1937 ****
+  					break;
+  				case CURRENT_DISPLAY.G:
+! 					buttons[1,0] = &quot;&quot;; buttons[1,1] = &quot;&quot;;
+  					buttons[2,0] = &quot;&quot;; buttons[2,1] = &quot;&quot;;//&quot;W&quot;;
+  					buttons[3,0] = &quot;&quot;; buttons[3,1] = &quot;&quot;;
+--- 2087,2098 ----
+  					break;
+  				case CURRENT_DISPLAY.G:
+! 					if (FISAn())
+! 					{
+! 						buttons[1,0] = &quot;Ausst.&quot;; buttons[1,1] = &quot;links&quot;;
+! 					}
+! 					else
+! 					{
+! 						buttons[1,0] = &quot;&quot;; buttons[1,1] = &quot;&quot;;
+! 					}
+  					buttons[2,0] = &quot;&quot;; buttons[2,1] = &quot;&quot;;//&quot;W&quot;;
+  					buttons[3,0] = &quot;&quot;; buttons[3,1] = &quot;&quot;;
+***************
+*** 1949,1953 ****
+  					buttons[8,0] = &quot;  FIS&quot;; buttons[8,1] = &quot;&quot;;
+  					buttons[9,0] = &quot;   S&quot;; buttons[9,1] = &quot;&quot;;
+! 					buttons[10,0] = &quot;&quot;; buttons[10,1] = &quot;&quot;;
+  					break;
+  				case CURRENT_DISPLAY.Zugbesy:
+--- 2110,2121 ----
+  					buttons[8,0] = &quot;  FIS&quot;; buttons[8,1] = &quot;&quot;;
+  					buttons[9,0] = &quot;   S&quot;; buttons[9,1] = &quot;&quot;;
+! 					if (FISAn())
+! 					{
+! 						buttons[10,0] = buttons[1,0]; buttons[10,1] = &quot;rechts&quot;;
+! 					}
+! 					else
+! 					{
+! 						buttons[10,0] = &quot;&quot;; buttons[10,1] = &quot;&quot;;
+! 					}
+  					break;
+  				case CURRENT_DISPLAY.Zugbesy:
+***************
+*** 2012,2015 ****
+--- 2180,2195 ----
+  					buttons[10,0] = &quot;   G&quot;; buttons[10,1] = &quot;&quot;;
+  					break;
++ 				case CURRENT_DISPLAY.FIS_HK:
++ 					buttons[1,0] = &quot;&quot;; buttons[1,1] = &quot;&quot;;
++ 					buttons[2,0] = &quot;&quot;; buttons[2,1] = &quot;&quot;;
++ 					buttons[3,0] = &quot;&quot;; buttons[3,1] = &quot;&quot;;
++ 					buttons[4,0] = &quot;&quot;; buttons[4,1] = &quot;&quot;;
++ 					buttons[5,0] = &quot;&quot;; buttons[5,1] = &quot;&quot;; 
++ 					buttons[6,0] = &quot;&quot;; buttons[6,1] = &quot;&quot;;
++ 					buttons[7,0] = &quot;&quot;; buttons[7,1] = &quot;&quot;;
++ 					buttons[8,0] = &quot;&quot;; buttons[8,1] = &quot;&quot;;
++ 					buttons[9,0] = &quot;&quot;; buttons[9,1] = &quot;&quot;;
++ 					buttons[10,0] = &quot;&quot;; buttons[10,1] = &quot;&quot;;
++ 					break;
+  				default:
+  					buttons[1,0] = &quot;&quot;; buttons[1,1] = &quot;&quot;;
+***************
+*** 2026,2034 ****
+  			}
+  		}	
+! 
+  		public void DrawButtons(ref Graphics pg)
+  		{
+  			for(int i = 0; i &lt; 10; i++)
+! 			{
+  				// Kasten
+  				DrawFrame(ref pg, i*63, 410, 62, 49);
+--- 2206,2221 ----
+  			}
+  		}	
+!  
+  		public void DrawButtons(ref Graphics pg)
+  		{
+  			for(int i = 0; i &lt; 10; i++)
+! 			{	
+! 				Color col = BLACK;
+! 				if (buttons_highlighted[i+1])
+! 				{
+! 					pg.FillRectangle(new SolidBrush(Color.Gold), i*63+2, 410+2, 62-4, 49-4);
+! 					col = Color.Black;
+! 				}
+! 
+  				// Kasten
+  				DrawFrame(ref pg, i*63, 410, 62, 49);
+***************
+*** 2040,2045 ****
+  				Font f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+  
+! 				pg.DrawString(s1, f, new SolidBrush(BLACK), i*63+8, 415);
+! 				pg.DrawString(s2, f, new SolidBrush(BLACK), i*63+8, 435);
+  			}
+  		}
+--- 2227,2232 ----
+  				Font f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+  
+! 				pg.DrawString(s1, f, new SolidBrush(col), i*63+8, 415);
+! 				pg.DrawString(s2, f, new SolidBrush(col), i*63+8, 435);
+  			}
+  		}
+***************
+*** 2434,2438 ****
+  			f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+  			if (localstate.fis.NaechsterHalt == &quot;&quot;)
+! 				pg.DrawString(&quot;             ---&quot;, f, new SolidBrush(BLACK), 350, 98);
+  			else
+  				pg.DrawString(localstate.fis.NaechsterHalt, f, new SolidBrush(BLACK), 350, 98);
+--- 2621,2625 ----
+  			f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+  			if (localstate.fis.NaechsterHalt == &quot;&quot;)
+! 				pg.DrawString(&quot;               ---&quot;, f, new SolidBrush(BLACK), 350, 98);
+  			else
+  				pg.DrawString(localstate.fis.NaechsterHalt, f, new SolidBrush(BLACK), 350, 98);
+***************
+*** 2541,2548 ****
+  		{
+  			// Seitliche Soft-Keys
+! 			if (localstate.DISPLAY != CURRENT_DISPLAY.FIS_HK &amp;&amp; localstate.DISPLAY != CURRENT_DISPLAY.FIS_ROUTE)
+  				DrawFrame(ref pg, 518, 43, 110, 48);
+  			
+! 			if (localstate.fis.position != FIS_POS.NONE)
+  			{
+  				DrawFrame(ref pg, 518, 105, 110, 50);
+--- 2728,2741 ----
+  		{
+  			// Seitliche Soft-Keys
+! 			if (localstate.DISPLAY != CURRENT_DISPLAY.FIS_HK &amp;&amp;
+! 				localstate.DISPLAY != CURRENT_DISPLAY.FIS_UPDATE &amp;&amp;
+! 				localstate.DISPLAY != CURRENT_DISPLAY.FIS_UPDATE2 &amp;&amp;
+! 				localstate.DISPLAY != CURRENT_DISPLAY.FIS_ROUTE)
+  				DrawFrame(ref pg, 518, 43, 110, 48);
+  			
+! 			if ((localstate.DISPLAY != CURRENT_DISPLAY.FIS_ROUTE &amp;&amp;
+! 				localstate.DISPLAY != CURRENT_DISPLAY.FIS_UPDATE &amp;&amp;
+! 				localstate.DISPLAY != CURRENT_DISPLAY.FIS_UPDATE2) ||
+! 				localstate.fis.position != FIS_POS.NONE)
+  			{
+  				DrawFrame(ref pg, 518, 105, 110, 50);
+***************
+*** 2614,2627 ****
+  			pg.DrawString(&quot;Aktuelle Routen:&quot;, f, new SolidBrush(BLACK), 5, 65-19);
+  
+  			f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+  			for (int i = 1; i &lt;= GetTrainCount(); i++)
+  			{
+  				if (localstate.fis.position != FIS_POS.NONE || localstate.DISPLAY == CURRENT_DISPLAY.FIS_UPDATE)
+  					pg.FillRectangle(new SolidBrush(Color.Gold), 72, 57-24+i*42, 230, 25);
+  				pg.DrawString(&quot;Zug &quot;+i.ToString(), f, new SolidBrush(BLACK), 10, 70-32+i*42);
+  				if (!(localstate.fis.Linie == &quot;&quot; || localstate.fis.Ziel == &quot;&quot; || localstate.fis.NaechsterHalt == &quot;&quot;))
+!                     pg.DrawString(localstate.fis.Linie + &quot; / &quot; + localstate.fis.Ziel, f, new SolidBrush(Color.Black), 100, 70-32+i*42);
+  				else
+  					pg.DrawString(&quot;&quot;, f, new SolidBrush(Color.Black), 100, 70-32+i*42);
+  				DrawFrameSunkenSmall(ref pg, 72, 57-24+i*42, 230, 25);
+  			}
+--- 2807,2832 ----
+  			pg.DrawString(&quot;Aktuelle Routen:&quot;, f, new SolidBrush(BLACK), 5, 65-19);
+  
++ 			bool backgroundDrawn = false;
++ 
+  			f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+  			for (int i = 1; i &lt;= GetTrainCount(); i++)
+  			{
++ 				backgroundDrawn = false;
+  				if (localstate.fis.position != FIS_POS.NONE || localstate.DISPLAY == CURRENT_DISPLAY.FIS_UPDATE)
++ 				{
+  					pg.FillRectangle(new SolidBrush(Color.Gold), 72, 57-24+i*42, 230, 25);
++ 					backgroundDrawn = true;
++ 				}
+  				pg.DrawString(&quot;Zug &quot;+i.ToString(), f, new SolidBrush(BLACK), 10, 70-32+i*42);
+  				if (!(localstate.fis.Linie == &quot;&quot; || localstate.fis.Ziel == &quot;&quot; || localstate.fis.NaechsterHalt == &quot;&quot;))
+! 				{
+! 					SolidBrush brush = new SolidBrush(BLACK);
+! 					if (backgroundDrawn) brush = new SolidBrush(Color.Black);
+! 					pg.DrawString(localstate.fis.Linie + &quot; / &quot; + localstate.fis.Ziel, f, brush, 100, 70-32+i*42);
+! 				}
+  				else
++ 				{
+  					pg.DrawString(&quot;&quot;, f, new SolidBrush(Color.Black), 100, 70-32+i*42);
++ 				}
+  				DrawFrameSunkenSmall(ref pg, 72, 57-24+i*42, 230, 25);
+  			}
+***************
+*** 4011,4015 ****
+  					break;
+  				case CURRENT_DISPLAY.FIS_UPDATE2:
+! 					localstate.DISPLAY = CURRENT_DISPLAY.FIS_ROUTE;
+  					something_changed = true;
+  					timer2.Enabled = false;
+--- 4216,4220 ----
+  					break;
+  				case CURRENT_DISPLAY.FIS_UPDATE2:
+! 					localstate.DISPLAY = CURRENT_DISPLAY.FIS;
+  					something_changed = true;
+  					timer2.Enabled = false;
+***************
+*** 4091,4094 ****
+--- 4296,4324 ----
+  			}
+  		}
++ 
++ 		private bool FISAn()
++ 		{
++ 			return (localstate.fis.Status);
++ 		}
++ 
++ 		private void timerNaechsterHaltDealy_Tick(object sender, System.EventArgs e)
++ 		{
++ 			timerNaechsterHaltDealy.Enabled = false;
++ 			try
++ 			{
++ 				localstate.fis.PlayNaechsterHalt();
++ 			}
++ 			catch(Exception){}
++ 		}
++ 
++ 		private void timerButtonsHighlight_Tick(object sender, System.EventArgs e)
++ 		{
++ 			timerButtonsHighlight.Enabled = false;
++ 			for(int i = 0; i &lt; 11; i++)
++ 			{
++ 				buttons_highlighted[i] = false;
++ 			}
++ 			something_changed = true;
++ 		}                            
+  	}
+  }
+
+Index: ET42XControl.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/ET42XControl.resx,v
+retrieving revision 1.3
+retrieving revision 1.4
+diff -C2 -d -r1.3 -r1.4
+*** ET42XControl.resx	26 May 2005 17:41:34 -0000	1.3
+--- ET42XControl.resx	14 Jun 2005 11:25:29 -0000	1.4
+***************
+*** 143,146 ****
+--- 143,164 ----
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;timerNaechsterHaltDealy.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;timerNaechsterHaltDealy.Location&quot; type=&quot;System.Drawing.Point, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
++     &lt;value&gt;531, 17&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;timerNaechsterHaltDealy.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;timerButtonsHighlight.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;timerButtonsHighlight.Location&quot; type=&quot;System.Drawing.Point, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
++     &lt;value&gt;706, 17&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;timerButtonsHighlight.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;$this.TrayLargeIcon&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+
+Index: State.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/State.cs,v
+retrieving revision 1.3
+retrieving revision 1.4
+diff -C2 -d -r1.3 -r1.4
+*** State.cs	26 May 2005 17:41:34 -0000	1.3
+--- State.cs	14 Jun 2005 11:25:29 -0000	1.4
+***************
+*** 23,29 ****
+  		public CURRENT_DISPLAY DISPLAY = CURRENT_DISPLAY.INIT;
+  		public CURRENT_DISPLAY OLD_DISPLAY = CURRENT_DISPLAY.NONE;
+! 		public ET42XTYPE ET42Xtype1 = ET42XTYPE.ET425;
+! 		public ET42XTYPE ET42Xtype2 = ET42XTYPE.ET425;
+! 		public ET42XTYPE ET42Xtype3 = ET42XTYPE.ET425;
+  
+  		public FIS_TYPE FISType = FIS_TYPE.GPS_FIS;
+--- 23,29 ----
+  		public CURRENT_DISPLAY DISPLAY = CURRENT_DISPLAY.INIT;
+  		public CURRENT_DISPLAY OLD_DISPLAY = CURRENT_DISPLAY.NONE;
+! 		public ET42XTYPE ET42Xtype1 = ET42XTYPE.ET423;
+! 		public ET42XTYPE ET42Xtype2 = ET42XTYPE.ET423;
+! 		public ET42XTYPE ET42Xtype3 = ET42XTYPE.NONE;
+  
+  		public FIS_TYPE FISType = FIS_TYPE.GPS_FIS;
+***************
+*** 39,43 ****
+  		public float E_Bremse = 0f;
+  
+! 		public T&#220;REN T&#252;ren = T&#220;REN.ZU;
+  
+  		public bool DSK_Gesperrt = false;
+--- 39,43 ----
+  		public float E_Bremse = 0f;
+  
+! 		public T&#220;REN T&#252;ren = T&#220;REN.AUF;
+  
+  		public bool DSK_Gesperrt = false;
+***************
+*** 46,54 ****
+  		public bool Kuehlung = true;
+  
+  
+  		public St&#246;rungsManager st&#246;rungmgr = new St&#246;rungsManager();
+  
+  
+! 		public ET42XState()
+  		{	
+  			HBL_Druck = 5f;
+--- 46,62 ----
+  		public bool Kuehlung = true;
+  
++ 		public float StreckenKM = float.MinValue;
++ 
++ 		public T&#220;REN TuerenStatus = T&#220;REN.AUF;
++ 
++ 		public bool TuerenWarenOffen = true;
++ 		public bool TuerenWarenOffenSound = true;
++ 		public float TuerenWarenOffenKM = 0f;
+  
+  		public St&#246;rungsManager st&#246;rungmgr = new St&#246;rungsManager();
+  
++ 		MMI.EBuLa.Tools.XMLLoader localconf;
+  
+! 		public ET42XState(ref MMI.EBuLa.Tools.XMLLoader conf, ref SoundInterface sound)
+  		{	
+  			HBL_Druck = 5f;
+***************
+*** 56,62 ****
+  			//st&#246;rungmgr.Add(new St&#246;rung(ENUMSt&#246;rung.S02_Trennsch&#252;tz));
+  			st&#246;rungmgr.Add(new St&#246;rung(ENUMSt&#246;rung.S01_ZUSIKomm));			
+  		}
+  
+! 		public FIS fis = new FIS();
+  		
+  		public string Zugnummer = &quot;&lt;INIT&gt;&quot;;
+--- 64,72 ----
+  			//st&#246;rungmgr.Add(new St&#246;rung(ENUMSt&#246;rung.S02_Trennsch&#252;tz));
+  			st&#246;rungmgr.Add(new St&#246;rung(ENUMSt&#246;rung.S01_ZUSIKomm));			
++ 			localconf = conf;
++ 			fis = new FIS(ref conf, ref sound);
+  		}
+  
+! 		public FIS fis;
+  		
+  		public string Zugnummer = &quot;&lt;INIT&gt;&quot;;
+
+Index: Switcher.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/Switcher.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** Switcher.cs	26 May 2005 17:41:34 -0000	1.2
+--- Switcher.cs	14 Jun 2005 11:25:29 -0000	1.3
+***************
+*** 418,421 ****
+--- 418,422 ----
+  			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+  			this.ClientSize = new System.Drawing.Size(522, 328);
++ 			this.ControlBox = false;
+  			this.Controls.Add(this.groupBox2);
+  			this.Controls.Add(this.groupBox4);
+
+Index: Switcher.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/Switcher.resx,v
+retrieving revision 1.3
+retrieving revision 1.4
+diff -C2 -d -r1.3 -r1.4
+*** Switcher.resx	26 May 2005 17:41:34 -0000	1.3
+--- Switcher.resx	14 Jun 2005 11:25:29 -0000	1.4
+***************
+*** 107,113 ****
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+-   &lt;data name=&quot;b_cancel.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+-     &lt;value&gt;Private&lt;/value&gt;
+-   &lt;/data&gt;
+    &lt;data name=&quot;b_cancel.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+--- 107,110 ----
+***************
+*** 116,119 ****
+--- 113,119 ----
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;b_cancel.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;cb_12std.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+***************
+*** 155,162 ****
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_425_2.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_425_2.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+--- 155,162 ----
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_425_2.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_425_2.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000043.html">[Zusidisplay-cvs] zusidisplay/EBuLaTools/Sound DxSound.cs,1.2,1.3 SoundInterface.cs,1.2,1.3 tonysound.cs,1.2,1.3
+</A></li>
+	<LI>Next message: <A HREF="000044.html">[Zusidisplay-cvs] zusidisplay/ET42X_/Network Network.cs,1.3,1.4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#46">[ date ]</a>
+              <a href="thread.html#46">[ thread ]</a>
+              <a href="subject.html#46">[ subject ]</a>
+              <a href="author.html#46">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

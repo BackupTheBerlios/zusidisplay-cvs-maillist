@@ -1,0 +1,939 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/Diagnose AssemblyInfo.cs,1.1.1.1,1.2 DIAGNOSEControl.cs,1.2,1.3 State.cs,1.2,1.3 Switcher.cs,1.2,1.3 Switcher.resx,1.2,1.3 UserControler.cs,1.1.1.1,1.2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/Diagnose%20AssemblyInfo.cs%2C1.1.1.1%2C1.2%20DIAGNOSEControl.cs%2C1.2%2C1.3%20State.cs%2C1.2%2C1.3%20Switcher.cs%2C1.2%2C1.3%20Switcher.resx%2C1.2%2C1.3%20UserControler.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqqN28926%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000019.html">
+   <LINK REL="Next"  HREF="000014.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/Diagnose AssemblyInfo.cs,1.1.1.1,1.2 DIAGNOSEControl.cs,1.2,1.3 State.cs,1.2,1.3 Switcher.cs,1.2,1.3 Switcher.resx,1.2,1.3 UserControler.cs,1.1.1.1,1.2</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/Diagnose%20AssemblyInfo.cs%2C1.1.1.1%2C1.2%20DIAGNOSEControl.cs%2C1.2%2C1.3%20State.cs%2C1.2%2C1.3%20Switcher.cs%2C1.2%2C1.3%20Switcher.resx%2C1.2%2C1.3%20UserControler.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqqN28926%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/Diagnose AssemblyInfo.cs,1.1.1.1,1.2 DIAGNOSEControl.cs,1.2,1.3 State.cs,1.2,1.3 Switcher.cs,1.2,1.3 Switcher.resx,1.2,1.3 UserControler.cs,1.1.1.1,1.2">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Wed Mar  9 11:52:52 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000019.html">[Zusidisplay-cvs] zusidisplay/David AssemblyInfo.cs,1.1.1.1,1.2 DavidControl.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2
+</A></li>
+        <LI>Next message: <A HREF="000014.html">[Zusidisplay-cvs] zusidisplay/EBuLaTools/Sound DxSound.cs,1.1.1.1,1.2 SoundInterface.cs,1.1.1.1,1.2 tonysound.cs,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/Diagnose
+In directory sheep:/tmp/cvs-serv11087/Diagnose
+
+Modified Files:
+	AssemblyInfo.cs DIAGNOSEControl.cs State.cs Switcher.cs 
+	Switcher.resx UserControler.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f&#252;r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:27 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.5.0.*&quot;)]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.5.2.*&quot;)]
+  
+  //
+
+Index: DIAGNOSEControl.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/DIAGNOSEControl.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** DIAGNOSEControl.cs	2 Feb 2005 06:39:41 -0000	1.2
+--- DIAGNOSEControl.cs	9 Mar 2005 10:52:20 -0000	1.3
+***************
+*** 804,808 ****
+  						localstate.marker_changed2 = false;
+  						localstate.marker = 0;
+! 						localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					}
+  					break;
+--- 804,811 ----
+  						localstate.marker_changed2 = false;
+  						localstate.marker = 0;
+! 						if (IsBR101())
+!                             localstate.DISPLAY = CURRENT_DISPLAY.G;
+! 						else
+! 							localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					}
+  					break;
+***************
+*** 962,969 ****
+  			{
+  				case CURRENT_DISPLAY.G:
+! 					localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+! 					if (IsBombardier())
+  						localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					break;
+--- 965,975 ----
+  			{
+  				case CURRENT_DISPLAY.G:
+! 					if (IsBR101())
+!                         localstate.DISPLAY = CURRENT_DISPLAY.Zug_Tf_Nr;
+! 					else
+! 						localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+! 					if (IsBombardier() || IsADtranz())
+  						localstate.DISPLAY = CURRENT_DISPLAY.Zugbesy;
+  					break;
+***************
+*** 1297,1301 ****
+  							{
+  								case 1:
+! 									if (IsBombardier())
+  									{
+  										Sound.PlayMalfunctionBombardierSound();
+--- 1303,1307 ----
+  							{
+  								case 1:
+! 									if (IsBombardier() || IsADtranz())
+  									{
+  										Sound.PlayMalfunctionBombardierSound();
+***************
+*** 1311,1315 ****
+  									break;
+  								case 2:
+! 									if (IsBombardier())
+  									{
+  										Sound.PlayMalfunctionBombardierSound();
+--- 1317,1321 ----
+  									break;
+  								case 2:
+! 									if (IsBombardier() || IsADtranz())
+  									{
+  										Sound.PlayMalfunctionBombardierSound();
+***************
+*** 1334,1338 ****
+  		private void DrawFrame(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			if (IsBombardier())
+  			{
+  				DrawFrameSunken(ref pg, x, y, width, height);
+--- 1340,1344 ----
+  		private void DrawFrame(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			if (IsBombardier() || IsADtranz())
+  			{
+  				DrawFrameSunken(ref pg, x, y, width, height);
+***************
+*** 1348,1385 ****
+  		private void DrawFrameRaised(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			// Stift
+! 			Pen pen_dg = new Pen(DARK, 1);
+! 			Pen pen_ws = new Pen(BRIGHT, 1);
+! 
+! 			pg.DrawLine(pen_ws, x, y, x+width, y);
+! 			pg.DrawLine(pen_ws, x, y, x,       y+height);
+! 
+! 			pg.DrawLine(pen_dg, x+width, y,        x+width, y+height);
+! 			pg.DrawLine(pen_dg, x,       y+height, x+width, y+height);
+  		}
+  
+  		private void DrawFrameSunken(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			// Stift
+! 			Pen pen_dg = new Pen(DARK, 1);
+! 			Pen pen_ws = new Pen(BRIGHT, 2);
+! 
+! 			pg.DrawLine(pen_dg, x, y, x+width, y);
+! 			pg.DrawLine(pen_dg, x, y, x,       y+height);
+! 
+! 			pg.DrawLine(pen_ws, x+width, y,        x+width, y+height);
+! 			pg.DrawLine(pen_ws, x,       y+height, x+width, y+height);
+  		}
+  		private void DrawFrameSunkenSmall(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			// Stift
+! 			Pen pen_dg = new Pen(DARK, 1);
+! 			Pen pen_ws = new Pen(BRIGHT, 1);
+! 
+! 			pg.DrawLine(pen_dg, x, y, x+width, y);
+! 			pg.DrawLine(pen_dg, x, y, x,       y+height);
+! 
+! 			pg.DrawLine(pen_ws, x+width, y,        x+width, y+height);
+! 			pg.DrawLine(pen_ws, x,       y+height, x+width, y+height);
+  		}
+  
+--- 1354,1368 ----
+  		private void DrawFrameRaised(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			MMI.EBuLa.Tools.DisplayDraw.DrawFrameRaised(ref pg, x, y, width, height, DARK, BRIGHT);
+  		}
+  
+  		private void DrawFrameSunken(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			MMI.EBuLa.Tools.DisplayDraw.DrawFrameSunken(ref pg, x, y, width, height, DARK, BRIGHT);
+  		}
++ 
+  		private void DrawFrameSunkenSmall(ref Graphics pg, int x, int y, int width, int height)
+  		{
+! 			MMI.EBuLa.Tools.DisplayDraw.DrawFrameSunkenSmall(ref pg, x, y, width, height, DARK, BRIGHT);
+  		}
+  
+***************
+*** 1728,1739 ****
+  			zugkraft = ReduziereZugkraft(localstate.ZugkraftGesammt, 1) * 2f;
+  
+- 			/*
+- 			if (localstate.VT612type2 != VT612TYPE.NONE)
+- 				zugkraft += ReduziereZugkraft(localstate.ZugkraftGesammt, 2) * 2f;
+- 
+- 			if (localstate.VT612type3 != VT612TYPE.NONE)
+- 				zugkraft += ReduziereZugkraft(localstate.ZugkraftGesammt, 3) * 2f;
+- 				*/
+- 
+  			if (zugkraft &lt; 0) zugkraft *= -1;
+  
+--- 1711,1714 ----
+***************
+*** 1832,1836 ****
+  		public void DrawSpannung(ref Graphics pg)
+  		{
+! 			if (IsBombardier()) DrawSpannungBombardier(ref pg);
+  			else DrawSpannungSiemens(ref pg);
+  		}
+--- 1807,1811 ----
+  		public void DrawSpannung(ref Graphics pg)
+  		{
+! 			if (IsBombardier() || IsADtranz()) DrawSpannungBombardier(ref pg);
+  			else DrawSpannungSiemens(ref pg);
+  		}
+***************
+*** 1956,1962 ****
+  			// Seitenschrift
+  			float oldsize = f.Size;
+! 			f = new Font(&quot;Arial&quot;, 5, FontStyle.Bold, GraphicsUnit.Millimeter);
+! 			pg.DrawString(&quot;Spannung&quot;, f, new SolidBrush(BLACK), 500, 230);
+! 			pg.DrawString(&quot;Oberstrom&quot;, f, new SolidBrush(BLACK), 500, 255);
+  			f = new Font(&quot;Arial&quot;, oldsize, FontStyle.Bold, GraphicsUnit.Millimeter);
+  
+--- 1931,1947 ----
+  			// Seitenschrift
+  			float oldsize = f.Size;
+! 			if (IsADtranz())
+! 			{
+! 				f = new Font(GetFontString(), 22, FontStyle.Bold, GraphicsUnit.Point);
+! 				pg.DrawString(&quot;Spannung&quot;, f, new SolidBrush(BLACK), 465, 230);
+! 				pg.DrawString(&quot;Oberstrom&quot;, f, new SolidBrush(BLACK), 460, 260);
+! 			}
+! 			else
+! 			{
+! 				f = new Font(&quot;Arial&quot;, 5, FontStyle.Bold, GraphicsUnit.Millimeter);
+! 				pg.DrawString(&quot;Spannung&quot;, f, new SolidBrush(BLACK), 500, 230);
+! 				pg.DrawString(&quot;Oberstrom&quot;, f, new SolidBrush(BLACK), 500, 255);
+! 			}
+! 
+  			f = new Font(&quot;Arial&quot;, oldsize, FontStyle.Bold, GraphicsUnit.Millimeter);
+  
+***************
+*** 1990,1994 ****
+  		public void DrawOberstrom(ref Graphics pg)
+  		{
+! 			if (IsBombardier())
+  				DrawOberstromBombardier(ref pg);
+  			else
+--- 1975,1979 ----
+  		public void DrawOberstrom(ref Graphics pg)
+  		{
+! 			if (IsBombardier()  || IsADtranz())
+  				DrawOberstromBombardier(ref pg);
+  			else
+***************
+*** 2258,2261 ****
+--- 2243,2255 ----
+  				DrawFrame(ref pg, 1, 335, 629, 56);
+  			}
++ 			else if (IsADtranz())
++ 			{
++ 				//kleine Felder
++ 				DrawFrame(ref pg, 145, 338, 50, 50);
++ 				DrawFrame(ref pg, 4, 338, 140, 50);
++ 
++ 				// gro&#223;er Rahmen
++ 				DrawFrame(ref pg, 1, 335, 629, 56);
++ 			}
+  
+  		}
+***************
+*** 2799,2802 ****
+--- 2793,2801 ----
+  		private void DrawST(ref Graphics pg)
+  		{
++ 			if (localstate.type == TRAIN_TYPE.BR152 || localstate.type == TRAIN_TYPE.BR189)
++ 			{
++ 				pg.FillRectangle(new SolidBrush(Color.LemonChiffon), 0, 40, 800, 353);
++ 			}
++ 
+  			int y = 60;
+  			Brush b_ws;
+***************
+*** 3080,3095 ****
+  				DrawFrame(ref pg, 468, 1, 160, 30);
+  
+! 				string s = &quot;&quot;;
+! 
+! 				s = DayOfWeekGerman(vtime.DayOfWeek).Substring(0, 2) + &quot;, &quot;;	
+! 				if (vtime.DayOfYear &lt; 10)
+! 					s += &quot;0&quot;+vtime.DayOfYear.ToString() + &quot;.&quot;;
+! 				else
+! 					s += vtime.DayOfYear.ToString() + &quot;.&quot;;
+! 				if (vtime.Month &lt; 10)
+! 					s += &quot;0&quot;+vtime.Month.ToString() + &quot;.&quot;;
+! 				else
+! 					s += vtime.Month.ToString() + &quot;.&quot;;
+! 				s += vtime.Year.ToString();
+  
+  				Font f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+--- 3079,3083 ----
+  				DrawFrame(ref pg, 468, 1, 160, 30);
+  
+! 				string s = MMI.EBuLa.Tools.Misc.getDateString(vtime);
+  
+  				Font f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+***************
+*** 3102,3117 ****
+  				DrawFrame(ref pg, 1, 1, 120, 38);
+  
+! 				string s = &quot;&quot;;
+! 
+! 				s = DayOfWeekGerman(vtime.DayOfWeek).Substring(0, 2) + &quot;, &quot;;	
+! 				if (vtime.DayOfYear &lt; 10)
+! 					s += &quot;0&quot;+vtime.DayOfYear.ToString() + &quot;.&quot;;
+! 				else
+! 					s += vtime.DayOfYear.ToString() + &quot;.&quot;;
+! 				if (vtime.Month &lt; 10)
+! 					s += &quot;0&quot;+vtime.Month.ToString() + &quot;.&quot;;
+! 				else
+! 					s += vtime.Month.ToString() + &quot;.&quot;;
+! 				s += vtime.Year.ToString();
+  
+  				Font f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+--- 3090,3094 ----
+  				DrawFrame(ref pg, 1, 1, 120, 38);
+  
+! 				string s = MMI.EBuLa.Tools.Misc.getDateString(vtime);
+  
+  				Font f = new Font(&quot;Arial&quot;, 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+***************
+*** 3160,3164 ****
+  			{
+  				case CURRENT_DISPLAY.G:
+! 					if (IsBombardier())
+                          l_Button1.Text = &quot;An-triebe&quot;;
+  					else
+--- 3137,3141 ----
+  			{
+  				case CURRENT_DISPLAY.G:
+! 					if (IsBombardier() || IsADtranz())
+                          l_Button1.Text = &quot;An-triebe&quot;;
+  					else
+***************
+*** 3166,3170 ****
+  					l_Button2.Text = &quot;W&quot;;
+  					l_Button3.Text = &quot;&quot;;
+! 					l_Button4.Text = &quot;Zug- Besy&quot;;
+  					l_Button5.Text = &quot;&quot;;
+  					if (IsMMI())
+--- 3143,3150 ----
+  					l_Button2.Text = &quot;W&quot;;
+  					l_Button3.Text = &quot;&quot;;
+! 					if (IsBR101())
+!                         l_Button4.Text = &quot;Zug- Num.&quot;;
+! 					else
+! 						l_Button4.Text = &quot;Zug- Besy&quot;;
+  					l_Button5.Text = &quot;&quot;;
+  					if (IsMMI())
+***************
+*** 3178,3182 ****
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+! 					if (IsBombardier())
+  						l_Button1.Text = &quot;An-triebe&quot;;
+  					else
+--- 3158,3162 ----
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+! 					if (IsBombardier() || IsADtranz())
+  						l_Button1.Text = &quot;An-triebe&quot;;
+  					else
+***************
+*** 3184,3188 ****
+  					l_Button2.Text = &quot;W&quot;;
+  					l_Button3.Text = &quot;&quot;;
+! 					if (IsBombardier())
+  						l_Button4.Text = &quot;Zug- Besy&quot;;
+  					else
+--- 3164,3168 ----
+  					l_Button2.Text = &quot;W&quot;;
+  					l_Button3.Text = &quot;&quot;;
+! 					if (IsBombardier() || IsADtranz())
+  						l_Button4.Text = &quot;Zug- Besy&quot;;
+  					else
+***************
+*** 3206,3210 ****
+  					l_Button6.Text = &quot;&quot;;
+  					l_Button7.Text = &quot;DSK&quot;;
+! 					if (IsBombardier())
+  						l_Button8.Text = &quot;Pr&#252;-fen&quot;;
+  					else
+--- 3186,3190 ----
+  					l_Button6.Text = &quot;&quot;;
+  					l_Button7.Text = &quot;DSK&quot;;
+! 					if (IsBombardier() || IsADtranz())
+  						l_Button8.Text = &quot;Pr&#252;-fen&quot;;
+  					else
+***************
+*** 3459,3463 ****
+  			}
+  
+! 			if (IsBombardier())
+  			{
+  				if (localstate.Brh &gt; 0f &amp;&amp; IsCONNECTED)
+--- 3439,3443 ----
+  			}
+  
+! 			if (IsBombardier() || IsADtranz())
+  			{
+  				if (localstate.Brh &gt; 0f &amp;&amp; IsCONNECTED)
+***************
+*** 3497,3501 ****
+  			{
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+! 					if (IsBombardier())
+  					{
+  						pg.DrawString(&quot;Grundbild&quot;, f, new SolidBrush(BLACK), 525, 56);
+--- 3477,3481 ----
+  			{
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+! 					if (IsBombardier() || IsADtranz())
+  					{
+  						pg.DrawString(&quot;Grundbild&quot;, f, new SolidBrush(BLACK), 525, 56);
+***************
+*** 3531,3535 ****
+  					break;
+  				case CURRENT_DISPLAY.DSK:
+! 					if (IsBombardier())
+  					{
+  						pg.DrawString(&quot;Grundbild&quot;, f, new SolidBrush(BLACK), 525, 56);
+--- 3511,3515 ----
+  					break;
+  				case CURRENT_DISPLAY.DSK:
+! 					if (IsBombardier() || IsADtranz())
+  					{
+  						pg.DrawString(&quot;Grundbild&quot;, f, new SolidBrush(BLACK), 525, 56);
+***************
+*** 3612,3621 ****
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48, y+10, 30, 40);
+  					if ((i &lt; localstate.marker &amp;&amp; localstate.marker_changed))
+! 						if (IsBombardier())
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Blue, 110+i*48, y +19);
+  					else if (!localstate.marker_changed || localstate.marker &gt; 5)
+! 						if (IsBombardier())
+  							pg.DrawString(org.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+--- 3592,3601 ----
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48, y+10, 30, 40);
+  					if ((i &lt; localstate.marker &amp;&amp; localstate.marker_changed))
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Blue, 110+i*48, y +19);
+  					else if (!localstate.marker_changed || localstate.marker &gt; 5)
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(org.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+***************
+*** 3657,3666 ****
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48, y+10, 30, 40);
+  					if ((i &lt; localstate.marker-6 &amp;&amp; localstate.marker_changed2))
+! 						if (IsBombardier())
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Blue, 110+i*48, y +19);
+  					else if (!localstate.marker_changed2 || localstate.marker-6 &gt; 5)
+! 						if (IsBombardier())
+  							pg.DrawString(org.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+--- 3637,3646 ----
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48, y+10, 30, 40);
+  					if ((i &lt; localstate.marker-6 &amp;&amp; localstate.marker_changed2))
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+  							pg.DrawString(nr.Substring(i, 1), f, Brushes.Blue, 110+i*48, y +19);
+  					else if (!localstate.marker_changed2 || localstate.marker-6 &gt; 5)
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(org.Substring(i, 1), f, Brushes.Black, 110+i*48, y +19);
+  						else
+***************
+*** 3705,3709 ****
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48+x, y+10, 30, 40);
+  					if (i &lt; localstate.marker)
+! 						if (IsBombardier())
+  							pg.DrawString(localstate.DSK_BUFFER.Substring(i, 1), f, Brushes.Black, 110+i*48+x, y +19);
+  						else
+--- 3685,3689 ----
+  					pg.FillRectangle(Brushes.WhiteSmoke, 105+i*48+x, y+10, 30, 40);
+  					if (i &lt; localstate.marker)
+! 						if (IsBombardier() || IsADtranz())
+  							pg.DrawString(localstate.DSK_BUFFER.Substring(i, 1), f, Brushes.Black, 110+i*48+x, y +19);
+  						else
+***************
+*** 3933,3937 ****
+  					DrawSt&#246;rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier())	DrawStatusSt&#246;rRahmen(ref g, true, true);
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+--- 3913,3917 ----
+  					DrawSt&#246;rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier() || IsADtranz()) DrawStatusSt&#246;rRahmen(ref g, true, true);
+  					break;
+  				case CURRENT_DISPLAY.Z_BR:
+***************
+*** 3941,3945 ****
+  					DrawSt&#246;rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier())	DrawStatusSt&#246;rRahmen(ref g, true, true);
+  					break;
+  				case CURRENT_DISPLAY.Zugbesy:
+--- 3921,3925 ----
+  					DrawSt&#246;rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier() || IsADtranz())	DrawStatusSt&#246;rRahmen(ref g, true, true);
+  					break;
+  				case CURRENT_DISPLAY.Zugbesy:
+***************
+*** 3948,3952 ****
+  					DrawSt&#246;rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier())	DrawStatusSt&#246;rRahmen(ref g, true, true);					
+  					break;
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+--- 3928,3932 ----
+  					DrawSt&#246;rung(ref g);
+  					DrawStatus(ref g);
+! 					if (IsBombardier() || IsADtranz())	DrawStatusSt&#246;rRahmen(ref g, true, true);					
+  					break;
+  				case CURRENT_DISPLAY.Zug_Tf_Nr:
+***************
+*** 3973,3998 ****
+  			//graph_main.Render(this.CreateGraphics());
+  		}
+! 		private string DayOfWeekGerman(DayOfWeek dayofweek)
+! 		{
+! 			switch (dayofweek)
+! 			{
+! 				case DayOfWeek.Monday:
+! 					return &quot;Montag&quot;;
+! 				case DayOfWeek.Tuesday:
+! 					return &quot;Dienstag&quot;;
+! 				case DayOfWeek.Wednesday:
+! 					return &quot;Mittwoch&quot;;
+! 				case DayOfWeek.Thursday:
+! 					return &quot;Donnerstag&quot;;
+! 				case DayOfWeek.Friday:
+! 					return &quot;Freitag&quot;;
+! 				case DayOfWeek.Saturday:
+! 					return &quot;Samstag&quot;;
+! 				case DayOfWeek.Sunday:
+! 					return &quot;Sonntag&quot;;
+! 			}
+! 			return &quot;&quot;;
+! 
+! 		}
+  		private void MoveZugkraft()
+  		{
+--- 3953,3957 ----
+  			//graph_main.Render(this.CreateGraphics());
+  		}
+! 	
+  		private void MoveZugkraft()
+  		{
+***************
+*** 4038,4042 ****
+  				{
+  					stoerung_counter = 0;
+! 					if (IsBombardier())
+  						Sound.PlayMalfunctionBombardierSound();
+  					else
+--- 3997,4001 ----
+  				{
+  					stoerung_counter = 0;
+! 					if (IsBombardier() || IsADtranz())
+  						Sound.PlayMalfunctionBombardierSound();
+  					else
+***************
+*** 4143,4151 ****
+  		public bool IsBombardier()
+  		{
+! 			return (localstate.type == TRAIN_TYPE.BR101 || localstate.type == TRAIN_TYPE.BR145 || localstate.type == TRAIN_TYPE.BR146 || localstate.type == TRAIN_TYPE.BR146_1 || localstate.type == TRAIN_TYPE.BR185);
+  		}
+  		public bool IsSiemens()
+  		{
+! 			return !IsBombardier();
+  		}
+  		public bool IsMMI()
+--- 4102,4114 ----
+  		public bool IsBombardier()
+  		{
+! 			return (localstate.type == TRAIN_TYPE.BR101_MET || localstate.type == TRAIN_TYPE.BR145 || localstate.type == TRAIN_TYPE.BR146 || localstate.type == TRAIN_TYPE.BR146_1 || localstate.type == TRAIN_TYPE.BR185);
+  		}
+  		public bool IsSiemens()
+  		{
+! 			return (!IsBombardier() &amp;&amp; !IsADtranz());
+! 		}
+! 		public bool IsADtranz()
+! 		{
+! 			return localstate.type == TRAIN_TYPE.BR101;
+  		}
+  		public bool IsMMI()
+***************
+*** 4153,4156 ****
+--- 4116,4123 ----
+  			return (localstate.type == TRAIN_TYPE.BR185 || localstate.type == TRAIN_TYPE.BR146_1 || localstate.type == TRAIN_TYPE.BR189);
+  		}
++ 		public bool IsBR101()
++ 		{
++ 			return (localstate.type == TRAIN_TYPE.BR101 || localstate.type == TRAIN_TYPE.BR101_MET);
++ 		}
+  		public bool SwitchToMMIAllowed
+  		{
+***************
+*** 4183,4186 ****
+--- 4150,4160 ----
+  			
+  			return text;
++ 		}
++ 		public string GetFontString()
++ 		{
++ 			if (IsBR101())
++ 				return &quot;FixedSysTTF&quot;;
++ 			else
++ 				return &quot;Arial&quot;;
+  		}
+  		public float ReduziereZugkraft(float zugkraft, int tz)
+
+Index: State.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/State.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** State.cs	2 Feb 2005 06:39:41 -0000	1.2
+--- State.cs	9 Mar 2005 10:52:20 -0000	1.3
+***************
+*** 11,15 ****
+  	public enum TRAIN_TYPE
+  	{
+! 		BR101=1, BR145, BR146, BR146_1, BR152, BR182, BR185, BR189, ER20
+  	}
+  
+--- 11,15 ----
+  	public enum TRAIN_TYPE
+  	{
+! 		BR101=1, BR101_MET, BR145, BR146, BR146_1, BR152, BR182, BR185, BR189, ER20
+  	}
+  
+
+Index: Switcher.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/Switcher.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** Switcher.cs	2 Feb 2005 06:39:41 -0000	1.2
+--- Switcher.cs	9 Mar 2005 10:52:20 -0000	1.3
+***************
+*** 37,40 ****
+--- 37,41 ----
+  		private System.Windows.Forms.RadioButton rb_er20;
+  		private System.Windows.Forms.RadioButton rb_146_1;
++ 		private System.Windows.Forms.RadioButton rb_101MET;
+  
+  		MMI.DIAGNOSE.DIAGNOSEState m_state;
+***************
+*** 53,56 ****
+--- 54,60 ----
+  					rb_101.Checked = true;
+  					break;
++ 				case TRAIN_TYPE.BR101_MET:
++ 					rb_101MET.Checked = true;
++ 					break;
+  				case TRAIN_TYPE.BR145:
+  					rb_145.Checked = true;
+***************
+*** 127,130 ****
+--- 131,135 ----
+  			this.cb_12std = new System.Windows.Forms.CheckBox();
+  			this.groupBox5 = new System.Windows.Forms.GroupBox();
++ 			this.rb_101MET = new System.Windows.Forms.RadioButton();
+  			this.rb_182 = new System.Windows.Forms.RadioButton();
+  			this.rb_152 = new System.Windows.Forms.RadioButton();
+***************
+*** 177,180 ****
+--- 182,186 ----
+  			// groupBox5
+  			// 
++ 			this.groupBox5.Controls.Add(this.rb_101MET);
+  			this.groupBox5.Controls.Add(this.rb_182);
+  			this.groupBox5.Controls.Add(this.rb_152);
+***************
+*** 196,199 ****
+--- 202,215 ----
+  			this.groupBox5.Text = &quot;Bitte w&#228;hlen Sie den gew&#252;nschten Loktyp aus:&quot;;
+  			// 
++ 			// rb_101MET
++ 			// 
++ 			this.rb_101MET.Enabled = false;
++ 			this.rb_101MET.FlatStyle = System.Windows.Forms.FlatStyle.System;
++ 			this.rb_101MET.Location = new System.Drawing.Point(128, 56);
++ 			this.rb_101MET.Name = &quot;rb_101MET&quot;;
++ 			this.rb_101MET.Size = new System.Drawing.Size(88, 24);
++ 			this.rb_101MET.TabIndex = 15;
++ 			this.rb_101MET.Text = &quot;BR 101 (MET)&quot;;
++ 			// 
+  			// rb_182
+  			// 
+***************
+*** 241,245 ****
+  			this.rb_101.Location = new System.Drawing.Point(40, 56);
+  			this.rb_101.Name = &quot;rb_101&quot;;
+! 			this.rb_101.Size = new System.Drawing.Size(168, 24);
+  			this.rb_101.TabIndex = 1;
+  			this.rb_101.TabStop = true;
+--- 257,261 ----
+  			this.rb_101.Location = new System.Drawing.Point(40, 56);
+  			this.rb_101.Name = &quot;rb_101&quot;;
+! 			this.rb_101.Size = new System.Drawing.Size(72, 24);
+  			this.rb_101.TabIndex = 1;
+  			this.rb_101.TabStop = true;
+***************
+*** 381,384 ****
+--- 397,404 ----
+  			{
+  				m_state.type = TRAIN_TYPE.BR101;
++ 			}
++ 			if (rb_101MET.Checked)
++ 			{
++ 				m_state.type = TRAIN_TYPE.BR101_MET;
+  			}
+  			else if (rb_145.Checked)
+
+Index: Switcher.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/Switcher.resx,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** Switcher.resx	2 Feb 2005 06:39:41 -0000	1.2
+--- Switcher.resx	9 Mar 2005 10:52:20 -0000	1.3
+***************
+*** 143,146 ****
+--- 143,155 ----
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;rb_101MET.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;False&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;rb_101MET.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;rb_101MET.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;rb_182.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+***************
+*** 313,316 ****
+--- 322,328 ----
+    &lt;data name=&quot;rb_3times.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;$this.Name&quot;&gt;
++     &lt;value&gt;Switcher&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;$this.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/UserControler.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** UserControler.cs	31 Jan 2005 10:54:28 -0000	1.1.1.1
+--- UserControler.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 12,15 ****
+--- 12,16 ----
+  	{
+  		const string BACKGROUND_IMAGE_BOMBARDIER = @&quot;.\Pictures\bombardier.jpg&quot;;
++ 		const string BACKGROUND_IMAGE_ADTRANZ = @&quot;.\Pictures\adtranz.jpg&quot;;
+  		const string BACKGROUND_IMAGE_SIEMENS    = @&quot;.\Pictures\siemens.jpg&quot;;
+  
+***************
+*** 42,45 ****
+--- 43,47 ----
+  				mmi_widget.Button_6_Pressed(this, new EventArgs());
+  				
++ 				
+  				m_widget = new DIAGNOSEControl(XMLConf,ref mmi_widget);
+                  P_Display.Controls.Add(m_widget);
+***************
+*** 61,65 ****
+  			try
+  			{
+! 				pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_BOMBARDIER);
+  			}
+  			catch(Exception)
+--- 63,93 ----
+  			try
+  			{
+! 				if (m_widget.IsSiemens())
+! 				{
+! 					if (System.IO.File.Exists(BACKGROUND_IMAGE_SIEMENS))
+! 					{
+! 						// change to siemens
+! 						pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_SIEMENS);
+! 					}
+! 				}
+! 				else
+! 				{
+! 					if (m_widget.IsBR101())
+! 					{
+! 						if (System.IO.File.Exists(BACKGROUND_IMAGE_ADTRANZ))
+! 						{
+! 							// change to adtranz
+! 							pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_ADTRANZ);
+! 						}
+! 					}
+! 					else
+! 					{
+! 						if (System.IO.File.Exists(BACKGROUND_IMAGE_BOMBARDIER))
+! 						{
+! 							// change to bombardier
+! 							pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_BOMBARDIER);
+! 						}
+! 					}
+! 				}
+  			}
+  			catch(Exception)
+***************
+*** 414,420 ****
+  				else if (e.X &gt; 150 &amp;&amp; e.X &lt; 205) // nix
+  				{
+- 				}
+- 				else if (e.X &gt; 216 &amp;&amp; e.X &lt; 270) // i
+- 				{
+  					if (m_widget.Visible)
+  					{
+--- 442,445 ----
+***************
+*** 431,441 ****
+  						else
+  						{
+! 							if (System.IO.File.Exists(BACKGROUND_IMAGE_BOMBARDIER))
+  							{
+! 								// change to bombardier
+! 								pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_BOMBARDIER);
+  							}
+  						}
+! 					}
+  				}
+  				else if (e.X &gt; 282 &amp;&amp; e.X &lt; 402) // St
+--- 456,480 ----
+  						else
+  						{
+! 							if (m_widget.IsBR101())
+  							{
+! 								if (System.IO.File.Exists(BACKGROUND_IMAGE_ADTRANZ))
+! 								{
+! 									// change to adtranz
+! 									pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_ADTRANZ);
+! 								}
+! 							}
+! 							else
+! 							{
+! 								if (System.IO.File.Exists(BACKGROUND_IMAGE_BOMBARDIER))
+! 								{
+! 									// change to bombardier
+! 									pB_EBuLa.Image = new Bitmap(BACKGROUND_IMAGE_BOMBARDIER);
+! 								}
+  							}
+  						}
+! 					}				
+! 				}
+! 				else if (e.X &gt; 216 &amp;&amp; e.X &lt; 270) // i
+! 				{
+  				}
+  				else if (e.X &gt; 282 &amp;&amp; e.X &lt; 402) // St
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000019.html">[Zusidisplay-cvs] zusidisplay/David AssemblyInfo.cs,1.1.1.1,1.2 DavidControl.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2
+</A></li>
+	<LI>Next message: <A HREF="000014.html">[Zusidisplay-cvs] zusidisplay/EBuLaTools/Sound DxSound.cs,1.1.1.1,1.2 SoundInterface.cs,1.1.1.1,1.2 tonysound.cs,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

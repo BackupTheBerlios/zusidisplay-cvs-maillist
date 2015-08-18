@@ -1,0 +1,553 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/ET42X_ AssemblyInfo.cs,1.1.1.1,1.2 ET42XControl.cs,1.1.1.1,1.2 ET42XControl.resx,1.1.1.1,1.2 State.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/ET42X_%20AssemblyInfo.cs%2C1.1.1.1%2C1.2%20ET42XControl.cs%2C1.1.1.1%2C1.2%20ET42XControl.resx%2C1.1.1.1%2C1.2%20State.cs%2C1.1.1.1%2C1.2%20Switcher.resx%2C1.1.1.1%2C1.2%20UserControler.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqON28869%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000003.html">
+   <LINK REL="Next"  HREF="000005.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/ET42X_ AssemblyInfo.cs,1.1.1.1,1.2 ET42XControl.cs,1.1.1.1,1.2 ET42XControl.resx,1.1.1.1,1.2 State.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/ET42X_%20AssemblyInfo.cs%2C1.1.1.1%2C1.2%20ET42XControl.cs%2C1.1.1.1%2C1.2%20ET42XControl.resx%2C1.1.1.1%2C1.2%20State.cs%2C1.1.1.1%2C1.2%20Switcher.resx%2C1.1.1.1%2C1.2%20UserControler.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqON28869%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/ET42X_ AssemblyInfo.cs,1.1.1.1,1.2 ET42XControl.cs,1.1.1.1,1.2 ET42XControl.resx,1.1.1.1,1.2 State.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Wed Mar  9 11:52:24 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000003.html">[Zusidisplay-cvs] zusidisplay/EBuLaTools/Network - New directory
+</A></li>
+        <LI>Next message: <A HREF="000005.html">[Zusidisplay-cvs] zusidisplay/SystemTools AssemblyInfo.vb,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/ET42X_
+In directory sheep:/tmp/cvs-serv11087/ET42X_
+
+Modified Files:
+	AssemblyInfo.cs ET42XControl.cs ET42XControl.resx State.cs 
+	Switcher.resx UserControler.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f&#252;r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.5.00.*&quot;)]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.5.2.*&quot;)]
+  
+  //
+
+Index: ET42XControl.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/ET42XControl.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** ET42XControl.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- ET42XControl.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 29,33 ****
+--- 29,36 ----
+  		private DateTime vtime;
+  
++ 		public bool GLOBAL_SOUND = true;
+  		private bool CONNECTED = false;
++ 		int stoerung_counter = 0;
++ 		SoundInterface Sound;
+  
+  		Color ST&#214;RUNG_BG = Color.Gold, ST&#214;RUNG_FG = Color.Black;
+***************
+[...1880 lines suppressed...]
+! 				case CURRENT_DISPLAY.B:
+! 					return &quot;                        Bremsenzustand&quot;;
+  			}
+  			
+***************
+*** 2076,2080 ****
+  				case 2:
+                      if (localstate.ET42Xtype1 == ET42XTYPE.ET426 &amp;&amp; localstate.ET42Xtype2 != ET42XTYPE.ET426)
+! 						return zugkraft * 2f;
+  					else if (localstate.ET42Xtype1 != ET42XTYPE.ET426 &amp;&amp; localstate.ET42Xtype2 == ET42XTYPE.ET426)
+  						return zugkraft / 2f; 
+--- 3200,3207 ----
+  				case 2:
+                      if (localstate.ET42Xtype1 == ET42XTYPE.ET426 &amp;&amp; localstate.ET42Xtype2 != ET42XTYPE.ET426)
+! 						if (zugkraft &lt; 0)
+! 							return zugkraft * 2f * (65f/90f);
+! 						else
+! 							return zugkraft * 2f;
+  					else if (localstate.ET42Xtype1 != ET42XTYPE.ET426 &amp;&amp; localstate.ET42Xtype2 == ET42XTYPE.ET426)
+  						return zugkraft / 2f; 
+
+Index: ET42XControl.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/ET42XControl.resx,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** ET42XControl.resx	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- ET42XControl.resx	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 143,152 ****
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+-   &lt;data name=&quot;p_Light8.SnapToGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+-     &lt;value&gt;True&lt;/value&gt;
+-   &lt;/data&gt;
+    &lt;data name=&quot;p_Light8.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;p_Light8.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+--- 143,152 ----
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;p_Light8.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;p_Light8.SnapToGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;True&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;p_Light8.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+***************
+*** 356,362 ****
+      &lt;value&gt;True&lt;/value&gt;
+    &lt;/data&gt;
+-   &lt;data name=&quot;p_Button7.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+-     &lt;value&gt;Private&lt;/value&gt;
+-   &lt;/data&gt;
+    &lt;data name=&quot;p_Button7.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
+      &lt;value&gt;8, 8&lt;/value&gt;
+--- 356,359 ----
+***************
+*** 368,371 ****
+--- 365,371 ----
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;p_Button7.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;p_Light5.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+***************
+*** 458,464 ****
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+-   &lt;data name=&quot;p_Dark8.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
+-     &lt;value&gt;8, 8&lt;/value&gt;
+-   &lt;/data&gt;
+    &lt;data name=&quot;p_Dark8.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+--- 458,461 ----
+***************
+*** 470,473 ****
+--- 467,473 ----
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;p_Dark8.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
++     &lt;value&gt;8, 8&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;p_Dark8.DrawGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;True&lt;/value&gt;
+***************
+*** 602,608 ****
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+-   &lt;data name=&quot;p_Button3.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
+-     &lt;value&gt;8, 8&lt;/value&gt;
+-   &lt;/data&gt;
+    &lt;data name=&quot;p_Button3.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+--- 602,605 ----
+***************
+*** 614,617 ****
+--- 611,617 ----
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;p_Button3.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
++     &lt;value&gt;8, 8&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;p_Button3.DrawGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;True&lt;/value&gt;
+***************
+*** 620,623 ****
+--- 620,641 ----
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;p_Light1.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;False&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;p_Light1.SnapToGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;True&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;p_Light1.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;p_Light1.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
++     &lt;value&gt;8, 8&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;p_Light1.DrawGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;True&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;p_Light1.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;l_Button3.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+***************
+*** 759,784 ****
+    &lt;/data&gt;
+    &lt;data name=&quot;timer_st.Location&quot; type=&quot;System.Drawing.Point, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
+!     &lt;value&gt;102, 17&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;timer_st.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;p_Light1.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+!     &lt;value&gt;False&lt;/value&gt;
+!   &lt;/data&gt;
+!   &lt;data name=&quot;p_Light1.SnapToGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+!     &lt;value&gt;True&lt;/value&gt;
+!   &lt;/data&gt;
+!   &lt;data name=&quot;p_Light1.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+!     &lt;value&gt;Private&lt;/value&gt;
+!   &lt;/data&gt;
+!   &lt;data name=&quot;p_Light1.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
+!     &lt;value&gt;8, 8&lt;/value&gt;
+!   &lt;/data&gt;
+!   &lt;data name=&quot;p_Light1.DrawGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+!     &lt;value&gt;True&lt;/value&gt;
+!   &lt;/data&gt;
+!   &lt;data name=&quot;p_Light1.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+!     &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;$this.TrayLargeIcon&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+--- 777,787 ----
+    &lt;/data&gt;
+    &lt;data name=&quot;timer_st.Location&quot; type=&quot;System.Drawing.Point, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
+!     &lt;value&gt;100, 17&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;timer_st.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;$this.Name&quot;&gt;
+!     &lt;value&gt;ET42XControl&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;$this.TrayLargeIcon&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+***************
+*** 793,799 ****
+    &lt;data name=&quot;$this.DrawGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;True&lt;/value&gt;
+-   &lt;/data&gt;
+-   &lt;data name=&quot;$this.Name&quot;&gt;
+-     &lt;value&gt;ET42XControl&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;$this.TrayHeight&quot; type=&quot;System.Int32, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+--- 796,799 ----
+
+Index: State.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/State.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** State.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- State.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 6,10 ****
+  	public enum CURRENT_DISPLAY
+  	{
+! 		G=1, M&#228;ngel, ZUG, Zugbesy, B, VA, Spg, FIS, S, V_GREATER_0, V_EQUAL_0, ST, NONE
+  	}
+  
+--- 6,10 ----
+  	public enum CURRENT_DISPLAY
+  	{
+! 		G=1, M&#228;ngel, ZUG, Zugbesy, B, VA, Spg, FIS, FIS_HK, FIS_ROUTE, S, V_GREATER_0, V_EQUAL_0, ST, NONE, OBERSTROM, Info, Besetz, Vist, DSK, Zug_Tf_Nr
+  	}
+  
+***************
+*** 12,16 ****
+  	{
+  		ET423=1, ET424, ET425, ET426, NONE
+! 	}
+  
+  	public enum T&#220;REN
+--- 12,16 ----
+  	{
+  		ET423=1, ET424, ET425, ET426, NONE
+! 	}       	
+  
+  	public enum T&#220;REN
+***************
+*** 23,41 ****
+  		public CURRENT_DISPLAY DISPLAY = CURRENT_DISPLAY.G;
+  		public CURRENT_DISPLAY OLD_DISPLAY = CURRENT_DISPLAY.NONE;
+! 		public ET42XTYPE ET42Xtype1 = ET42XTYPE.ET423;
+! 		public ET42XTYPE ET42Xtype2 = ET42XTYPE.NONE;
+! 		public ET42XTYPE ET42Xtype3 = ET42XTYPE.NONE;
+  
+  		public float Zusatzbremse = 0f;
+  
+! 		public float OberstromGrenze = 900f;
+  		public float OberstromToRender = 0f;
+  		public float Drehzahl = 0f;
+  
+  		public new float Fahrstufe = 0f;
+  		public float E_Bremse = 0f;
+  
+  		public T&#220;REN T&#252;ren = T&#220;REN.ZU;
+  
+  
+  		public St&#246;rungsManager st&#246;rungmgr = new St&#246;rungsManager();
+--- 23,49 ----
+  		public CURRENT_DISPLAY DISPLAY = CURRENT_DISPLAY.G;
+  		public CURRENT_DISPLAY OLD_DISPLAY = CURRENT_DISPLAY.NONE;
+! 		public ET42XTYPE ET42Xtype1 = ET42XTYPE.ET425;
+! 		public ET42XTYPE ET42Xtype2 = ET42XTYPE.ET425;
+! 		public ET42XTYPE ET42Xtype3 = ET42XTYPE.ET425;
+! 
+! 		public FIS_TYPE FISType = FIS_TYPE.GPS_FIS;
+  
+  		public float Zusatzbremse = 0f;
+  
+! 		public float OberstromGrenze = 1000f;
+  		public float OberstromToRender = 0f;
+  		public float Drehzahl = 0f;
+  
+  		public new float Fahrstufe = 0f;
++ 		public int FahrstufenSchalter = 10;
+  		public float E_Bremse = 0f;
+  
+  		public T&#220;REN T&#252;ren = T&#220;REN.ZU;
+  
++ 		public bool DSK_Gesperrt = false;
++ 		public string DSK_BUFFER = &quot;    &quot;;
++ 
++ 		public bool Kuehlung = true;
++ 
+  
+  		public St&#246;rungsManager st&#246;rungmgr = new St&#246;rungsManager();
+***************
+*** 47,52 ****
+  			st&#246;rungmgr.Add(new St&#246;rung(ENUMSt&#246;rung.S01_ZUSIKomm));			
+  		}
+  		
+! 		public string Zugnummer = &quot;12345&quot;;
+  	}
+  
+--- 55,69 ----
+  			st&#246;rungmgr.Add(new St&#246;rung(ENUMSt&#246;rung.S01_ZUSIKomm));			
+  		}
++ 
++ 		public FIS fis = new FIS();
+  		
+! 		public string Zugnummer = &quot;&lt;INIT&gt;&quot;;
+! 		public string ZugnummerTemp = &quot;&quot;;
+! 		public string Tfnummer = &quot;&lt;INIT&gt;&quot;;
+! 		public string TfnummerTemp = &quot;&quot;;
+! 
+! 		public int marker = 0;
+! 		public bool marker_changed = false;
+! 		public bool marker_changed2 = false;
+  	}
+  
+
+Index: Switcher.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/Switcher.resx,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Switcher.resx	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- Switcher.resx	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 230,233 ****
+--- 230,236 ----
+      &lt;value&gt;8, 8&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;groupBox1.SnapToGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;True&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;groupBox1.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+***************
+*** 236,242 ****
+      &lt;value&gt;True&lt;/value&gt;
+    &lt;/data&gt;
+-   &lt;data name=&quot;groupBox1.SnapToGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+-     &lt;value&gt;True&lt;/value&gt;
+-   &lt;/data&gt;
+    &lt;data name=&quot;groupBox1.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+--- 239,242 ----
+***************
+*** 272,279 ****
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_425_3.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_425_3.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+--- 272,279 ----
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_425_3.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_425_3.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+***************
+*** 308,311 ****
+--- 308,314 ----
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;$this.Name&quot;&gt;
++     &lt;value&gt;Switcher&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;$this.Language&quot; type=&quot;System.Globalization.CultureInfo, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;(Default)&lt;/value&gt;
+***************
+*** 319,325 ****
+    &lt;data name=&quot;$this.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
+      &lt;value&gt;8, 8&lt;/value&gt;
+-   &lt;/data&gt;
+-   &lt;data name=&quot;$this.Name&quot;&gt;
+-     &lt;value&gt;Switcher&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;$this.DrawGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+--- 322,325 ----
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/UserControler.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** UserControler.cs	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- UserControler.cs	9 Mar 2005 10:52:21 -0000	1.2
+***************
+*** 36,40 ****
+              {
+                  //m_parent = gotParent;
+!                 m_widget = new ET42XControl(XMLConf);
+                  P_Display.Controls.Add(m_widget);
+                  if (m_XMLConf.Inverse) 
+--- 36,40 ----
+              {
+                  //m_parent = gotParent;
+!                 m_widget = new ET42XControl(XMLConf, ref net);
+                  P_Display.Controls.Add(m_widget);
+                  if (m_XMLConf.Inverse) 
+***************
+*** 72,75 ****
+--- 72,77 ----
+  				Thread.Sleep(1);
+  			}
++ 
++ 			m_widget.m_net = net;
+  		}
+  
+***************
+*** 182,185 ****
+--- 184,188 ----
+          private void B_Off_Click(object sender, System.EventArgs e)
+          {
++ 			m_widget.GLOBAL_SOUND = false;
+              this.Dispose();
+          }
+***************
+*** 366,378 ****
+  				if (e.X &gt; 88 &amp;&amp; e.X &lt; 138) // aus
+  				{
+  					this.Dispose();
+  				}
+  				else if (e.X &gt; 150 &amp;&amp; e.X &lt; 205) // nix
+  				{
+  				}
+  				else if (e.X &gt; 216 &amp;&amp; e.X &lt; 270) // i
+  				{
+  					if (m_widget.Visible)
+! 						m_widget.Button_SW_Pressed(sender, e);
+  				}
+  				else if (e.X &gt; 282 &amp;&amp; e.X &lt; 402) // St
+--- 369,384 ----
+  				if (e.X &gt; 88 &amp;&amp; e.X &lt; 138) // aus
+  				{
++ 					m_widget.GLOBAL_SOUND = false;
+  					this.Dispose();
+  				}
+  				else if (e.X &gt; 150 &amp;&amp; e.X &lt; 205) // nix
+  				{
++ 					if (m_widget.Visible)
++ 						m_widget.Button_SW_Pressed(sender, e);
+  				}
+  				else if (e.X &gt; 216 &amp;&amp; e.X &lt; 270) // i
+  				{
+  					if (m_widget.Visible)
+! 						m_widget.Button_I_Pressed(sender, e);
+  				}
+  				else if (e.X &gt; 282 &amp;&amp; e.X &lt; 402) // St
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000003.html">[Zusidisplay-cvs] zusidisplay/EBuLaTools/Network - New directory
+</A></li>
+	<LI>Next message: <A HREF="000005.html">[Zusidisplay-cvs] zusidisplay/SystemTools AssemblyInfo.vb,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

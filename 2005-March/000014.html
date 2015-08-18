@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/EBuLaTools/Sound DxSound.cs,1.1.1.1,1.2 SoundInterface.cs,1.1.1.1,1.2 tonysound.cs,1.1.1.1,1.2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/EBuLaTools/Sound%20DxSound.cs%2C1.1.1.1%2C1.2%20SoundInterface.cs%2C1.1.1.1%2C1.2%20tonysound.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqrN28934%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000020.html">
+   <LINK REL="Next"  HREF="000015.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/EBuLaTools/Sound DxSound.cs,1.1.1.1,1.2 SoundInterface.cs,1.1.1.1,1.2 tonysound.cs,1.1.1.1,1.2</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/EBuLaTools/Sound%20DxSound.cs%2C1.1.1.1%2C1.2%20SoundInterface.cs%2C1.1.1.1%2C1.2%20tonysound.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqrN28934%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/EBuLaTools/Sound DxSound.cs,1.1.1.1,1.2 SoundInterface.cs,1.1.1.1,1.2 tonysound.cs,1.1.1.1,1.2">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Wed Mar  9 11:52:53 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000020.html">[Zusidisplay-cvs] zusidisplay/Diagnose AssemblyInfo.cs,1.1.1.1,1.2 DIAGNOSEControl.cs,1.2,1.3 State.cs,1.2,1.3 Switcher.cs,1.2,1.3 Switcher.resx,1.2,1.3 UserControler.cs,1.1.1.1,1.2
+</A></li>
+        <LI>Next message: <A HREF="000015.html">[Zusidisplay-cvs] zusidisplay/EBuLa/Network Network.cs,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Sound
+In directory sheep:/tmp/cvs-serv11087/EBuLaTools/Sound
+
+Modified Files:
+	DxSound.cs SoundInterface.cs tonysound.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f&#252;r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: DxSound.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Sound/DxSound.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** DxSound.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- DxSound.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 49,52 ****
+--- 49,74 ----
+  		}
+  
++ 		public void PlayWBGesperrt()
++ 		{
++ 			try
++ 			{	
++ 				Audio a = Audio.FromFile(@&quot;.\Sounds\wb_gesperrt.WAV&quot;);
++ 				a.Play();
++ 				System.Threading.Thread.Sleep(1200);
++ 			}
++ 			catch(Exception){}
++ 		}
++ 
++ 		public void PlayWBFreigabe()
++ 		{
++ 			try
++ 			{	
++ 				Audio a = Audio.FromFile(@&quot;.\Sounds\wb_freigabe.WAV&quot;);
++ 				a.Play();
++ 				System.Threading.Thread.Sleep(1200);
++ 			}
++ 			catch(Exception){}
++ 		}
++ 
+  		/*
+  		 * CODE BELOW FOR DIRECT-SOUND 9
+
+Index: SoundInterface.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Sound/SoundInterface.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** SoundInterface.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- SoundInterface.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 25,28 ****
+--- 25,38 ----
+  		/// &lt;/summary&gt;
+  		void PlayMalfunctionBombardierSound();
++ 
++ 		/// &lt;summary&gt;
++ 		/// Play &quot;WB gesperrt&quot;
++ 		/// &lt;/summary&gt;
++ 		void PlayWBGesperrt();
++ 
++ 		/// &lt;summary&gt;
++ 		/// Play &quot;WB Freigabe&quot;
++ 		/// &lt;/summary&gt;
++ 		void PlayWBFreigabe();
+  	}
+  }
+
+Index: tonysound.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/EBuLaTools/Sound/tonysound.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** tonysound.cs	31 Jan 2005 10:54:24 -0000	1.1.1.1
+--- tonysound.cs	9 Mar 2005 10:52:20 -0000	1.2
+***************
+*** 54,57 ****
+--- 54,75 ----
+  		}
+  
++ 		public void PlayWBGesperrt()
++ 		{
++ 			try
++ 			{
++ 				PlaySound(@&quot;.\Sounds\wb_gesperrt.wav&quot;, IntPtr.Zero, PlaySoundFlags.SND_ASYNC &amp; PlaySoundFlags.SND_NOSTOP);
++ 			}
++ 			catch(Exception) {}
++ 		}
++ 
++ 		public void PlayWBFreigabe()
++ 		{
++ 			try
++ 			{
++ 				PlaySound(@&quot;.\Sounds\wb_freigabe.wav&quot;, IntPtr.Zero, PlaySoundFlags.SND_ASYNC &amp; PlaySoundFlags.SND_NOSTOP);
++ 			}
++ 			catch(Exception) {}
++ 		}
++ 
+  		[DllImport(&quot;winmm.dll&quot;)] //inports the winmm.dll used for sound
+  		private static extern bool PlaySound( string szSound, IntPtr hMod, PlaySoundFlags flags );
+***************
+*** 78,81 ****
+--- 96,101 ----
+  		public void PlayMalfunctionSiemensSound() {}
+  		public void PlayMalfunctionBombardierSound() {}
++ 		public void PlayWBFreigabe() {}
++ 		public void PlayWBGesperrt() {}
+      }
+  }
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000020.html">[Zusidisplay-cvs] zusidisplay/Diagnose AssemblyInfo.cs,1.1.1.1,1.2 DIAGNOSEControl.cs,1.2,1.3 State.cs,1.2,1.3 Switcher.cs,1.2,1.3 Switcher.resx,1.2,1.3 UserControler.cs,1.1.1.1,1.2
+</A></li>
+	<LI>Next message: <A HREF="000015.html">[Zusidisplay-cvs] zusidisplay/EBuLa/Network Network.cs,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

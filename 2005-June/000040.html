@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/Diagnose AssemblyInfo.cs,1.3,1.4 DIAGNOSEControl.cs,1.4,1.5 State.cs,1.4,1.5
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-June/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/Diagnose%20AssemblyInfo.cs%2C1.3%2C1.4%20DIAGNOSEControl.cs%2C1.4%2C1.5%20State.cs%2C1.4%2C1.5&In-Reply-To=%3C200506061103.j56B39m12587%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000039.html">
+   <LINK REL="Next"  HREF="000032.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/Diagnose AssemblyInfo.cs,1.3,1.4 DIAGNOSEControl.cs,1.4,1.5 State.cs,1.4,1.5</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/Diagnose%20AssemblyInfo.cs%2C1.3%2C1.4%20DIAGNOSEControl.cs%2C1.4%2C1.5%20State.cs%2C1.4%2C1.5&In-Reply-To=%3C200506061103.j56B39m12587%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/Diagnose AssemblyInfo.cs,1.3,1.4 DIAGNOSEControl.cs,1.4,1.5 State.cs,1.4,1.5">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Mon Jun  6 13:03:09 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000039.html">[Zusidisplay-cvs] zusidisplay/EBuLa AssemblyInfo.cs,1.3,1.4 Control.cs,1.2,1.3 UserControl1.cs,1.3,1.4 UserControl1.resx,1.2,1.3
+</A></li>
+        <LI>Next message: <A HREF="000032.html">[Zusidisplay-cvs] zusidisplay/ET42X_ AssemblyInfo.cs,1.3,1.4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/Diagnose
+In directory sheep:/tmp/cvs-serv30397/Diagnose
+
+Modified Files:
+	AssemblyInfo.cs DIAGNOSEControl.cs State.cs 
+Log Message:
+Version 1.6.5
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/AssemblyInfo.cs,v
+retrieving revision 1.3
+retrieving revision 1.4
+diff -C2 -d -r1.3 -r1.4
+*** AssemblyInfo.cs	26 May 2005 17:41:33 -0000	1.3
+--- AssemblyInfo.cs	6 Jun 2005 11:03:06 -0000	1.4
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.6.4.*&quot;)]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.6.5.*&quot;)]
+  
+  //
+
+Index: DIAGNOSEControl.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/DIAGNOSEControl.cs,v
+retrieving revision 1.4
+retrieving revision 1.5
+diff -C2 -d -r1.4 -r1.5
+*** DIAGNOSEControl.cs	26 May 2005 17:41:33 -0000	1.4
+--- DIAGNOSEControl.cs	6 Jun 2005 11:03:06 -0000	1.5
+***************
+*** 585,588 ****
+--- 585,592 ----
+  			switch(localstate.DISPLAY)
+  			{
++ 				case CURRENT_DISPLAY.Z_BR:
++ 					if (localstate.type == TRAIN_TYPE.BR182)
++ 						localstate.SPUS = !localstate.SPUS;
++ 					break;
+  				case CURRENT_DISPLAY.Zugbesy:
+  					localstate.DISPLAY = CURRENT_DISPLAY.DSK;
+***************
+*** 1208,1212 ****
+  			TimeSpan span = new TimeSpan(DateTime.Now.Ticks - lastTime.Ticks);
+  
+! 			if (span.TotalMilliseconds &lt; 100)
+  			{
+  				lastTime = DateTime.Now;
+--- 1212,1216 ----
+  			TimeSpan span = new TimeSpan(DateTime.Now.Ticks - lastTime.Ticks);
+  
+! 			if (span.TotalMilliseconds &lt; 400)
+  			{
+  				lastTime = DateTime.Now;
+***************
+*** 3723,3727 ****
+  						buttons[6,0] = &quot;&quot;; buttons[6,1] = &quot;&quot;;
+  						buttons[7,0] = &quot;&quot;; buttons[7,1] = &quot;&quot;;
+! 						buttons[8,0] = &quot;Ein-&quot;; buttons[8,1] = &quot;gabe&quot;;
+  						buttons[9,0] = &quot;&quot;; buttons[9,1] = &quot;&quot;;
+  						buttons[10,0] = &quot;   G&quot;; buttons[10,1] = &quot;&quot;;
+--- 3727,3731 ----
+  						buttons[6,0] = &quot;&quot;; buttons[6,1] = &quot;&quot;;
+  						buttons[7,0] = &quot;&quot;; buttons[7,1] = &quot;&quot;;
+! 						buttons[8,0] = &quot; Ein-&quot;; buttons[8,1] = &quot;gabe&quot;;
+  						buttons[9,0] = &quot;&quot;; buttons[9,1] = &quot;&quot;;
+  						buttons[10,0] = &quot;   G&quot;; buttons[10,1] = &quot;&quot;;
+***************
+*** 3734,3739 ****
+  						buttons[5,0] = &quot;&quot;; buttons[5,1] = &quot;&quot;;
+  						buttons[6,0] = &quot;&quot;; buttons[6,1] = &quot;&quot;;
+! 						buttons[7,0] = &quot;&quot;; buttons[7,1] = &quot;&quot;;
+! 						buttons[8,0] = &quot;Ein-&quot;; buttons[8,1] = &quot;gabe&quot;;
+  						buttons[9,0] = &quot;&quot;; buttons[9,1] = &quot;&quot;;
+  						buttons[10,0] = &quot;&quot;; buttons[10,1] = &quot;&quot;;
+--- 3738,3747 ----
+  						buttons[5,0] = &quot;&quot;; buttons[5,1] = &quot;&quot;;
+  						buttons[6,0] = &quot;&quot;; buttons[6,1] = &quot;&quot;;
+! 						buttons[7,0] = &quot;SPUS&quot;; 
+! 						if (localstate.SPUS)
+! 							buttons[7,1] = &quot;  aus&quot;;
+! 						else
+! 							buttons[7,1] = &quot;  ein&quot;;
+! 						buttons[8,0] = &quot; Ein-&quot;; buttons[8,1] = &quot;gabe&quot;;
+  						buttons[9,0] = &quot;&quot;; buttons[9,1] = &quot;&quot;;
+  						buttons[10,0] = &quot;&quot;; buttons[10,1] = &quot;&quot;;
+***************
+*** 4030,4033 ****
+--- 4038,4043 ----
+  
+  			// Feld 4: Zugsammelschiene
++ 			f = new Font(&quot;Arial&quot;, 5f, FontStyle.Bold, GraphicsUnit.Millimeter);
++ 			pg.DrawString(&quot;1000 V&quot;, f, Brushes.WhiteSmoke, 290, 388);
+  
+  			// Feld 5: Bremse
+***************
+*** 4046,4049 ****
+--- 4056,4073 ----
+  				pg.FillPolygon(Brushes.WhiteSmoke, p1);
+  				pg.FillPolygon(Brushes.WhiteSmoke, p2);
++ 			}
++ 
++ 			f = new Font(&quot;Arial&quot;, 5.7f, FontStyle.Bold, GraphicsUnit.Millimeter);
++ 			if (localstate.Bremsstellung == BREMSSTELLUNG.R_Mg || localstate.Bremsstellung == BREMSSTELLUNG.R)
++ 			{
++ 				pg.DrawString(&quot;R&quot;, f, Brushes.WhiteSmoke, 393, 363);
++ 			}
++ 			else if (localstate.Bremsstellung == BREMSSTELLUNG.P_Mg || localstate.Bremsstellung == BREMSSTELLUNG.P)
++ 			{
++ 				pg.DrawString(&quot;P&quot;, f, Brushes.Gold, 394, 363);
++ 			}
++ 			else if (localstate.Bremsstellung == BREMSSTELLUNG.G)
++ 			{
++ 				pg.DrawString(&quot;G&quot;, f, Brushes.Red, 393, 363);
+  			}
+  
+
+Index: State.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Diagnose/State.cs,v
+retrieving revision 1.4
+retrieving revision 1.5
+diff -C2 -d -r1.4 -r1.5
+*** State.cs	26 May 2005 17:41:33 -0000	1.4
+--- State.cs	6 Jun 2005 11:03:06 -0000	1.5
+***************
+*** 44,47 ****
+--- 44,48 ----
+  		public float C_Druck = 0f;
+  
++ 		public bool SPUS = true;
+  
+  		public St&#246;rungsManager st&#246;rungmgr = new St&#246;rungsManager();
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000039.html">[Zusidisplay-cvs] zusidisplay/EBuLa AssemblyInfo.cs,1.3,1.4 Control.cs,1.2,1.3 UserControl1.cs,1.3,1.4 UserControl1.resx,1.2,1.3
+</A></li>
+	<LI>Next message: <A HREF="000032.html">[Zusidisplay-cvs] zusidisplay/ET42X_ AssemblyInfo.cs,1.3,1.4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

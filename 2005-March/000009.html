@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/ET42X_/Network Network.cs,1.1.1.1,1.2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/ET42X_/Network%20Network.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqON28871%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000008.html">
+   <LINK REL="Next"  HREF="000010.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/ET42X_/Network Network.cs,1.1.1.1,1.2</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/ET42X_/Network%20Network.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqON28871%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/ET42X_/Network Network.cs,1.1.1.1,1.2">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Wed Mar  9 11:52:24 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000008.html">[Zusidisplay-cvs] zusidisplay/VT612 AssemblyInfo.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2 VT612Control.cs,1.1.1.1,1.2
+</A></li>
+        <LI>Next message: <A HREF="000010.html">[Zusidisplay-cvs] zusidisplay/br185mmi AssemblyInfo.cs,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#9">[ date ]</a>
+              <a href="thread.html#9">[ thread ]</a>
+              <a href="subject.html#9">[ subject ]</a>
+              <a href="author.html#9">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/ET42X_/Network
+In directory sheep:/tmp/cvs-serv11087/ET42X_/Network
+
+Modified Files:
+	Network.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f&#252;r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: Network.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ET42X_/Network/Network.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Network.cs	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- Network.cs	9 Mar 2005 10:52:22 -0000	1.2
+***************
+*** 6,13 ****
+  using System.Windows.Forms;
+  using System.Collections;
+  
+  namespace MMI.ET42X
+  {
+! 	public class Network : MMI.EBuLa.Tools.INetwork
+  	{
+  		Socket s;
+--- 6,14 ----
+  using System.Windows.Forms;
+  using System.Collections;
++ using MMI.EBuLa.Tools;
+  
+  namespace MMI.ET42X
+  {
+! 	public class Network : MMI.EBuLa.Tools.INetwork, MMI.EBuLa.Tools.IFISNetwork
+  	{
+  		Socket s;
+***************
+*** 16,19 ****
+--- 17,21 ----
+  		ET42XControl c;
+  		ArrayList sockets_list = new ArrayList();
++ 		MMI.EBuLa.Tools.SuperNetwork sn;
+  		
+  		public Network(ref ET42XControl control)
+***************
+*** 33,37 ****
+  		public void Connect()
+  		{
+! 			MMI.EBuLa.Tools.SuperNetwork sn = new MMI.EBuLa.Tools.SuperNetwork(this);
+  			c.IsCONNECTED = true;
+  
+--- 35,39 ----
+  		public void Connect()
+  		{
+! 			sn = new MMI.EBuLa.Tools.SuperNetwork(this);
+  			c.IsCONNECTED = true;
+  
+***************
+*** 81,84 ****
+--- 83,219 ----
+  		}  */
+  
++ 		public void SendData(FIS_DATA type, string data)
++ 		{
++ 			switch(type)
++ 			{
++ 				case FIS_DATA.FIS_Aus:
++ 					// TODO
++ 					break;
++ 				case FIS_DATA.FIS_Ausloesen:
++ 					sn.SendToFISServer(s, 25, &quot;&quot;);
++ 					break;
++ 				case FIS_DATA.FIS_Start:
++ 					sn.SendToFISServer(s, 26, &quot;&quot;);
++ 					break;
++ 				case FIS_DATA.GPS_Status:
++ 					sn.SendToFISServer(s, 17, &quot;&quot;);
++ 					break;
++ 				case FIS_DATA.Naechster_Halt:
++ 					sn.SendToFISServer(s, 18, &quot;&quot;);
++ 					break;
++ 				case FIS_DATA.Next_Entry:
++ 					sn.SendToFISServer(s, 23, &quot;&quot;);
++ 					break;
++ 				case FIS_DATA.Prev_Entry:
++ 					sn.SendToFISServer(s, 24, &quot;&quot;);
++ 					break;
++ 				case FIS_DATA.Route_Data:
++ 					sn.SendToFISServer(s, 29, &quot;&quot;);
++ 					break;
++ 				case FIS_DATA.Status:
++ 					sn.SendToFISServer(s, 16, &quot;&quot;);
++ 					break;
++ 				case FIS_DATA.Set_FISTYPE:
++ 					if (data == &quot;true&quot;)
++ 						sn.SendToFISServer(s, 40, true);
++ 					else if (data == &quot;false&quot;)
++ 						sn.SendToFISServer(s, 40, false);
++ 					break;
++ 				case FIS_DATA.Set_NaechsterHalt:
++ 					// TODO
++ 					break;
++ 				case FIS_DATA.Set_Route_Netz:
++ 					sn.SendToFISServer(s, 34, data);
++ 					break;
++ 				case FIS_DATA.Set_Route_Linie:
++ 					sn.SendToFISServer(s, 35, data);
++ 					break;
++ 				case FIS_DATA.Set_Route_Start:
++ 					sn.SendToFISServer(s, 36, data);
++ 					break;
++ 				case FIS_DATA.Set_Route_Ziel:
++ 					sn.SendToFISServer(s, 37, data);
++ 					break;
++ 				case FIS_DATA.Set_Status:
++ 					if (data == &quot;true&quot;)
++ 						sn.SendToFISServer(s, 32, true);
++ 					else if (data == &quot;false&quot;)
++ 						sn.SendToFISServer(s, 32, false);
++ 					break;
++ 			}
++ 		}
++ 		public void ChangeFISState(int type, byte[] buffer) 
++ 		{
++ 			string data = &quot;&quot;;
++ 			float valu = 0f;
++ 			bool state = false;
++ 			BinaryReader reader = new BinaryReader(new MemoryStream(buffer));
++ 
++ 			switch (type)
++ 			{
++ 				case  1: 
++ 					valu = reader.ReadSingle();
++ 					if (valu == 1f) state = true;
++ 					c.SetFIS_Status(state);
++ 					break;
++ 				case  2: 
++ 					valu = reader.ReadSingle();
++ 					if (valu == 1f) state = true;
++ 					c.SetFIS_GPSStatus(state);
++ 					break;
++ 				case  3:
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_NaechsterHalt(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  4: 
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_Netz(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  5: 
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_Linie(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  6: 
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_Start(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  7: 
++ 					try
++ 					{
++ 						data = reader.ReadString();
++ 						c.SetFIS_Ziel(data);
++ 					}                              
++ 					catch(Exception){}
++ 					break;
++ 				case  8: 
++ 					c.SetFIS_NoMoreData();
++ 					break;
++ 				case  9: 
++ 					c.SetFIS_NoMoreZiel();
++ 					break;
++ 				case  10: 
++ 					c.SetFIS_NoMoreStart();
++ 					break;
++ 				default: // nix
++ 					break;
++ 			}
++ 		}
++ 
+  		public void ChangeState(int type, byte[] buffer)
+  		{
+***************
+*** 168,171 ****
+--- 303,309 ----
+  				case 47: // T&#252;ren offen
+  					c.SetLM_T&#252;r(state);
++ 					break;
++ 				case 51: // Schalter Fahrstufen
++ 					c.SetFahrstufenSchalter(valu);
+  					break;
+  				case 56: // AFB
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000008.html">[Zusidisplay-cvs] zusidisplay/VT612 AssemblyInfo.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2 VT612Control.cs,1.1.1.1,1.2
+</A></li>
+	<LI>Next message: <A HREF="000010.html">[Zusidisplay-cvs] zusidisplay/br185mmi AssemblyInfo.cs,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#9">[ date ]</a>
+              <a href="thread.html#9">[ thread ]</a>
+              <a href="subject.html#9">[ subject ]</a>
+              <a href="author.html#9">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

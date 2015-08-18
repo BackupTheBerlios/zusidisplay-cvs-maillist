@@ -1,0 +1,417 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay/ice3 AssemblyInfo.cs,1.2,1.3 ICE3Control.cs,1.2,1.3 Switcher.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2 UserControler.cs,1.2,1.3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-May/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/ice3%20AssemblyInfo.cs%2C1.2%2C1.3%20ICE3Control.cs%2C1.2%2C1.3%20Switcher.cs%2C1.1.1.1%2C1.2%20Switcher.resx%2C1.1.1.1%2C1.2%20UserControler.cs%2C1.2%2C1.3&In-Reply-To=%3C200505261741.j4QHfcm12101%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000021.html">
+   <LINK REL="Next"  HREF="000025.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay/ice3 AssemblyInfo.cs,1.2,1.3 ICE3Control.cs,1.2,1.3 Switcher.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2 UserControler.cs,1.2,1.3</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay/ice3%20AssemblyInfo.cs%2C1.2%2C1.3%20ICE3Control.cs%2C1.2%2C1.3%20Switcher.cs%2C1.1.1.1%2C1.2%20Switcher.resx%2C1.1.1.1%2C1.2%20UserControler.cs%2C1.2%2C1.3&In-Reply-To=%3C200505261741.j4QHfcm12101%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay/ice3 AssemblyInfo.cs,1.2,1.3 ICE3Control.cs,1.2,1.3 Switcher.cs,1.1.1.1,1.2 Switcher.resx,1.1.1.1,1.2 UserControler.cs,1.2,1.3">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Thu May 26 19:41:38 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000021.html">[Zusidisplay-cvs] zusidisplay/ice3/Network Network.cs,1.2,1.3
+</A></li>
+        <LI>Next message: <A HREF="000025.html">[Zusidisplay-cvs] zusidisplay/br185mmi/Network Network.cs,1.2,1.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#22">[ date ]</a>
+              <a href="thread.html#22">[ thread ]</a>
+              <a href="subject.html#22">[ subject ]</a>
+              <a href="author.html#22">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay/ice3
+In directory sheep:/tmp/cvs-serv19686/ice3
+
+Modified Files:
+	AssemblyInfo.cs ICE3Control.cs Switcher.cs Switcher.resx 
+	UserControler.cs 
+Log Message:
+STAND: 1.6.4
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ice3/AssemblyInfo.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** AssemblyInfo.cs	9 Mar 2005 10:52:23 -0000	1.2
+--- AssemblyInfo.cs	26 May 2005 17:41:35 -0000	1.3
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.5.2.*&quot;)]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.6.4.*&quot;)]
+  
+  //
+
+Index: ICE3Control.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ice3/ICE3Control.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** ICE3Control.cs	9 Mar 2005 10:52:23 -0000	1.2
+--- ICE3Control.cs	26 May 2005 17:41:36 -0000	1.3
+***************
+*** 18,23 ****
+  	public class ICE3Control : System.Windows.Forms.UserControl
+  	{
+! 		const bool USE_DOUBLE_BUFFER = true;
+! 		const float FramesPerSecond = 30f;
+  		const string fixed_font = &quot;FixedSysTTF&quot;;
+  		const string other_font = &quot;Tahoma&quot;;
+--- 18,23 ----
+  	public class ICE3Control : System.Windows.Forms.UserControl
+  	{
+! 		bool USE_DOUBLE_BUFFER = false;
+! 		const float FramesPerSecond = 100f;
+  		const string fixed_font = &quot;FixedSysTTF&quot;;
+  		const string other_font = &quot;Tahoma&quot;;
+***************
+*** 93,96 ****
+--- 93,107 ----
+  		public ICE3Control(MMI.EBuLa.Tools.XMLLoader conf, ControlContainer cc)
+  		{
++ 			if (!conf.DoubleBuffer)
++ 			{
++ 				//This turns off internal double buffering of all custom GDI+ drawing
++ 				this.SetStyle(ControlStyles.DoubleBuffer, true);
++ 				this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
++ 				this.SetStyle(ControlStyles.UserPaint, true);
++ 				USE_DOUBLE_BUFFER = false;
++ 			}
++ 			else 
++ 				USE_DOUBLE_BUFFER = true;
++ 
+  			InitializeComponent();
+  
+***************
+*** 138,141 ****
+--- 149,154 ----
+  			timer1.Interval = interval;
+  			timer1.Enabled = true;
++ 
++ 			Button_SW_Pressed(this, new EventArgs());
+  		}
+  
+***************
+*** 849,853 ****
+  							// Thread muss neu anglegt werden
+  							ThreadT&#252;ren = new Thread(new ThreadStart(threadDelegate_T&#252;ren));
+! 							ThreadT&#252;ren.Priority = ThreadPriority.Lowest;
+  							ThreadT&#252;ren.IsBackground = true;
+  							ThreadT&#252;ren.Start();
+--- 862,866 ----
+  							// Thread muss neu anglegt werden
+  							ThreadT&#252;ren = new Thread(new ThreadStart(threadDelegate_T&#252;ren));
+! 							ThreadT&#252;ren.Priority = ThreadPriority.BelowNormal;
+  							ThreadT&#252;ren.IsBackground = true;
+  							ThreadT&#252;ren.Start();
+***************
+*** 869,873 ****
+  				{
+  					ThreadT&#252;ren = new Thread(new ThreadStart(threadDelegate_T&#252;ren));
+! 					ThreadT&#252;ren.Priority = ThreadPriority.Lowest;
+  					ThreadT&#252;ren.IsBackground = true;
+  					ThreadT&#252;ren.Start();
+--- 882,886 ----
+  				{
+  					ThreadT&#252;ren = new Thread(new ThreadStart(threadDelegate_T&#252;ren));
+! 					ThreadT&#252;ren.Priority = ThreadPriority.BelowNormal;
+  					ThreadT&#252;ren.IsBackground = true;
+  					ThreadT&#252;ren.Start();
+***************
+*** 889,893 ****
+  		public void UpdateScreen()
+  		{
+! 			ICE3Control_Paint(this, new PaintEventArgs(this.CreateGraphics(), new Rectangle(0,0,this.Width, this.Height)));
+  		}
+  
+--- 902,915 ----
+  		public void UpdateScreen()
+  		{
+! 			//if (!something_changed) return;
+! 
+! 			//something_changed = false;
+! 			
+! 			if (USE_DOUBLE_BUFFER)
+! 				ICE3Control_Paint(this, new PaintEventArgs(this.CreateGraphics(), new Rectangle(0,0,this.Width, this.Height)));
+! 			else
+! 				this.Refresh();
+! 
+! 			
+  		}
+  
+***************
+*** 1019,1022 ****
+--- 1041,1047 ----
+  						DrawS01(ref pg, false);
+  						break;
++ 					case ENUMSt&#246;rung.S11_ZUSIKomm:
++ 						DrawS11(ref pg, false);
++ 						break;
+  					case ENUMSt&#246;rung.S02_Trennsch&#252;tz:
+  						DrawS02(ref pg, false);
+***************
+*** 1034,1037 ****
+--- 1059,1065 ----
+  						DrawS01(ref pg, true);
+  						break;
++ 					case ENUMSt&#246;rung.S11_ZUSIKomm:
++ 						DrawS11(ref pg, false);
++ 						break;
+  					case ENUMSt&#246;rung.S02_Trennsch&#252;tz:
+  						DrawS02(ref pg, true);
+***************
+*** 2782,2785 ****
+--- 2810,2834 ----
+  		}
+  
++ 		private void DrawS11(ref Graphics pg, bool greater)
++ 		{
++ 			Font f = new Font(&quot;Arial&quot;, 11, FontStyle.Regular, GraphicsUnit.Point);
++ 			string s = &quot;&quot;;
++ 
++ 			St&#246;rung st = localstate.st&#246;rungmgr.LastSt&#246;rung;
++ 			s += st.Priority.ToString()+&quot;  &quot;;
++ 			s += st.Name+&quot;  &quot;;
++ 			s += st.Description;
++ 
++ 			pg.DrawString(s, f, b_ws, 20, 1);
++ 
++ 			f = new Font(&quot;Arial&quot;, 14, FontStyle.Bold, GraphicsUnit.Point);
++ 
++ 			pg.DrawString(&quot;Die Kommunikation mit ZUSI ist im Augenblick gest&#246;rt!&quot;, f, b_ws, 50, 40);
++ 			pg.DrawString(&quot;ZUSI ist bereits mit dem TCP Server verbunden!&quot;, f, b_ws, 50, 60);
++ 			pg.DrawString(&quot;- Verbindung zwischen ZUSI und TCP Server trennen&quot;, f, b_ws, 50, 80);
++ 			pg.DrawString(&quot;- Display meldet sich automatisch an Server an&quot;, f, b_ws, 50, 100);
++ 			pg.DrawString(&quot;- ZUSI wieder verbinden&quot;, f, b_ws, 50, 120);
++ 		}
++ 
+  		private void DrawS02(ref Graphics pg, bool greater)
+  		{
+***************
+*** 3668,3672 ****
+  		public void ICE3Control_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+  		{
+! 			if (m_backBuffer == null)
+  			{
+  				m_backBuffer= new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
+--- 3717,3721 ----
+  		public void ICE3Control_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+  		{
+! 			if (m_backBuffer == null &amp;&amp; USE_DOUBLE_BUFFER)
+  			{
+  				m_backBuffer= new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
+***************
+*** 3685,3689 ****
+  			if (!Inverse)
+  			{
+! 				g.Clear(Color.LightGray);
+  				b_ws = new SolidBrush(Color.Black);
+  				b_ws_alt = new SolidBrush(Color.WhiteSmoke);
+--- 3734,3738 ----
+  			if (!Inverse)
+  			{
+! 				g.Clear(Misc.FILL_GRAY);
+  				b_ws = new SolidBrush(Color.Black);
+  				b_ws_alt = new SolidBrush(Color.WhiteSmoke);
+***************
+*** 3692,3696 ****
+  			else
+  			{
+! 				g.Clear(Color.Black);
+  				b_ws = new SolidBrush(Color.WhiteSmoke);
+  				b_ws_alt = new SolidBrush(Color.Black);
+--- 3741,3745 ----
+  			else
+  			{
+! 				g.Clear(Misc.FILL_BLACK);
+  				b_ws = new SolidBrush(Color.WhiteSmoke);
+  				b_ws_alt = new SolidBrush(Color.Black);
+
+Index: Switcher.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ice3/Switcher.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Switcher.cs	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- Switcher.cs	26 May 2005 17:41:36 -0000	1.2
+***************
+*** 230,234 ****
+  			this.b_ok.DialogResult = System.Windows.Forms.DialogResult.OK;
+  			this.b_ok.FlatStyle = System.Windows.Forms.FlatStyle.System;
+! 			this.b_ok.Location = new System.Drawing.Point(48, 344);
+  			this.b_ok.Name = &quot;b_ok&quot;;
+  			this.b_ok.TabIndex = 2;
+--- 230,234 ----
+  			this.b_ok.DialogResult = System.Windows.Forms.DialogResult.OK;
+  			this.b_ok.FlatStyle = System.Windows.Forms.FlatStyle.System;
+! 			this.b_ok.Location = new System.Drawing.Point(88, 344);
+  			this.b_ok.Name = &quot;b_ok&quot;;
+  			this.b_ok.TabIndex = 2;
+***************
+*** 239,247 ****
+  			// 
+  			this.b_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+  			this.b_cancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
+! 			this.b_cancel.Location = new System.Drawing.Point(152, 344);
+  			this.b_cancel.Name = &quot;b_cancel&quot;;
+  			this.b_cancel.TabIndex = 3;
+  			this.b_cancel.Text = &quot;Abbrechen&quot;;
+  			// 
+  			// cb_12std
+--- 239,249 ----
+  			// 
+  			this.b_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
++ 			this.b_cancel.Enabled = false;
+  			this.b_cancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
+! 			this.b_cancel.Location = new System.Drawing.Point(192, 296);
+  			this.b_cancel.Name = &quot;b_cancel&quot;;
+  			this.b_cancel.TabIndex = 3;
+  			this.b_cancel.Text = &quot;Abbrechen&quot;;
++ 			this.b_cancel.Visible = false;
+  			// 
+  			// cb_12std
+
+Index: Switcher.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ice3/Switcher.resx,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Switcher.resx	31 Jan 2005 10:54:25 -0000	1.1.1.1
+--- Switcher.resx	26 May 2005 17:41:36 -0000	1.2
+***************
+*** 197,206 ****
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+-   &lt;data name=&quot;cb_12std.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+-     &lt;value&gt;Private&lt;/value&gt;
+-   &lt;/data&gt;
+    &lt;data name=&quot;cb_12std.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;cb_12std.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+--- 197,206 ----
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;cb_12std.Locked&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;cb_12std.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
++     &lt;value&gt;Private&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;cb_12std.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+***************
+*** 227,234 ****
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_415_415_2.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_415_415_2.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+--- 227,234 ----
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_415_415_2.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;rb_415_415_2.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+***************
+*** 335,343 ****
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+-   &lt;data name=&quot;$this.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
+-     &lt;value&gt;8, 8&lt;/value&gt;
+-   &lt;/data&gt;
+    &lt;data name=&quot;$this.Name&quot;&gt;
+      &lt;value&gt;Switcher&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;$this.DrawGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+--- 335,343 ----
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;$this.Name&quot;&gt;
+      &lt;value&gt;Switcher&lt;/value&gt;
++   &lt;/data&gt;
++   &lt;data name=&quot;$this.GridSize&quot; type=&quot;System.Drawing.Size, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot;&gt;
++     &lt;value&gt;8, 8&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;$this.DrawGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+
+Index: UserControler.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/ice3/UserControler.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** UserControler.cs	9 Mar 2005 10:52:23 -0000	1.2
+--- UserControler.cs	26 May 2005 17:41:36 -0000	1.3
+***************
+*** 78,82 ****
+  				t = new Thread(new ThreadStart(net.Connect));
+  				t.IsBackground = true;
+! 				t.Priority = ThreadPriority.Lowest;
+  				t.Start();
+  				Thread.Sleep(1);
+--- 78,82 ----
+  				t = new Thread(new ThreadStart(net.Connect));
+  				t.IsBackground = true;
+! 				t.Priority = m_XMLConf.thread_prio;
+  				t.Start();
+  				Thread.Sleep(1);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000021.html">[Zusidisplay-cvs] zusidisplay/ice3/Network Network.cs,1.2,1.3
+</A></li>
+	<LI>Next message: <A HREF="000025.html">[Zusidisplay-cvs] zusidisplay/br185mmi/Network Network.cs,1.2,1.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#22">[ date ]</a>
+              <a href="thread.html#22">[ thread ]</a>
+              <a href="subject.html#22">[ subject ]</a>
+              <a href="author.html#22">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>

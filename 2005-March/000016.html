@@ -1,0 +1,584 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Zusidisplay-cvs] zusidisplay AboutBox.cs,1.2,1.3 AboutBox.resx,1.1.1.1,1.2 AssemblyInfo.cs,1.1.1.1,1.2 Form1.cs,1.1.1.1,1.2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/zusidisplay-cvs/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay%20AboutBox.cs%2C1.2%2C1.3%20AboutBox.resx%2C1.1.1.1%2C1.2%20AssemblyInfo.cs%2C1.1.1.1%2C1.2%20Form1.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqpN28917%40bat.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000007.html">
+   <LINK REL="Next"  HREF="000013.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Zusidisplay-cvs] zusidisplay AboutBox.cs,1.2,1.3 AboutBox.resx,1.1.1.1,1.2 AssemblyInfo.cs,1.1.1.1,1.2 Form1.cs,1.1.1.1,1.2</H1>
+    <B>jens_h</B> 
+    <A HREF="mailto:zusidisplay-cvs%40lists.berlios.de?Subject=Re%3A%20%5BZusidisplay-cvs%5D%20zusidisplay%20AboutBox.cs%2C1.2%2C1.3%20AboutBox.resx%2C1.1.1.1%2C1.2%20AssemblyInfo.cs%2C1.1.1.1%2C1.2%20Form1.cs%2C1.1.1.1%2C1.2&In-Reply-To=%3C200503091052.j29AqpN28917%40bat.berlios.de%3E"
+       TITLE="[Zusidisplay-cvs] zusidisplay AboutBox.cs,1.2,1.3 AboutBox.resx,1.1.1.1,1.2 AssemblyInfo.cs,1.1.1.1,1.2 Form1.cs,1.1.1.1,1.2">nobody at sheep.berlios.de
+       </A><BR>
+    <I>Wed Mar  9 11:52:51 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000007.html">[Zusidisplay-cvs] zusidisplay/ice3 AssemblyInfo.cs,1.1.1.1,1.2 ICE3Control.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2
+</A></li>
+        <LI>Next message: <A HREF="000013.html">[Zusidisplay-cvs] zusidisplay/Diagnose/Network Network.cs,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#16">[ date ]</a>
+              <a href="thread.html#16">[ thread ]</a>
+              <a href="subject.html#16">[ subject ]</a>
+              <a href="author.html#16">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Update of /cvsroot/zusidisplay/zusidisplay
+In directory sheep:/tmp/cvs-serv11087
+
+Modified Files:
+	AboutBox.cs AboutBox.resx AssemblyInfo.cs Form1.cs 
+Log Message:
+- viele viele Fixes
+- ET423-426 start erweitert
+- FIS eingebaut (f&#252;r IBIS Server)
+- neues Hauptmenue
+- verbessertes Multidisplay
+- usw
+
+Index: AboutBox.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/AboutBox.cs,v
+retrieving revision 1.2
+retrieving revision 1.3
+diff -C2 -d -r1.2 -r1.3
+*** AboutBox.cs	2 Feb 2005 06:39:41 -0000	1.2
+--- AboutBox.cs	9 Mar 2005 10:52:19 -0000	1.3
+***************
+*** 153,157 ****
+  			this.label13.Size = new System.Drawing.Size(192, 16);
+  			this.label13.TabIndex = 10;
+! 			this.label13.Text = &quot;ET423-426 Diagnosedisplay (alpha)&quot;;
+  			// 
+  			// label12
+--- 153,157 ----
+  			this.label13.Size = new System.Drawing.Size(192, 16);
+  			this.label13.TabIndex = 10;
+! 			this.label13.Text = &quot;ET423-426 Diagnosedisplay&quot;;
+  			// 
+  			// label12
+
+Index: AboutBox.resx
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/AboutBox.resx,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AboutBox.resx	31 Jan 2005 10:54:12 -0000	1.1.1.1
+--- AboutBox.resx	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 191,198 ****
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;label3.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;label3.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+--- 191,198 ----
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;label3.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;label3.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+***************
+*** 209,216 ****
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;button1.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;button1.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+--- 209,216 ----
+      &lt;value&gt;False&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;button1.DefaultModifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+!   &lt;data name=&quot;button1.Modifiers&quot; type=&quot;System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;Private&lt;/value&gt;
+    &lt;/data&gt;
+***************
+*** 311,314 ****
+--- 311,317 ----
+      &lt;value&gt;8, 8&lt;/value&gt;
+    &lt;/data&gt;
++   &lt;data name=&quot;$this.Name&quot;&gt;
++     &lt;value&gt;AboutBox&lt;/value&gt;
++   &lt;/data&gt;
+    &lt;data name=&quot;$this.DrawGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;True&lt;/value&gt;
+***************
+*** 316,322 ****
+    &lt;data name=&quot;$this.TrayHeight&quot; type=&quot;System.Int32, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+      &lt;value&gt;80&lt;/value&gt;
+-   &lt;/data&gt;
+-   &lt;data name=&quot;$this.Name&quot;&gt;
+-     &lt;value&gt;AboutBox&lt;/value&gt;
+    &lt;/data&gt;
+    &lt;data name=&quot;$this.SnapToGrid&quot; type=&quot;System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;&gt;
+--- 319,322 ----
+
+Index: AssemblyInfo.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/AssemblyInfo.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** AssemblyInfo.cs	31 Jan 2005 10:54:11 -0000	1.1.1.1
+--- AssemblyInfo.cs	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 27,31 ****
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.5.0.*&quot;)]
+  
+  //
+--- 27,31 ----
+  // mit '*' angeben:
+  
+! [assembly: AssemblyVersion(&quot;1.5.2.*&quot;)]
+  
+  //
+
+Index: Form1.cs
+===================================================================
+RCS file: /cvsroot/zusidisplay/zusidisplay/Form1.cs,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -C2 -d -r1.1.1.1 -r1.2
+*** Form1.cs	31 Jan 2005 10:54:11 -0000	1.1.1.1
+--- Form1.cs	9 Mar 2005 10:52:19 -0000	1.2
+***************
+*** 49,53 ****
+          private System.ComponentModel.IContainer components;
+  
+! 		public MainForm()
+  		{
+  			InitializeComponent();
+--- 49,53 ----
+          private System.ComponentModel.IContainer components;
+  
+! 		public MainForm(string[] args)
+  		{
+  			InitializeComponent();
+***************
+*** 57,60 ****
+--- 57,62 ----
+              Init();
+  
++ 			LoadDisplay(args);
++ 
+  			this.Focus();
+  		}
+***************
+*** 101,104 ****
+--- 103,107 ----
+  			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+  			this.Resize += new System.EventHandler(this.MainForm_Resize);
++ 			this.Move += new System.EventHandler(this.MainForm_Move);
+  
+  		}
+***************
+*** 106,113 ****
+  
+  		[STAThread]
+! 		static void Main() 
+  		{
+  			//Application.EnableVisualStyles();
+! 			Application.Run(new MainForm());
+          }
+  
+--- 109,116 ----
+  
+  		[STAThread]
+! 		static void Main(string[] args) 
+  		{
+  			//Application.EnableVisualStyles();
+! 			Application.Run(new MainForm(args));
+          }
+  
+***************
+*** 126,131 ****
+                      this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
+                  }
+!                 if (m_br185 != null &amp;&amp; m_br185.IsDisposed)
+                  {
+                      // show main selection
+--- 129,135 ----
+                      this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
++ 					ActivateBorder();
+                  }
+!                 else if (m_br185 != null &amp;&amp; m_br185.IsDisposed)
+                  {
+                      // show main selection
+***************
+*** 137,142 ****
+                      this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
+                  }   
+! 				if (m_david != null &amp;&amp; m_david.IsDisposed)
+  				{
+  					// show main selection
+--- 141,147 ----
+                      this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
++ 					ActivateBorder();
+                  }   
+! 				else if (m_david != null &amp;&amp; m_david.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 148,153 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
+  				}
+! 				if (m_ice3 != null &amp;&amp; m_ice3.IsDisposed)
+  				{
+  					// show main selection
+--- 153,159 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
++ 					ActivateBorder();
+  				}
+! 				else if (m_ice3 != null &amp;&amp; m_ice3.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 159,164 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
+  				}
+! 				if (m_et42x != null &amp;&amp; m_et42x.IsDisposed)
+  				{
+  					// show main selection
+--- 165,171 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
++ 					ActivateBorder();
+  				}
+! 				else if (m_et42x != null &amp;&amp; m_et42x.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 169,174 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
+  				}
+! 				if (m_vt612 != null &amp;&amp; m_vt612.IsDisposed)
+  				{
+  					// show main selection
+--- 176,182 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
++ 					ActivateBorder();
+  				}
+! 				else if (m_vt612 != null &amp;&amp; m_vt612.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 179,184 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
+  				}
+! 				if (m_diagnose != null &amp;&amp; m_diagnose.IsDisposed)
+  				{
+  					// show main selection
+--- 187,193 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
++ 					ActivateBorder();
+  				}
+! 				else if (m_diagnose != null &amp;&amp; m_diagnose.IsDisposed)
+  				{
+  					// show main selection
+***************
+*** 189,194 ****
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
+  				}
+! 				if (m_tools != null &amp;&amp; m_tools.IsDisposed)
+                  {
+                      // show main selection
+--- 198,204 ----
+  					this.Controls.Add(m_menu);
+  					this.Text = &quot;ZusiDisplay&quot;;
++ 					ActivateBorder();
+  				}
+! 				else if (m_tools != null &amp;&amp; m_tools.IsDisposed)
+                  {
+                      // show main selection
+***************
+*** 205,210 ****
+                      m_menu = new SelectionMenu(m_handler);
+                      this.Controls.Add(m_menu);*/
+                  }
+!                 if (m_menu != null &amp;&amp; m_menu.IsDisposed)
+                  {
+                      m_menu = null;
+--- 215,221 ----
+                      m_menu = new SelectionMenu(m_handler);
+                      this.Controls.Add(m_menu);*/
++ 					ActivateBorder();
+                  }
+!                 else if (m_menu != null &amp;&amp; m_menu.IsDisposed)
+                  {
+                      m_menu = null;
+***************
+*** 212,215 ****
+--- 223,227 ----
+                      {
+                          case Loadwhat.EBuLa:
++ 							SetWindow(enumDisplay.EBuLa);
+                              m_widget = new EBuLa.ControlContainer(XmlConf);
+                              this.Controls.Add(m_widget);
+***************
+*** 225,229 ****
+                          case Loadwhat.MMI:
+  							//MMI.BR185_MMI.Network net = new MMI.BR185_MMI.Network();
+!                             m_br185 = new MMIBR185.ControlContainer(XmlConf);
+                              this.Controls.Add(m_br185);
+                              m_handler.Load = Loadwhat.Menu;
+--- 237,242 ----
+                          case Loadwhat.MMI:
+  							//MMI.BR185_MMI.Network net = new MMI.BR185_MMI.Network();
+! 							SetWindow(enumDisplay.MMI);
+! 							m_br185 = new MMIBR185.ControlContainer(XmlConf);
+                              this.Controls.Add(m_br185);
+                              m_handler.Load = Loadwhat.Menu;
+***************
+*** 231,234 ****
+--- 244,248 ----
+                              break;
+  						case Loadwhat.DAVID:
++ 							SetWindow(enumDisplay.DAVID1);
+  							m_david = new MMI.DAVID.ControlContainer(XmlConf, 1);
+  							m_david.m_widget.localstate.Type = MMI.DAVID.TYPE.David1;
+***************
+*** 241,244 ****
+--- 255,259 ----
+  							break;
+  						case Loadwhat.DAVID2:
++ 							SetWindow(enumDisplay.DAVID2);
+  							m_david = new MMI.DAVID.ControlContainer(XmlConf, 2);
+  							m_david.m_widget.localstate.Type = MMI.DAVID.TYPE.David2;
+***************
+*** 249,252 ****
+--- 264,268 ----
+  							break;
+  						case Loadwhat.ICE3_1:
++ 							SetWindow(enumDisplay.ICE3_1);
+  							m_ice3 = new MMI.ICE3.ControlContainer(XmlConf, 1);
+  							m_ice3.m_widget.localstate.Type = MMI.ICE3.TYPE.David1;
+***************
+*** 259,262 ****
+--- 275,279 ----
+  							break;
+  						case Loadwhat.ICE3_2:
++ 							SetWindow(enumDisplay.ICE3_2);
+  							m_ice3 = new MMI.ICE3.ControlContainer(XmlConf, 2);
+  							m_ice3.m_widget.olddisplay = ICE3.CURRENT_DISPLAY.D1_Grundb;
+***************
+*** 269,272 ****
+--- 286,290 ----
+  							break;
+  						case Loadwhat.ET42X:
++ 							SetWindow(enumDisplay.ET42X);
+  							m_et42x = new MMI.ET42X.ControlContainer(XmlConf);
+  							this.Controls.Add(m_et42x);
+***************
+*** 275,278 ****
+--- 293,297 ----
+  							break;
+  						case Loadwhat.VT612:
++ 							SetWindow(enumDisplay.VT612);
+  							m_vt612 = new MMI.VT612.ControlContainer(XmlConf);
+  							this.Controls.Add(m_vt612);
+***************
+*** 281,284 ****
+--- 300,304 ----
+  							break;
+  						case Loadwhat.DIAGNOSE:
++ 							SetWindow(enumDisplay.DIAGNOSE);
+  							m_diagnose = new MMI.DIAGNOSE.ControlContainer(XmlConf);
+  							this.Controls.Add(m_diagnose);
+***************
+*** 312,315 ****
+--- 332,353 ----
+          }
+  
++ 		private void SetWindow(enumDisplay display)
++ 		{
++ 			this.Location = new Point(XmlConf.GetWidth(display), XmlConf.GetHeight(display));
++ 
++ 			if (XmlConf.GetBorder(display)) 
++ 			{
++ 				this.FormBorderStyle = FormBorderStyle.FixedDialog;
++ 			}
++ 			else
++ 			{
++ 				this.FormBorderStyle = FormBorderStyle.None;
++ 			}
++ 		}
++ 		private void ActivateBorder()
++ 		{
++ 			this.FormBorderStyle = FormBorderStyle.FixedDialog;
++ 		}
++ 
+          public void Init()
+          {
+***************
+*** 326,338 ****
+                  this.Controls.Add(m_menu);
+  
+!                 this.Location = new Point(XmlConf.Width,XmlConf.Height);
+!                 if (XmlConf.Border) 
+!                 {
+!                     this.FormBorderStyle = FormBorderStyle.FixedDialog;
+!                 }
+!                 else
+!                 {
+!                     this.FormBorderStyle = FormBorderStyle.None;
+!                 }
+  
+                  this.TopMost = XmlConf.TopMost;
+--- 364,371 ----
+                  this.Controls.Add(m_menu);
+  
+!                 
+! 				MainForm_Move(this, new EventArgs());
+!                 
+! 				
+  
+                  this.TopMost = XmlConf.TopMost;
+***************
+*** 356,359 ****
+--- 389,450 ----
+          }
+  
++ 		private void LoadDisplay(string[] args)
++ 		{
++ 			foreach(string strg in args)
++ 			{
++ 				if (!isKnownArgument(strg)) continue;
++ 				OpenDisplay(strg);
++ 				m_menu.Dispose();
++ 				return;
++ 			}
++ 		}
++ 
++ 		private bool isKnownArgument(string arg)
++ 		{
++ 			return (arg == &quot;-ebula&quot; ||
++ 					arg == &quot;-mmi&quot; ||
++ 					arg == &quot;-et42x&quot; ||
++ 					arg == &quot;-vt612&quot; ||
++ 					arg == &quot;-diagnose&quot; ||
++ 					arg == &quot;-david_1&quot; ||
++ 					arg == &quot;-david_2&quot; ||
++ 					arg == &quot;-ice3_1&quot; ||
++ 					arg == &quot;-ice3_2&quot;);
++ 		}
++ 
++ 		private void OpenDisplay(string arg)
++ 		{
++ 			switch(arg)
++ 			{
++ 				case &quot;-ebula&quot;:
++ 					m_handler.Load = Loadwhat.EBuLa;
++ 					break;
++ 				case &quot;-mmi&quot;:
++ 					m_handler.Load = Loadwhat.MMI;
++ 					break;
++ 				case &quot;-et42x&quot;:
++ 					m_handler.Load = Loadwhat.ET42X;
++ 					break;
++ 				case &quot;-vt612&quot;:
++ 					m_handler.Load = Loadwhat.VT612;
++ 					break;
++ 				case &quot;-diagnose&quot;:
++ 					m_handler.Load = Loadwhat.DIAGNOSE;
++ 					break;
++ 				case &quot;-david_1&quot;:
++ 					m_handler.Load = Loadwhat.DAVID;
++ 					break;
++ 				case &quot;-david_2&quot;:
++ 					m_handler.Load = Loadwhat.DAVID2;
++ 					break;
++ 				case &quot;-ice3_1&quot;:
++ 					m_handler.Load = Loadwhat.ICE3_1;
++ 					break;
++ 				case &quot;-ice3_2&quot;:
++ 					m_handler.Load = Loadwhat.ICE3_2;
++ 					break;			
++ 			}
++ 		}
++ 
+  		private void MainForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+  		{
+***************
+*** 362,365 ****
+--- 453,457 ----
+  		private void MainForm_Resize(object sender, System.EventArgs e)
+  		{
++ 			/*
+  			foreach(UserControl c in this.Controls)
+  			{
+***************
+*** 368,371 ****
+--- 460,469 ----
+  				c.Size = new Size(this.Width, this.Height);
+  			}
++ 			*/
++ 		}
++ 
++ 		private void MainForm_Move(object sender, System.EventArgs e)
++ 		{
++ 				XmlConf.Position = new System.Drawing.Point(this.Location.X, this.Location.Y);
+  		}
+  
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000007.html">[Zusidisplay-cvs] zusidisplay/ice3 AssemblyInfo.cs,1.1.1.1,1.2 ICE3Control.cs,1.1.1.1,1.2 UserControler.cs,1.1.1.1,1.2
+</A></li>
+	<LI>Next message: <A HREF="000013.html">[Zusidisplay-cvs] zusidisplay/Diagnose/Network Network.cs,1.1.1.1,1.2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#16">[ date ]</a>
+              <a href="thread.html#16">[ thread ]</a>
+              <a href="subject.html#16">[ subject ]</a>
+              <a href="author.html#16">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/zusidisplay-cvs">More information about the Zusidisplay-cvs
+mailing list</a><br>
+</body></html>
